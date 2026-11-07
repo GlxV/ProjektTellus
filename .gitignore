@@ -1,0 +1,25 @@
+# Maven / Java
+/target/
+*.class
+*.log
+*.hprof
+# Local SQLite databases and write-ahead logs
+/data/
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+# IDE / OS
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/
+.DS_Store
+Thumbs.db
+# Secrets
+.env
+.env.*
+!.env.example

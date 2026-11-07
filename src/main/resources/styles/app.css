@@ -1,0 +1,32 @@
+/* Tela de boas-vindas temporaria; o Sol devera definir a identidade final. */
+.root {
+    -fx-background-color: #090f1d;
+    -fx-font-family: "Segoe UI", "Arial";
+}
+.welcome-panel {
+    -fx-background-color: #111d30;
+    -fx-background-radius: 18;
+    -fx-border-color: #263951;
+    -fx-border-radius: 18;
+    -fx-border-width: 1;
+}
+.brand-label {
+    -fx-text-fill: #86bde8;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+.hero-title {
+    -fx-text-fill: #eef5ff;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+.hero-description {
+    -fx-text-fill: #b9c8d9;
+    -fx-font-size: 15px;
+    -fx-text-alignment: center;
+}
+.technology-label {
+    -fx-text-fill: #5da5ac;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
