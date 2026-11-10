@@ -1,64 +1,96 @@
-# ProjektTellus — diretrizes arquiteturais propostas
+# Arquitetura implementada
 
-**Este documento descreve a arquitetura desejada, nao o codigo ja implementado.**
+O domínio não conhece JavaFX, JDBC ou o modo de interface. Records compõem o estado imutável. `Terra` mantém identidade, nome e o estado atual; é o originador do Memento. `SimulacaoService` coordena casos de uso e é o caretaker, usando `MundoRepository` para armazenar os retratos.
 
-## Limites de camadas
+Para uma alteração, o serviço captura o estado anterior e prepara um candidato separado. Eventos e evolução temporal produzem novos valores. Indicadores são derivados do candidato. SQLite confirma estado, registro e retrato em uma transação. Somente depois a Terra viva é atualizada e os observadores são notificados. Falha de persistência não altera a Terra exibida nem gera notificações de sucesso.
 
-- `domain`: Terra, Atmosfera, Clima, Biosfera, Hidrosfera, Civilizacao; regras de validacao e invariantes. **Sem JavaFX, FXML, JDBC nem SQL**.
-- `simulation`: evolucao temporal, indicadores e recalculo deterministicos; sem UI.
-- `events`: interface de eventos e criadores polimorficos (**Factory Method**). Eventos alteram variaveis reais do modelo; nao apenas a barra de habitabilidade.
-- `application`: casos de uso, orquestracao, transacoes e criacao de checkpoints.
-- `persistence`: repositorios e implementacao JDBC/SQLite. Migrations ou esquema idempotente, prepared statements, transacoes e integridade referencial.
-- `ui`: controladores JavaFX, FXML e globo; view-models quando uteis.
-- `patterns`: usar apenas para conceitos transversais que nao tenham pacote de dominio mais apropriado; nao criar duplicatas de classes so para exibicao.
+`ObserverBus` tem assinantes removíveis e isola falhas individuais. `AlertaObserver` produz alertas por mundo; `EstatisticasObserver` acompanha extremos e quantidade de alterações durante a sessão. A interface também é assinante. Alertas e estatísticas são projeções de sessão, fora do estado planetário persistente.
 
-## Fluxo de eventos
+A interface executa banco e casos de uso numa fila de trabalho e renderiza na thread JavaFX. Apresentação projeta `Passo` de operações já concluídas, com linguagem natural e comparação de estados imutáveis. Escolher o modo não interfere nos cálculos.
 
-1. Usuario escolhe uma acao.
-2. Caso de uso opcionalmente cria snapshot antes da mudanca.
-3. Criador concreto instancia um EventoPlanetario.
-4. Motor aplica os efeitos no dominio e recalcula indicadores.
-5. Eventos de dominio sao publicados aos interessados (**Observer**).
-6. UI e historico/apresentacao exibem o resultado. Persistencia e feita de forma consistente em SQLite.
+## Classes
 
-A ordem exata devera refletir o fluxo *real* da implementacao; nao desenhar fluxos ficticios.
+```mermaid
+classDiagram
+  class Terra {
+    -UUID id
+    -String nome
+    -EstadoPlanetario estado
+    +capturar(rotulo) TerraMemento
+    +restaurar(memento)
+  }
+  class EstadoPlanetario {
+    <<immutable record>>
+    +double anos
+  }
+  class Atmosfera
+  class Clima
+  class Biosfera
+  class Hidrosfera
+  class Civilizacao
+  class TerraBuilder {
+    +build() Terra
+  }
+  class TerraMemento {
+    <<immutable record>>
+  }
+  class SimulacaoService
+  class MundoRepository {
+    <<interface>>
+  }
+  class SqliteMundoRepository
+  class ModeloPlanetario
+  class MainController
+  Terra *-- EstadoPlanetario
+  EstadoPlanetario *-- Atmosfera
+  EstadoPlanetario *-- Clima
+  EstadoPlanetario *-- Biosfera
+  EstadoPlanetario *-- Hidrosfera
+  EstadoPlanetario *-- Civilizacao
+  TerraBuilder ..> Terra : constrói
+  Terra ..> TerraMemento : captura e restaura
+  TerraMemento --> EstadoPlanetario
+  MainController --> SimulacaoService
+  SimulacaoService --> Terra
+  SimulacaoService --> ModeloPlanetario
+  SimulacaoService --> MundoRepository
+  SqliteMundoRepository ..|> MundoRepository
+```
 
-## Padroes
+## Fluxo real de evento
 
-- **Factory Method:** classe abstrata/interface de criador define metodo de fabrica sobrescrito por criadores concretos para diferentes eventos; nao reduzir a um switch estatico.
-- **Builder:** com parametros opcionais e `build()` validado, produzindo estado inicial valido. Evitar obrigar cada cliente a conhecer detalhes de construcao.
-- **Observer:** interfaces para publicador/assinantes desacoplados; ao menos dois assinantes com utilidade real. Testar notificacao e remocao de assinatura. Nao confundir exclusivamente com JavaFX property binding.
-- **Memento:** estado completo imutavel, restauracao por proprietario/guardiao apropriados, sem expor campos mutaveis; copia profunda se necessario; snapshots de mundos isolados.
+```mermaid
+sequenceDiagram
+  actor U as Usuário
+  participant UI as Interface
+  participant S as SimulacaoService
+  participant C as Criador concreto
+  participant E as Evento concreto
+  participant T as Terra
+  participant M as ModeloPlanetario
+  participant DB as SQLite
+  participant B as ObserverBus
+  participant O as Monitor / Estatísticas / Interface
+  U->>UI: Evento e intensidade
+  UI->>S: aplicar
+  S->>C: criar
+  C-->>S: EventoPlanetario
+  S->>T: capturar
+  T-->>S: TerraMemento
+  S->>E: aplicar ao estado
+  E-->>S: Novo estado
+  S->>M: calcular indicadores
+  S->>DB: salvar candidato + registro + retrato
+  DB-->>S: commit
+  S->>T: atualizar
+  S->>B: publicar mudança
+  B->>O: notificar cada assinante
+  S-->>UI: ResultadoOperacao e passos concluídos
+  UI-->>U: Globo e sequência didática
+```
 
-## Modo Apresentacao: sem codigo tecnico
+## SQLite
 
-Tratar como *projecao didatica* de eventos reais do motor. Associar eventos internos a rotulos em portugues natural:
-- `EventoCriado` -> "Evento preparado"
-- `SnapshotCriado` -> "Estado anterior preservado"
-- `TerraAlterada` -> "Condicoes planetarias alteradas"
-- `ObservadoresNotificados` -> "Alteracoes comunicadas"
-- `IndicadoresRecalculados` -> "Habitabilidade atualizada"
+Schema versionado por `PRAGMA user_version`; migration `src/main/resources/db/migrations/V001__mundos.sql`. Tabelas `mundos`, `eventos` e `snapshots`, chaves estrangeiras e exclusão em cascata. Mundo e snapshot guardam todos os componentes em colunas. Valores externos usam parâmetros JDBC. `TransacaoSqlite` trata commit, rollback e falhas de autocommit; conexão serializada e tempo limite para bloqueios.
 
-Esses nomes de eventos sao **exemplos de design**, nao classes ja existentes. Mapeamentos para texto ficam na UI, nunca no dominio.
-
-A demonstracao precisa permitir passo a passo, pausas e repetir exemplos. Os rotulos dos quatro padroes podem aparecer; chamadas Java/SQL, nao.
-
-## Persistencia
-
-SQLite e a fonte persistente dos mundos. Estrutura sugerida, sujeita a evolucao: mundos, estados, gases, eventos e snapshots. Definir chaves estrangeiras, migrations e atomicidade. Banco local deve ficar em `data/` e ser ignorado pelo Git.
-
-Jackson pode auxiliar exportacao/serializacao de payloads, mas nao substituir SQLite. Nao prometer JAR standalone antes de implementar empacotamento proprio.
-
-## Testes essenciais
-
-- Validacao de gases/pressao e indicadores sem valores invalidos.
-- Comportamentos dos cinco eventos.
-- Factory cria tipos adequados, Builder rejeita mundos invalidos.
-- Observer notifica apenas interessados.
-- Memento restaura integralmente sem referencia mutavel compartilhada.
-- Multiplos saves + reinicio + transacoes SQLite.
-- UI: testar manualmente rotacao/zoom e modo didatico, documentar resultados.
-
-## Demo final sugerida
-
-Criar duas Terras -> personalizar uma (Builder) -> salvar ambas (SQLite) -> capturar snapshot -> provocar invasao alienigena (Factory Method) -> observar mudancas e notificacoes (Observer) -> restaurar (Memento) -> recarregar o banco -> explicar UML.
+Não há física por pixel, engine gráfico próprio, processos remotos ou segundo motor didático.

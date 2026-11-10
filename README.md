@@ -1,79 +1,88 @@
 # ProjektTellus
 
-**Simulador Planetário Interativo** — trabalho acadêmico de Arquitetura de Software e Programação Orientada a Objetos (UNIVEL, 4AN, 2026).
+**Simulador Planetário Interativo** — aplicação desktop acadêmica de Arquitetura de Software e POO. Crie Terras independentes, altere seu ambiente, provoque eventos e restaure retratos anteriores. Sandbox e Apresentação compartilham o mesmo motor e banco SQLite.
 
-> Status: **estrutura inicial preparada**. O simulador, a física simplificada, os eventos, o banco e os quatro padrões ainda precisam ser implementados. A tela inicial é apenas um ponto de partida, não uma demonstração de funcionalidades prontas.
+O modelo é **didático e global**, com aproximações explícitas. Os indicadores não representam previsões científicas nem certificação de um ambiente habitável. Invasão alienígena é ficção.
 
-## Conceito
+## Executar no Windows x64
 
-Sandbox de planetas Terra com globo girável, atmosfera configurável (O₂, N₂, CO₂ e He), indicadores separados de habitabilidade humana e potencial de vida, avanço de tempo e eventos (asteroide, supervulcão, guerra nuclear, invasão alienígena fictícia e restauração ecológica). Vários mundos independentes e snapshots persistidos em **SQLite**.
+Abra **`Abrir-ProjektTellus.cmd`**. Na primeira execução, se necessário, o lançador baixa Java 25 (Eclipse Temurin) e Maven para `.tools/`, verifica os downloads e compila o projeto. Não altera o Java padrão do Windows. Internet é necessária para preparar ferramentas e dependências; depois o JAR e o banco funcionam localmente.
 
-O mesmo motor será utilizado em **Sandbox** e **Modo Apresentação**, que exibirá fluxos didáticos em português, *não* código Java/SQL.
-
-## Stack inicial
-
-- Java **25** + Maven
-- JavaFX **27.0.1** (FXML, controles, esfera 3D nativa)
-- AtlantaFX **3.0.0** (tema)
-- SQLite JDBC **3.54.1.0** (persistência obrigatória)
-- Jackson Databind **2.22.3** (exportação/serialização quando útil)
-- JUnit Jupiter **6.1.3** (testes)
-
-As versões estão concentradas no `pom.xml`. O Maven baixa as dependências automaticamente. **JDK 25 ou superior** é necessário.
-
-## Execução da estrutura inicial
+Para compilar e testar:
 
 ```powershell
-git clone https://github.com/GlxV/ProjektTellos.git
-cd ProjektTellos
-mvn test
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Build.ps1
+```
+
+Com **JDK 25** e **Maven 3.9+** já configurados:
+
+```powershell
+mvn clean verify
+java --enable-native-access=ALL-UNNAMED -jar target/ProjektTellus.jar
+# Alternativa de desenvolvimento:
 mvn javafx:run
 ```
 
-Se não houver `mvn` no Windows, instale/configure Maven e confirme `java -version` e `mvn -version`. A primeira execução exige internet para baixar dependências.
+Teste gráfico opcional, com um desktop disponível: `mvn -Pgui-tests test`. Ele usa um banco temporário, percorre os controles/diálogos reais e gera capturas em `target/gui-verification/`. Sem esse perfil, a suíte não inicia JavaFX.
 
-> `mvn package` gera um JAR Maven normal, **não** um executável autossuficiente com JavaFX. O empacotamento distribuível deverá ser configurado durante a implementação; não anunciar `java -jar` como pronto.
+`target/ProjektTellus.jar` inclui dependências JavaFX/JDBC; **requer Java 25**, cujo runtime não está embutido. O pacote gerado neste ambiente é Windows x64; em outro sistema, compile novamente para obter os binários nativos correspondentes.
+
+Banco automático: `data/projekttellus.db`, relativo ao diretório de execução. O lançador fixa esse diretório na raiz do projeto. Para outro banco:
+
+```powershell
+java --enable-native-access=ALL-UNNAMED -Dprojekttellus.db=C:/Mundos/demo.db -jar target/ProjektTellus.jar
+```
+
+## Usar e demonstrar
+
+1. Crie um mundo e personalize condições iniciais (**Builder**).
+2. Arraste o globo para girar; use a roda para aproximar/afastar. A aparência acompanha condições ambientais.
+3. Ajuste os controles ambientais. Os gases devem somar **100%**; água e gelo juntos podem ocupar até 100% da superfície. Pressão em atm, temperatura em °C, população em pessoas e tempo em anos.
+4. Escolha um dos cinco eventos e intensidade (**Factory Method**).
+5. Observe os indicadores separados e alertas (**Observer**).
+6. Capture um retrato, altere o planeta e restaure pelo histórico (**Memento**).
+7. Duplique o mundo, modifique um deles e carregue o outro para mostrar isolamento. Feche e reabra para mostrar SQLite.
+8. Ative **Modo apresentação**: a sequência reproduz a última operação concluída, com avanço manual, explicações e comparação antes/depois.
+
+Mudanças confirmadas são salvas automaticamente; há também ação explícita de salvar. Cada alteração ambiental/evento/avanço/restauração preserva um retrato anterior na mesma transação que novo estado e histórico. A exclusão confirmada elimina somente o mundo escolhido, seu histórico e retratos.
+
+## Tecnologias
+
+| Tecnologia | Versão |
+|---|---|
+| Java | 25 |
+| Maven do preparador | 3.9.11 |
+| JavaFX (FXML e 3D) | 25.0.1 |
+| AtlantaFX (Primer Dark) | 2.0.1 |
+| SQLite JDBC | 3.50.3.0 |
+| JUnit Jupiter | 5.13.4 |
+
+Versões e plugins no `pom.xml`. Records reduzem código repetitivo. Jackson foi dispensado por não haver serialização JSON que justifique outra dependência; SQLite guarda estados em colunas.
 
 ## Organização
 
 ```text
 src/main/java/com/projekttellus/
-  Launcher.java           # ponto de entrada Maven/JavaFX
-  ProjektTellusApp.java   # Application JavaFX; tela inicial mínima
-  domain/                 # entidades e regras POO
-  simulation/             # motor/regras de evolução
-  events/                 # eventos e Factory Method
-  patterns/               # Builder, Observer, Memento (conforme design)
-  persistence/            # SQLite / DAOs / repositories
-  application/            # casos de uso e serviços
-  ui/                     # controladores e visualização
-src/main/resources/
-  fxml/                   # telas FXML
-  styles/                 # CSS
-  textures/               # texturas com licenças registradas
-  db/                     # scripts/migrations SQL
-src/test/java/com/projekttellus/
-docs/                      # requisitos, arquitetura e handoff
+  domain/                 Terra, componentes e Builder
+  simulation/             Indicadores e evolução determinística
+  events/                 Eventos e criadores concretos
+  patterns/memento/       Retrato imutável
+  patterns/observer/      Publicador, alertas e estatísticas
+  application/            Casos de uso, caretaker e passos reais
+  persistence/            Repository, JDBC, migrations e transações
+  ui/                     Controlador, editores, globo e apresentação
+src/main/resources/       FXML, CSS e migration SQL
+src/test/java/            JUnit de comportamento e integração
+docs/                     Modelos, diagramas e transferência
 ```
 
-Os diretórios vazios contêm `.gitkeep` e podem ser reorganizados pelo agente se houver justificativa. **Não criar classes vazias ou padrões artificiais só para preencher pastas.**
+- [Arquitetura e UML](docs/ARQUITETURA.md)
+- [Os quatro padrões](docs/PADROES.md)
+- [Modelo matemático e limites](docs/MODELO.md)
+- [Recursos visuais](docs/ASSETS.md)
+- [Transferência e validação](docs/HANDOFF_SOL.md)
+- [Requisitos originais](docs/REQUISITOS.md)
 
-## Padrões obrigatórios
+Referências técnicas: [compatibilidade JavaFX 25/JDK 25](https://docs.oracle.com/en/java/java-components/javafx/25/javafx-users-guide/supported-jdk-versions.html), [JavaFX com Maven](https://openjfx.io/openjfx-docs/), [API oficial Temurin](https://github.com/adoptium/api.adoptium.net).
 
-- **Factory Method:** criadores de eventos planetários;
-- **Builder:** construção validada de mundos;
-- **Observer:** propagação de mudanças para subsistemas desacoplados;
-- **Memento:** capturar/restaurar estado completo e imutável.
-
-Separam-se objetos de domínio, casos de uso, infraestrutura JDBC e interface. Os padrões devem ser observáveis e testáveis no fluxo real, sem acoplamento da simulação ao modo didático.
-
-## Documentos para começar
-
-1. [Requisitos e critérios de aceite](docs/REQUISITOS.md)
-2. [Diretrizes de arquitetura](docs/ARQUITETURA.md)
-3. [Briefing para Sol 6.1](docs/BRIEF_SOL.md)
-4. [Handoff inicial](docs/HANDOFF_INICIAL.md)
-
-**Prazo acadêmico:** apresentações/entregas entre **16 e 23/11/2026** (confirmar a data específica da turma/professora).
-
-**Nomes:** aplicativo/projeto **ProjektTellus**, pacote `com.projekttellus`. O repositório no GitHub foi criado pelo usuário como **ProjektTellos** e não deve ser renomeado sem autorização.
+O diretório local, aplicativo e remoto configurado se chamam **ProjektTellus**. O endereço remoto existente foi preservado.

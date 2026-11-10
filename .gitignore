@@ -1,5 +1,6 @@
 # Maven / Java
 /target/
+/.tools/
 *.class
 *.log
 *.hprof

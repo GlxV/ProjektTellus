@@ -1,22 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-
-<StackPane xmlns="http://javafx.com/javafx/27"
-           xmlns:fx="http://javafx.com/fxml/1"
-           stylesheets="@../styles/app.css">
-    <children>
-        <VBox alignment="CENTER" spacing="17" maxWidth="720" styleClass="welcome-panel">
-            <padding><Insets top="32" right="32" bottom="32" left="32" /></padding>
-            <children>
-                <Label text="P R O J E K T T E L L U S" styleClass="brand-label" />
-                <Label text="Um planeta. Infinitas possibilidades." styleClass="hero-title" wrapText="true" />
-                <Label text="Projeto JavaFX preparado para iniciar a implementacao.&#10;O simulador planetario, os eventos e os saves ainda nao estao disponiveis."
-                       styleClass="hero-description" wrapText="true" />
-                <Label text="JAVA 25   •   JAVAFX   •   SQLITE   •   POO" styleClass="technology-label" />
-            </children>
-        </VBox>
-    </children>
-</StackPane>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projekttellus.ui.MainController" stylesheets="@../styles/app.css" styleClass="app-root">
+ <top><HBox fx:id="header" alignment="CENTER_LEFT" spacing="18" styleClass="header">
+  <VBox spacing="2"><Label text="◉  PROJEKT TELLUS" styleClass="brand"/><Label text="LABORATÓRIO DE MUNDOS" styleClass="eyebrow"/></VBox><Region HBox.hgrow="ALWAYS"/><Label text="Um planeta. Infinitas possibilidades." styleClass="muted"/><ToggleButton fx:id="presentationToggle" text="Modo apresentação" onAction="#togglePresentation"/>
+ </HBox></top>
+ <center><BorderPane fx:id="interactionRoot">
+  <left><VBox spacing="12" prefWidth="218" minWidth="195" styleClass="sidebar">
+   <Label text="EXPLORADOR" styleClass="eyebrow"/><HBox alignment="CENTER_LEFT"><Label text="Meus mundos" styleClass="section-title"/><Region HBox.hgrow="ALWAYS"/><Label fx:id="worldCount" text="0" styleClass="count"/></HBox>
+   <Button text="＋ Criar mundo" onAction="#createWorld" maxWidth="Infinity" styleClass="primary"/><ListView fx:id="worldList" VBox.vgrow="ALWAYS" minHeight="100"/>
+   <Button text="Carregar selecionado" onAction="#loadWorld" maxWidth="Infinity"/>
+   <GridPane hgap="6" vgap="6"><columnConstraints><ColumnConstraints percentWidth="50"/><ColumnConstraints percentWidth="50"/></columnConstraints>
+    <Button text="Renomear" onAction="#renameWorld" maxWidth="Infinity"/><Button text="Duplicar" onAction="#duplicateWorld" GridPane.columnIndex="1" maxWidth="Infinity"/>
+    <Button text="Salvar" onAction="#saveWorld" GridPane.rowIndex="1" maxWidth="Infinity"/><Button text="Excluir" onAction="#deleteWorld" GridPane.columnIndex="1" GridPane.rowIndex="1" maxWidth="Infinity" styleClass="danger"/>
+   </GridPane><Separator/><Label text="● Mundo carregado: renomear, duplicar e salvar. Excluir usa a seleção da lista. Alterações confirmadas são salvas localmente." wrapText="true" styleClass="muted"/>
+  </VBox></left>
+  <center><VBox spacing="12" styleClass="main-content">
+   <HBox alignment="CENTER_LEFT" spacing="12"><VBox spacing="3"><Label text="OBSERVATÓRIO PLANETÁRIO" styleClass="eyebrow"/><Label fx:id="worldTitle" text="Seu próximo mundo começa aqui" styleClass="world-title"/></VBox><Region HBox.hgrow="ALWAYS"/><Label fx:id="yearLabel" text="ANO 0" styleClass="pill"/></HBox>
+   <SplitPane fx:id="mainSplit" orientation="VERTICAL" dividerPositions="0.63" VBox.vgrow="ALWAYS">
+    <VBox spacing="10" minHeight="260"><StackPane fx:id="globeHost" VBox.vgrow="ALWAYS" minHeight="180" styleClass="globe-host"/>
+     <HBox alignment="CENTER" spacing="8"><Label text="Arraste para girar · Role para aproximar" styleClass="muted"/><Button text="Recentrar" onAction="#resetGlobe"/><CheckBox fx:id="lightToggle" text="Luz solar" selected="true"/></HBox>
+     <HBox spacing="10" styleClass="metrics"><VBox HBox.hgrow="ALWAYS" spacing="4"><Label text="HABITABILIDADE HUMANA" styleClass="eyebrow"/><Label fx:id="humanValue" text="—" styleClass="metric-number"/><ProgressBar fx:id="humanBar" progress="0" maxWidth="Infinity"/></VBox><VBox HBox.hgrow="ALWAYS" spacing="4"><Label text="POTENCIAL BIOLÓGICO" styleClass="eyebrow"/><Label fx:id="bioValue" text="—" styleClass="metric-number"/><ProgressBar fx:id="bioBar" progress="0" maxWidth="Infinity"/></VBox></HBox>
+    </VBox>
+    <TabPane fx:id="activityTabs" tabClosingPolicy="UNAVAILABLE" minHeight="180"><tabs>
+     <Tab text="Linha do tempo"><ListView fx:id="historyList"/></Tab>
+     <Tab text="Retratos salvos"><VBox spacing="8" styleClass="tab-content-pad"><Label text="Retratos completos e persistentes deste mundo." styleClass="muted"/><ListView fx:id="snapshotList" VBox.vgrow="ALWAYS"/><HBox spacing="8"><Button text="＋ Capturar retrato" onAction="#captureSnapshot"/><Button text="Restaurar selecionado" onAction="#restoreSnapshot"/></HBox></VBox></Tab>
+     <Tab fx:id="presentationTab" text="Apresentação"><StackPane fx:id="presentationHost"/></Tab>
+    </tabs></TabPane>
+   </SplitPane>
+   <Label fx:id="alertLabel" text="Crie um mundo ou carregue um cenário da biblioteca." wrapText="true" styleClass="notice"/>
+   <Label text="Modelo educacional simplificado e ficcional · Textura ilustrativa · Indicadores sem validação científica" wrapText="true" styleClass="footnote"/>
+  </VBox></center>
+  <right><ScrollPane fitToWidth="true" prefWidth="324" minWidth="290" hbarPolicy="NEVER" styleClass="inspector"><VBox spacing="14" styleClass="inspector-content">
+   <Label text="PAINEL DE CONTROLE" styleClass="eyebrow"/><Label text="Condições ambientais" styleClass="section-title"/><VBox fx:id="environmentHost"/>
+   <Button fx:id="applyButton" text="Aplicar condições" onAction="#applyEnvironment" maxWidth="Infinity" styleClass="primary"/><Separator/>
+   <Label text="Eventos planetários" styleClass="section-title"/><ComboBox fx:id="eventChoice" maxWidth="Infinity"/>
+   <HBox><Label text="Intensidade"/><Region HBox.hgrow="ALWAYS"/><Label fx:id="intensityLabel" text="40%" styleClass="accent-text"/></HBox><Slider fx:id="intensitySlider" min="0" max="100" value="40" blockIncrement="5"/>
+   <Button text="Aplicar evento" onAction="#applyEvent" maxWidth="Infinity"/><Label text="Afeta apenas o mundo simulado. Um retrato anterior é preservado automaticamente." wrapText="true" styleClass="muted"/><Separator/>
+   <Label text="Passagem do tempo" styleClass="section-title"/><HBox spacing="8" alignment="CENTER_LEFT"><Spinner fx:id="yearsSpinner" prefWidth="130"/><Label text="anos por avanço" styleClass="muted"/></HBox><Button text="Avançar tempo →" onAction="#advanceTime" maxWidth="Infinity"/>
+   <Label fx:id="observerLabel" text="Observer · aguardando mudanças" wrapText="true" styleClass="notice"/>
+  </VBox></ScrollPane></right>
+ </BorderPane></center>
+ <bottom><HBox spacing="10" alignment="CENTER_LEFT" styleClass="statusbar"><ProgressIndicator fx:id="busyIndicator" prefWidth="16" prefHeight="16" visible="false" managed="false"/><Label fx:id="statusLabel" text="Abrindo biblioteca local…" wrapText="true"/></HBox></bottom>
+</BorderPane>

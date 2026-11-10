@@ -1,8 +1,7 @@
 package com.projekttellus;
 
 /**
- * Entrada de execucao separada da Application JavaFX.
- * O motor de simulacao ainda sera implementado.
+ * Entrada separada de Application para execução do JAR com JavaFX no classpath.
  */
 public final class Launcher {
     private Launcher() {
