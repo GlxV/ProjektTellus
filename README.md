@@ -81,6 +81,7 @@ docs/                     Modelos, diagramas e transferência
 - [Modelo matemático e limites](docs/MODELO.md)
 - [Recursos visuais](docs/ASSETS.md)
 - [Transferência e validação](docs/HANDOFF_SOL.md)
+- [Handoff final da auditoria](docs/HANDOFF_FINAL.md)
 - [Requisitos originais](docs/REQUISITOS.md)
 
 Referências técnicas: [compatibilidade JavaFX 25/JDK 25](https://docs.oracle.com/en/java/java-components/javafx/25/javafx-users-guide/supported-jdk-versions.html), [JavaFX com Maven](https://openjfx.io/openjfx-docs/), [API oficial Temurin](https://github.com/adoptium/api.adoptium.net).

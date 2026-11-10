@@ -14,18 +14,39 @@ classDiagram
   }
   class AsteroideCreator
   class SupervulcaoCreator
+  class GuerraNuclearCreator
+  class InvasaoAlienigenaCreator
+  class RestauracaoEcologicaCreator
   class EventoPlanetario {
     <<interface>>
     +aplicar(estado) EstadoPlanetario
   }
+  class EventoBase {
+    <<abstract>>
+    -double intensidade
+    +aplicar(estado) EstadoPlanetario
+  }
   class Asteroide
   class Supervulcao
+  class GuerraNuclear
+  class InvasaoAlienigena
+  class RestauracaoEcologica
   EventoCreator <|-- AsteroideCreator
   EventoCreator <|-- SupervulcaoCreator
-  EventoPlanetario <|.. Asteroide
-  EventoPlanetario <|.. Supervulcao
+  EventoCreator <|-- GuerraNuclearCreator
+  EventoCreator <|-- InvasaoAlienigenaCreator
+  EventoCreator <|-- RestauracaoEcologicaCreator
+  EventoPlanetario <|.. EventoBase
+  EventoBase <|-- Asteroide
+  EventoBase <|-- Supervulcao
+  EventoBase <|-- GuerraNuclear
+  EventoBase <|-- InvasaoAlienigena
+  EventoBase <|-- RestauracaoEcologica
   AsteroideCreator ..> Asteroide : cria
   SupervulcaoCreator ..> Supervulcao : cria
+  GuerraNuclearCreator ..> GuerraNuclear : cria
+  InvasaoAlienigenaCreator ..> InvasaoAlienigena : cria
+  RestauracaoEcologicaCreator ..> RestauracaoEcologica : cria
 ```
 
 ## Builder
@@ -33,6 +54,31 @@ classDiagram
 `domain/TerraBuilder` oferece parâmetros opcionais e defaults coerentes para os cinco componentes e tempo. `build` reúne valores imutáveis, valida o cenário e atribui uma nova identidade a `Terra`. Componentes validam limites nos construtores. Gases inconsistentes e água+gelo acima do total são rejeitados.
 
 **Demonstrar:** criar mundo, personalizar condições iniciais e confirmar. A trilha mostra componentes reunidos, validação e construção concluída.
+
+```mermaid
+classDiagram
+  class TerraBuilder {
+    -String nome
+    -Atmosfera atmosfera
+    -Clima clima
+    -Biosfera biosfera
+    -Hidrosfera hidrosfera
+    -Civilizacao civilizacao
+    -double anos
+    +build() Terra
+  }
+  class Terra
+  class EstadoPlanetario {
+    <<immutable record>>
+  }
+  TerraBuilder ..> Terra : constrói
+  Terra *-- EstadoPlanetario
+  EstadoPlanetario *-- Atmosfera
+  EstadoPlanetario *-- Clima
+  EstadoPlanetario *-- Biosfera
+  EstadoPlanetario *-- Hidrosfera
+  EstadoPlanetario *-- Civilizacao
+```
 
 ## Observer
 
@@ -53,9 +99,13 @@ classDiagram
   }
   class AlertaObserver
   class EstatisticasObserver
+  class SimulacaoService
+  class MainController
   ObserverBus o-- SimulacaoObserver
   SimulacaoObserver <|.. AlertaObserver
   SimulacaoObserver <|.. EstatisticasObserver
+  SimulacaoService --> ObserverBus : publica
+  MainController ..> ObserverBus : registra observador da interface
 ```
 
 ## Memento
