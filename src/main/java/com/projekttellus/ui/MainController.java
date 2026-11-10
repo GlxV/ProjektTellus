@@ -35,6 +35,8 @@ public final class MainController implements AutoCloseable {
     @FXML private Button applyButton;
     @FXML private ToggleButton presentationToggle;
     @FXML private CheckBox lightToggle;
+    @FXML private ComboBox<AnimationMode> animationMode;
+    @FXML private Button skipAnimation;
     @FXML private ComboBox<EventoCreator> eventChoice;
     @FXML private Slider intensitySlider;
     @FXML private Spinner<Integer> yearsSpinner;
@@ -51,6 +53,7 @@ public final class MainController implements AutoCloseable {
     private final Map<UUID, MudancaPlanetaria> observed = new HashMap<>(); // FX thread only
     private final EnvironmentEditor editor = new EnvironmentEditor();
     private PlanetView globe;
+    private PlanetEventAnimator animator;
     private PresentationPane presentation;
     private SimulacaoService service; // mutations on worker; only thread-safe observer projections read on FX
     private AutoCloseable subscription;
@@ -60,7 +63,16 @@ public final class MainController implements AutoCloseable {
 
     @FXML private void initialize() {
         globe = new PlanetView(); globeHost.getChildren().add(globe);
+        animator = new PlanetEventAnimator(globe);
+        animationMode.getItems().setAll(AnimationMode.values());
+        String savedMode = System.getProperty("projekttellus.animationMode", "FULL");
+        try { animationMode.setValue(AnimationMode.valueOf(savedMode)); }
+        catch (IllegalArgumentException ex) { animationMode.setValue(AnimationMode.FULL); }
+        skipAnimation.disableProperty().bind(animator.runningProperty().not());
+        animationMode.valueProperty().addListener((o, a, b) -> animator.skip());
+        skipAnimation.setOnAction(e -> animator.skip());
         presentation = new PresentationPane(state -> {
+            animator.discard();
             globe.update(state);
             statusLabel.setText("Comparação visual da última ação · O estado salvo do mundo permanece no resultado final.");
         }, this::demonstrate);
@@ -71,6 +83,7 @@ public final class MainController implements AutoCloseable {
             mainSplit.setDividerPositions(presenting ? .48 : .63);
             if (previous == presentationTab && !presenting) {
                 presentation.stop();
+                animator.discard();
                 if (current != null) globe.update(current.estado());
                 statusLabel.setText("Exibindo o estado atual confirmado do mundo.");
             }
@@ -137,6 +150,7 @@ public final class MainController implements AutoCloseable {
             Terra terra = service.repository().carregar(selected.id()).orElseThrow(() -> new IllegalArgumentException("Este mundo não está mais na biblioteca. Atualize ou crie outro cenário."));
             return new Loaded(terra, library(terra.id()));
         }, loaded -> {
+            animator.discard();
             current = loaded.terra(); hasWorld.set(true); presentation.clear();
             renderCurrent(); showLibrary(loaded.library());
             statusLabel.setText("“" + current.nome() + "” carregado da biblioteca local.");
@@ -167,6 +181,7 @@ public final class MainController implements AutoCloseable {
         }, worlds -> {
             observed.remove(selected.id());
             if (current != null && current.id().equals(selected.id())) {
+                animator.discard();
                 current = null; hasWorld.set(false); presentation.clear(); historyList.getItems().clear(); snapshotList.getItems().clear();
                 worldTitle.setText("Seu próximo mundo começa aqui"); yearLabel.setText("ANO 0"); humanValue.setText("—"); bioValue.setText("—"); humanBar.setProgress(0); bioBar.setProgress(0);
                 editor.setState(new TerraBuilder().build().estado()); globe.update(new TerraBuilder().build().estado());
@@ -185,7 +200,7 @@ public final class MainController implements AutoCloseable {
     @FXML private void applyEvent() {
         if (!requireWorld() || !discardDraft()) return;
         EventoCreator creator = eventChoice.getValue(); double intensity = intensitySlider.getValue() / 100;
-        operate("Aplicando evento ao mundo simulado…", () -> service.aplicar(current, creator, intensity));
+        operate("Aplicando evento ao mundo simulado…", () -> service.aplicar(current, creator, intensity), AnimationKind.forCreator(creator), intensity);
     }
     @FXML private void advanceTime() {
         if (!requireWorld() || !discardDraft()) return;
@@ -201,9 +216,9 @@ public final class MainController implements AutoCloseable {
         TerraMemento snapshot = snapshotList.getSelectionModel().getSelectedItem();
         if (snapshot == null) { statusLabel.setText("Selecione um retrato na aba “Retratos salvos”."); return; }
         if (!UiDialogs.confirm(owner(), "Restaurar “" + snapshot.rotulo() + "”?", "Nome, ambiente, população e ano voltarão a esse retrato. O estado atual será preservado em outro retrato; edições não aplicadas serão descartadas. Outros mundos não mudam.")) return;
-        operate("Restaurando retrato…", () -> service.restaurar(current, snapshot));
+        operate("Restaurando retrato…", () -> service.restaurar(current, snapshot), AnimationKind.MEMENTO, 0);
     }
-    @FXML private void resetGlobe() { if (current != null) globe.update(current.estado()); globe.reset(); }
+    @FXML private void resetGlobe() { globe.reset(); }
     @FXML private void togglePresentation() {
         if (presentationToggle.isSelected()) activityTabs.getSelectionModel().select(presentationTab);
         else activityTabs.getSelectionModel().selectFirst();
@@ -222,6 +237,9 @@ public final class MainController implements AutoCloseable {
     }
 
     private void operate(String message, Callable<ResultadoOperacao> action) {
+        operate(message, action, AnimationKind.TRANSITION, 0);
+    }
+    private void operate(String message, Callable<ResultadoOperacao> action, AnimationKind kind, double intensity) {
         presentation.stop();
         run(message, () -> {
             ResultadoOperacao result = action.call();
@@ -231,7 +249,8 @@ public final class MainController implements AutoCloseable {
             catch (RuntimeException ex) { ex.printStackTrace(System.err); }
             return new Completed(result, library);
         }, completed -> {
-            current = completed.result().terra(); hasWorld.set(true); renderCurrent(); presentation.show(completed.result());
+            current = completed.result().terra(); hasWorld.set(true); renderCurrent(false); presentation.show(completed.result());
+            animator.play(completed.result(), kind, intensity, animationMode.getValue());
             if (completed.library() != null) showLibrary(completed.library());
             else { historyList.getItems().clear(); snapshotList.getItems().clear(); }
             statusLabel.setText(completed.result().descricao() + " · Confirmado e salvo." +
@@ -249,6 +268,10 @@ public final class MainController implements AutoCloseable {
     }
     private void populateWorlds(List<MundoResumo> worlds) { worldList.getItems().setAll(worlds); worldCount.setText(Integer.toString(worlds.size())); }
     private void renderCurrent() {
+        renderCurrent(true);
+    }
+    private void renderCurrent(boolean updateGlobe) {
+        if (updateGlobe) globe.update(current.estado());
         editor.setState(current.estado()); worldTitle.setText(current.nome()); yearLabel.setText("ANO " + f(current.estado().anos()));
         var notification = observed.get(current.id());
         if (notification != null && notification.estado().equals(current.estado())) renderObserved(notification);
@@ -263,11 +286,12 @@ public final class MainController implements AutoCloseable {
                 "\nSessão: " + stats.mudancas() + " mudanças · humanos " + f(stats.minima()) + "% a " + f(stats.maxima()) + "%"));
     }
     private void renderState(EstadoPlanetario state, Indicadores indicators) {
-        globe.update(state); humanValue.setText(f(indicators.humana()) + "%"); bioValue.setText(f(indicators.biologica()) + "%");
+        humanValue.setText(f(indicators.humana()) + "%"); bioValue.setText(f(indicators.biologica()) + "%");
         humanBar.setProgress(indicators.humana() / 100); bioBar.setProgress(indicators.biologica() / 100);
     }
     private <T> void run(String message, Callable<T> action, Consumer<T> success) {
         if (closed || busy.get()) return;
+        animator.skip();
         presentation.stop();
         busy.set(true); statusLabel.setText(message);
         worker.submit(() -> {
@@ -288,7 +312,7 @@ public final class MainController implements AutoCloseable {
     }
     /** Closing queues resource release behind any in-flight transaction; never blocks the FX thread. */
     @Override public void close() {
-        if (closed) return; closed = true; presentation.close();
+        if (closed) return; closed = true; animator.close(); presentation.close();
         worker.submit(() -> {
             try { if (subscription != null) subscription.close(); }
             catch (Exception ex) { ex.printStackTrace(System.err); }

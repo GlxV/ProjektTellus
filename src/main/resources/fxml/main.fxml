@@ -19,7 +19,7 @@
    <HBox alignment="CENTER_LEFT" spacing="12"><VBox spacing="3"><Label text="OBSERVATÓRIO PLANETÁRIO" styleClass="eyebrow"/><Label fx:id="worldTitle" text="Seu próximo mundo começa aqui" styleClass="world-title"/></VBox><Region HBox.hgrow="ALWAYS"/><Label fx:id="yearLabel" text="ANO 0" styleClass="pill"/></HBox>
    <SplitPane fx:id="mainSplit" orientation="VERTICAL" dividerPositions="0.63" VBox.vgrow="ALWAYS">
     <VBox spacing="10" minHeight="260"><StackPane fx:id="globeHost" VBox.vgrow="ALWAYS" minHeight="180" styleClass="globe-host"/>
-     <HBox alignment="CENTER" spacing="8"><Label text="Arraste para girar · Role para aproximar" styleClass="muted"/><Button text="Recentrar" onAction="#resetGlobe"/><CheckBox fx:id="lightToggle" text="Luz solar" selected="true"/></HBox>
+     <FlowPane alignment="CENTER" hgap="8" vgap="5"><Label text="Arraste para girar · Role para aproximar" styleClass="muted"/><Button text="Recentrar" onAction="#resetGlobe"/><CheckBox fx:id="lightToggle" text="Luz solar" selected="true"/><Button fx:id="skipAnimation" text="Pular animação" accessibleText="Pular animação e mostrar resultado confirmado"/></FlowPane>
      <HBox spacing="10" styleClass="metrics"><VBox HBox.hgrow="ALWAYS" spacing="4"><Label text="HABITABILIDADE HUMANA" styleClass="eyebrow"/><Label fx:id="humanValue" text="—" styleClass="metric-number"/><ProgressBar fx:id="humanBar" progress="0" maxWidth="Infinity"/></VBox><VBox HBox.hgrow="ALWAYS" spacing="4"><Label text="POTENCIAL BIOLÓGICO" styleClass="eyebrow"/><Label fx:id="bioValue" text="—" styleClass="metric-number"/><ProgressBar fx:id="bioBar" progress="0" maxWidth="Infinity"/></VBox></HBox>
     </VBox>
     <TabPane fx:id="activityTabs" tabClosingPolicy="UNAVAILABLE" minHeight="180"><tabs>
@@ -36,7 +36,7 @@
    <Button fx:id="applyButton" text="Aplicar condições" onAction="#applyEnvironment" maxWidth="Infinity" styleClass="primary"/><Separator/>
    <Label text="Eventos planetários" styleClass="section-title"/><ComboBox fx:id="eventChoice" maxWidth="Infinity"/>
    <HBox><Label text="Intensidade"/><Region HBox.hgrow="ALWAYS"/><Label fx:id="intensityLabel" text="40%" styleClass="accent-text"/></HBox><Slider fx:id="intensitySlider" min="0" max="100" value="40" blockIncrement="5"/>
-   <Button text="Aplicar evento" onAction="#applyEvent" maxWidth="Infinity"/><Label text="Afeta apenas o mundo simulado. Um retrato anterior é preservado automaticamente." wrapText="true" styleClass="muted"/><Separator/>
+   <Button text="Aplicar evento" onAction="#applyEvent" maxWidth="Infinity"/><Label text="Animações"/><ComboBox fx:id="animationMode" maxWidth="Infinity" accessibleText="Animações: completas, movimento reduzido ou desativadas"/><Label text="O resultado é salvo antes da animação. Você pode pular ou iniciar outra ação a qualquer momento." wrapText="true" styleClass="muted"/><Separator/>
    <Label text="Passagem do tempo" styleClass="section-title"/><HBox spacing="8" alignment="CENTER_LEFT"><Spinner fx:id="yearsSpinner" prefWidth="130"/><Label text="anos por avanço" styleClass="muted"/></HBox><Button text="Avançar tempo →" onAction="#advanceTime" maxWidth="Infinity"/>
    <Label fx:id="observerLabel" text="Observer · aguardando mudanças" wrapText="true" styleClass="notice"/>
   </VBox></ScrollPane></right>

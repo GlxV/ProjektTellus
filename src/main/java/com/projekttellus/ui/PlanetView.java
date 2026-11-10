@@ -13,6 +13,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.*;
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Scale;
+import javafx.geometry.Point3D;
 
 /** A native lit Sphere with an original, intentionally simplified equirectangular map. */
 public final class PlanetView extends StackPane {
@@ -24,14 +26,26 @@ public final class PlanetView extends StackPane {
     private final PointLight sunlight = new PointLight(Color.web("#fff5df"));
     private final AmbientLight ambient = new AmbientLight(Color.color(.32, .38, .45));
     private final Group planet = new Group(sphere);
+    private final Group effects = new Group();
+    private final Scale globeScale = new Scale(1, 1, 1, 0, 0, 0);
+    private final Canvas glowLayer = new Canvas();
     private final double[] land = new double[W * H];
     private double pressX, pressY, startX, startY, zoom = 1;
+    private EstadoPlanetario displayedState;
+    private int[] displayedPixels;
+    private final int[] blended = new int[W * H];
+    private WritableImage transitionTexture;
 
     public PlanetView() {
         setMinSize(100, 150); setFocusTraversable(true);
         setAccessibleText("Globo planetário. Arraste para girar, use a roda para zoom. Setas giram; mais e menos aproximam e afastam.");
         createContinents();
-        sphere.setMaterial(surface); sphere.getTransforms().addAll(latitude, longitude);
+        sphere.setMaterial(surface);
+        Group rotating = new Group(sphere, effects);
+        rotating.getTransforms().addAll(latitude, longitude);
+        planet.getChildren().setAll(rotating);
+        planet.getTransforms().add(globeScale);
+        effects.setMouseTransparent(true);
         sunlight.setTranslateX(-280); sunlight.setTranslateY(-180); sunlight.setTranslateZ(-340);
         Group sceneRoot = new Group(planet, sunlight, ambient);
         SubScene scene = new SubScene(sceneRoot, 500, 350, true, SceneAntialiasing.BALANCED);
@@ -40,7 +54,9 @@ public final class PlanetView extends StackPane {
         planet.translateXProperty().bind(widthProperty().divide(2));
         planet.translateYProperty().bind(heightProperty().divide(2));
         widthProperty().addListener((o, a, b) -> resizeGlobe()); heightProperty().addListener((o, a, b) -> resizeGlobe());
-        getChildren().add(scene);
+        glowLayer.setMouseTransparent(true);
+        glowLayer.widthProperty().bind(widthProperty()); glowLayer.heightProperty().bind(heightProperty());
+        getChildren().addAll(scene, glowLayer);
         if (!Platform.isSupported(ConditionalFeature.SCENE3D)) {
             Label warning = new Label("A aceleração 3D não está disponível neste computador.");
             warning.getStyleClass().add("notice"); getChildren().add(warning);
@@ -67,7 +83,7 @@ public final class PlanetView extends StackPane {
 
     private void resizeGlobe() {
         double scale = Math.max(.1, Math.min(getWidth(), getHeight()) / 310) * zoom;
-        planet.setScaleX(scale); planet.setScaleY(scale); planet.setScaleZ(scale);
+        globeScale.setX(scale); globeScale.setY(scale); globeScale.setZ(scale);
     }
     public void reset() { longitude.setAngle(-25); latitude.setAngle(-12); zoom = 1; resizeGlobe(); }
     public void setSunlight(boolean enabled) {
@@ -96,8 +112,9 @@ public final class PlanetView extends StackPane {
         g.fillPolygon(x, y, n);
     }
 
-    public void update(EstadoPlanetario state) {
-        WritableImage texture = new WritableImage(W, H); PixelWriter pixels = texture.getPixelWriter();
+    /** Pure pixel preparation: may run on the animator worker; topology is immutable after construction. */
+    int[] prepareTexture(EstadoPlanetario state) {
+        int[] pixels = new int[W * H];
         double water = state.hidrosfera().agua() / 100, ice = state.hidrosfera().gelo() / 100;
         double vegetation = state.biosfera().vegetacao() / 100;
         double heat = Math.clamp((state.clima().temperatura() - 25) / 130, 0, 1);
@@ -107,6 +124,7 @@ public final class PlanetView extends StackPane {
         Color soil = Color.web("#b69866").interpolate(Color.web("#36825b"), vegetation).interpolate(Color.web("#6c342d"), heat * .7);
         Color sea = Color.web("#124b70").interpolate(Color.web("#593e32"), heat * .8).interpolate(Color.web("#8cc4d8"), cold * .55);
         for (int y = 0; y < H; y++) {
+            if (Thread.currentThread().isInterrupted()) throw new java.util.concurrent.CancellationException("Textura substituída");
             double polar = Math.abs(y - H / 2.0) / (H / 2.0);
             for (int x = 0; x < W; x++) {
                 double noise = (.5 + .23 * Math.sin(x * .061 + Math.sin(y * .053) * 3) + .17 * Math.cos(y * .093 + Math.cos(x * .04) * 2));
@@ -119,9 +137,55 @@ public final class PlanetView extends StackPane {
                 c = c.interpolate(Color.web("#7c6b5b"), haze * (.45 + noise * .5));
                 c = c.interpolate(Color.web("#8f658e"), radiation * .25);
                 if (!wet && vegetation > .1 && noise > .65) c = c.interpolate(Color.web("#76a866"), vegetation * .3);
-                pixels.setColor(x, y, c);
+                pixels[y * W + x] = 0xff000000 | ((int) Math.round(c.getRed() * 255) << 16)
+                        | ((int) Math.round(c.getGreen() * 255) << 8) | (int) Math.round(c.getBlue() * 255);
             }
         }
-        surface.setDiffuseMap(texture); surface.setSpecularColor(Color.color(.24, .34, .40)); surface.setSpecularPower(18);
+        return pixels;
     }
+
+    public void update(EstadoPlanetario state) {
+        if (state.equals(displayedState) && transitionTexture == null) return;
+        showPrepared(state, prepareTexture(state));
+    }
+    void showPrepared(EstadoPlanetario state, int[] pixels) {
+        WritableImage texture = new WritableImage(W, H);
+        texture.getPixelWriter().setPixels(0, 0, W, H, PixelFormat.getIntArgbInstance(), pixels, 0, W);
+        surface.setDiffuseMap(texture); surface.setSpecularColor(Color.color(.24, .34, .40)); surface.setSpecularPower(18);
+        displayedState = state; displayedPixels = pixels; transitionTexture = null;
+    }
+    void blend(int[] before, int[] after, double progress) {
+        if (transitionTexture == null) { transitionTexture = new WritableImage(W, H); surface.setDiffuseMap(transitionTexture); }
+        int weight = (int) Math.round(Math.clamp(progress, 0, 1) * 256), inverse = 256 - weight;
+        for (int n = 0; n < blended.length; n++) {
+            int a = before[n], b = after[n];
+            int rb = (((a & 0xff00ff) * inverse + (b & 0xff00ff) * weight) >>> 8) & 0xff00ff;
+            int green = (((a & 0xff00) * inverse + (b & 0xff00) * weight) >>> 8) & 0xff00;
+            blended[n] = 0xff000000 | rb | green;
+        }
+        transitionTexture.getPixelWriter().setPixels(0, 0, W, H, PixelFormat.getIntArgbInstance(), blended, 0, W);
+    }
+    int[] pixelsFor(EstadoPlanetario state) { return state.equals(displayedState) ? displayedPixels : null; }
+    public EstadoPlanetario displayedState() { return displayedState; }
+    Group effectLayer() { return effects; }
+    Point3D frontPoint(double x, double y) {
+        return effects.getParent().parentToLocal(new Point3D(x, y, -Math.sqrt(130 * 130 - x * x - y * y)));
+    }
+    Point3D cameraOffset(Point3D origin, Point3D offset) {
+        Parent rotating = effects.getParent();
+        return rotating.parentToLocal(rotating.localToParent(origin).add(offset));
+    }
+    void shake(double x, double y) { effects.getParent().setTranslateX(x); effects.getParent().setTranslateY(y); }
+    void clearGlow() { glowLayer.getGraphicsContext2D().clearRect(0, 0, getWidth(), getHeight()); }
+    void glow(Point3D point, double radius, Color color, double alpha) {
+        Point3D p = effects.getParent().localToParent(point);
+        if (p.getZ() > 0) return; // Surface flares on the back hemisphere remain occluded.
+        double scale = globeScale.getX(), x = getWidth() / 2 + p.getX() * scale, y = getHeight() / 2 + p.getY() * scale;
+        double r = radius * scale;
+        var g = glowLayer.getGraphicsContext2D();
+        g.setFill(new RadialGradient(0, 0, x, y, r, false, CycleMethod.NO_CYCLE,
+                new Stop(0, color.deriveColor(0, 1, 1, alpha)), new Stop(.22, color.deriveColor(0, 1, 1, alpha * .5)), new Stop(1, Color.TRANSPARENT)));
+        g.fillOval(x - r, y - r, r * 2, r * 2);
+    }
+    void clearEffects() { effects.getChildren().clear(); clearGlow(); shake(0, 0); }
 }

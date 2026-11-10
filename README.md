@@ -40,6 +40,7 @@ java --enable-native-access=ALL-UNNAMED -Dprojekttellus.db=C:/Mundos/demo.db -ja
 3. Ajuste os controles ambientais. Os gases devem somar **100%**; água e gelo juntos podem ocupar até 100% da superfície. Pressão em atm, temperatura em °C, população em pessoas e tempo em anos.
 4. Escolha um dos cinco eventos e intensidade (**Factory Method**).
 5. Observe os indicadores separados e alertas (**Observer**).
+   Os cinco eventos têm sequências 3D de 3,8 segundos, proporcionais à intensidade. Use **Pular animação** para ver o resultado já confirmado ou escolha **Movimento reduzido / Desativadas** no painel de eventos.
 6. Capture um retrato, altere o planeta e restaure pelo histórico (**Memento**).
 7. Duplique o mundo, modifique um deles e carregue o outro para mostrar isolamento. Feche e reabra para mostrar SQLite.
 8. Ative **Modo apresentação**: a sequência reproduz a última operação concluída, com avanço manual, explicações e comparação antes/depois.
@@ -80,6 +81,7 @@ docs/                     Modelos, diagramas e transferência
 - [Os quatro padrões](docs/PADROES.md)
 - [Modelo matemático e limites](docs/MODELO.md)
 - [Recursos visuais](docs/ASSETS.md)
+- [Animações, acessibilidade e verificação gráfica](docs/ANIMACOES.md)
 - [Transferência e validação](docs/HANDOFF_SOL.md)
 - [Handoff final da auditoria](docs/HANDOFF_FINAL.md)
 - [Requisitos originais](docs/REQUISITOS.md)

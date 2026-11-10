@@ -4,7 +4,10 @@ import atlantafx.base.theme.PrimerDark;
 import com.projekttellus.domain.*;
 import com.projekttellus.persistence.*;
 import com.projekttellus.patterns.memento.TerraMemento;
+import com.projekttellus.application.*;
+import com.projekttellus.events.*;
 import javafx.application.*;
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -114,6 +117,160 @@ class DesktopFlowTest {
         throw new AssertionError("Globo ausente");
     }
 
+    private PlanetView globe() { return (PlanetView) ((javafx.scene.layout.StackPane) node("globeHost")).getChildren().getFirst(); }
+    private void animatedIdle() throws Exception { idle(); await(() -> ((Button) node("skipAnimation")).isDisabled()); }
+
+    @Test void animatedEventsAndMementoOnRealDesktop() throws Exception {
+        Path db = temporary.resolve("cinema.db");
+        String previous = System.getProperty("projekttellus.db"); System.setProperty("projekttellus.db", db.toString());
+        UUID id; EstadoPlanetario original;
+        try (var repo = new SqliteMundoRepository(db)) {
+            var terra = new SimulacaoService(repo).criar(new TerraBuilder().nome("Cinema · verificação")).terra();
+            id = terra.id(); original = terra.estado();
+        }
+        try {
+            open(); assertTrue(fx(() -> Platform.isSupported(ConditionalFeature.SCENE3D)), "Verificação visual requer 3D real");
+            fx(() -> { list("worldList").getSelectionModel().selectFirst(); return null; });
+            dialog("Carregar selecionado", null); long baseline = fx(this::globeFingerprint);
+            fx(() -> { ((Slider) node("intensitySlider")).setValue(100); return null; });
+            StringBuilder timing = new StringBuilder("event,frames,elapsed_ms,mean_frame_ms,max_frame_ms\n");
+            for (int i = 0; i < 5; i++) {
+                int index = i;
+                fx(() -> { ((ComboBox<?>) node("eventChoice")).getSelectionModel().select(index); return null; });
+                action("Aplicar evento");
+                await(() -> !globe().effectLayer().getChildren().isEmpty());
+                long[] pulse = new long[4];
+                AnimationTimer meter = new AnimationTimer() {
+                    @Override public void handle(long now) {
+                        if (pulse[0] == 0) pulse[0] = now;
+                        if (pulse[1] != 0) pulse[3] = Math.max(pulse[3], now - pulse[1]);
+                        pulse[1] = now; pulse[2]++;
+                    }
+                };
+                fx(() -> { meter.start(); return null; });
+                Thread.sleep(i == 0 ? 1100 : 1700); picture("event-" + i + "-action");
+                if (i == 0) { Thread.sleep(520); picture("event-0-impact"); }
+                if (i == 1) { Thread.sleep(700); picture("event-1-ash"); }
+                animatedIdle();
+                fx(() -> { meter.stop(); return null; });
+                assertTrue(pulse[2] >= 10, "O desktop deve renderizar quadros intermediários reais");
+                timing.append(String.format(Locale.ROOT, "%d,%d,%.1f,%.2f,%.2f%n", i, pulse[2], (pulse[1] - pulse[0]) / 1e6,
+                        (pulse[1] - pulse[0]) / 1e6 / Math.max(1, pulse[2] - 1), pulse[3] / 1e6));
+                try (var repo = new SqliteMundoRepository(db)) {
+                    var expected = repo.carregar(id).orElseThrow().estado();
+                    assertEquals(expected, fx(() -> globe().displayedState()));
+                    assertTrue(fx(() -> globe().effectLayer().getChildren().isEmpty()));
+                    assertEquals(i + 2, repo.historico(id).size(), "A animação não deve duplicar operações");
+                }
+                picture("event-" + i + "-final");
+            }
+            Files.writeString(Path.of("target/gui-verification/pulse-timing.csv"), timing);
+            // Zero intensity leaves both texture and real world intact, without any effects.
+            long finalBeforeZero = fx(this::globeFingerprint);
+            fx(() -> { ((Slider) node("intensitySlider")).setValue(0); return null; });
+            action("Aplicar evento"); animatedIdle();
+            assertEquals(finalBeforeZero, fx(this::globeFingerprint));
+            assertTrue(fx(() -> globe().effectLayer().getChildren().isEmpty()));
+
+            fx(() -> {
+                ((TabPane) node("activityTabs")).getSelectionModel().select(1);
+                this.<TerraMemento>list("snapshotList").getSelectionModel().select(this.<TerraMemento>list("snapshotList")
+                        .getItems().stream().filter(m -> m.rotulo().equals("Origem do mundo")).findFirst().orElseThrow()); return null;
+            });
+            dialog("Restaurar selecionado", null); await(() -> !globe().effectLayer().getChildren().isEmpty());
+            Thread.sleep(900); picture("memento-pulse"); animatedIdle();
+            assertEquals(original, fx(() -> globe().displayedState())); assertEquals(baseline, fx(this::globeFingerprint));
+            // Real key, scroll and light handlers remain active.
+            fx(() -> {
+                globe().requestFocus();
+                javafx.event.Event.fireEvent(globe(), new javafx.scene.input.KeyEvent(javafx.scene.input.KeyEvent.KEY_PRESSED, "", "", javafx.scene.input.KeyCode.RIGHT, false, false, false, false));
+                javafx.event.Event.fireEvent(globe(), new javafx.scene.input.KeyEvent(javafx.scene.input.KeyEvent.KEY_PRESSED, "", "", javafx.scene.input.KeyCode.ADD, false, false, false, false));
+                ((CheckBox) node("lightToggle")).fire(); return null;
+            }); picture("rotation-zoom-light");
+
+            // An actual failed SQL transaction must not start a cinematic or alter the current projection.
+            try (var conn = java.sql.DriverManager.getConnection("jdbc:sqlite:" + db); var stmt = conn.createStatement()) {
+                stmt.execute("CREATE TRIGGER fail_animation BEFORE UPDATE ON mundos BEGIN SELECT RAISE(ABORT, 'animation rollback'); END");
+            }
+            fx(() -> { ((Slider) node("intensitySlider")).setValue(100); return null; });
+            dialog("Aplicar evento", null); animatedIdle();
+            assertEquals(original, fx(() -> globe().displayedState()));
+            assertTrue(fx(() -> globe().effectLayer().getChildren().isEmpty()));
+            assertTrue(fx(() -> ((Label) node("statusLabel")).getText().contains("não foi concluída")));
+        } finally {
+            fx(() -> { if (controller != null) controller.close(); if (stage != null) stage.close(); return null; });
+            if (previous == null) System.clearProperty("projekttellus.db"); else System.setProperty("projekttellus.db", previous);
+        }
+    }
+
+    @Test void animatorCancellationReplacementAccessibilityAndClose() throws Exception {
+        try (var repo = new SqliteMundoRepository(temporary.resolve("lifecycle.db"))) {
+            var service = new SimulacaoService(repo); var terra = service.criar(new TerraBuilder()).terra();
+            var first = service.aplicar(terra, new AsteroideCreator(), 1);
+            var second = service.aplicar(terra, new InvasaoAlienigenaCreator(), .7);
+            var restored = service.restaurar(terra, repo.snapshots(terra.id()).getFirst());
+            int histories = repo.historico(terra.id()).size();
+            long notifications = service.estatisticas().para(terra.id()).mudancas();
+            PlanetView view = fx(PlanetView::new);
+            PlanetEventAnimator animator = fx(() -> new PlanetEventAnimator(view));
+            try {
+                // Replacement while the old textures are still being prepared.
+                fx(() -> {
+                    animator.play(first, AnimationKind.ASTEROID, 1, AnimationMode.FULL);
+                    animator.play(second, AnimationKind.ALIEN, .7, AnimationMode.FULL);
+                    animator.cancel(); return null;
+                });
+                await(() -> !animator.isRunning()); assertEquals(second.depois(), fx(view::displayedState));
+                assertTrue(fx(() -> view.effectLayer().getChildren().isEmpty()));
+                fx(() -> { animator.play(first, AnimationKind.ASTEROID, 1, AnimationMode.FULL); return null; });
+                await(() -> !view.effectLayer().getChildren().isEmpty());
+                fx(() -> { animator.skip(); return null; });
+                assertEquals(first.depois(), fx(view::displayedState)); assertFalse(fx(animator::isRunning));
+                fx(() -> { animator.play(restored, AnimationKind.MEMENTO, 0, AnimationMode.REDUCED); return null; });
+                await(() -> !animator.isRunning()); assertEquals(restored.depois(), fx(view::displayedState));
+                fx(() -> { animator.play(second, AnimationKind.ALIEN, .7, AnimationMode.OFF); return null; });
+                await(() -> !animator.isRunning()); assertEquals(second.depois(), fx(view::displayedState));
+                // A context switch invalidates pending callbacks, including after close.
+                fx(() -> {
+                    animator.play(first, AnimationKind.ASTEROID, 1, AnimationMode.FULL);
+                    animator.discard(); view.update(restored.depois()); return null;
+                });
+                Thread.sleep(350); assertEquals(restored.depois(), fx(view::displayedState));
+                fx(() -> { animator.play(second, AnimationKind.ALIEN, .7, AnimationMode.FULL); animator.close(); return null; });
+                Thread.sleep(350); assertEquals(restored.depois(), fx(view::displayedState));
+                assertFalse(fx(animator::isRunning)); assertTrue(fx(() -> view.effectLayer().getChildren().isEmpty()));
+                assertEquals(histories, repo.historico(terra.id()).size());
+                assertEquals(notifications, service.estatisticas().para(terra.id()).mudancas());
+                assertEquals(restored.depois(), terra.estado());
+                assertEquals(terra.estado(), repo.carregar(terra.id()).orElseThrow().estado());
+            } finally { fx(() -> { animator.close(); return null; }); }
+        }
+    }
+
+    @Test void approachRemainsOutsideSurfaceAfterRotationAndEffectsKeepCenterStable() throws Exception {
+        fx(() -> {
+            PlanetView view = new PlanetView(); view.resize(600, 400); view.reset();
+            Parent rotating = view.effectLayer().getParent();
+            var latitude = (javafx.scene.transform.Rotate) rotating.getTransforms().get(0);
+            var longitude = (javafx.scene.transform.Rotate) rotating.getTransforms().get(1);
+            for (double x : new double[]{-80, 0, 80}) for (double y : new double[]{0, 90, 180, 270}) {
+                latitude.setAngle(x); longitude.setAngle(y);
+                var hit = view.frontPoint(24, -18);
+                var start = view.cameraOffset(hit, new javafx.geometry.Point3D(-230, -175, -290));
+                for (int step = 0; step <= 100; step++) {
+                    var point = start.add(hit.subtract(start).multiply(step / 100.0));
+                    assertTrue(point.magnitude() >= 130 - 1e-8, "A aproximação deve permanecer fora da esfera até o impacto");
+                }
+                var center = rotating.localToScene(javafx.geometry.Point3D.ZERO);
+                var effect = new PlanetEventEffect(view, AnimationPlan.of(AnimationKind.ASTEROID, 1, AnimationMode.FULL));
+                effect.frame(.15);
+                assertEquals(center, rotating.localToScene(javafx.geometry.Point3D.ZERO), "Partículas não podem mover o pivô de escala");
+                effect.dispose();
+            }
+            return null;
+        });
+    }
+
     @Test void completeDesktopWorkflowAndReopen() throws Exception {
         String previous = System.getProperty("projekttellus.db"); Path db = temporary.resolve("desktop.db");
         System.setProperty("projekttellus.db", db.toString());
@@ -152,6 +309,7 @@ class DesktopFlowTest {
             action("Avançar tempo →"); assertEquals("ANO 10,0", fx(() -> ((Label) node("yearLabel")).getText()));
             fx(() -> { this.<TerraMemento>list("snapshotList").getSelectionModel().select(memento); return null; });
             dialog("Restaurar selecionado", null);
+            animatedIdle();
             assertEquals(preservedHuman, fx(() -> ((Label) node("humanValue")).getText()));
             assertEquals("ANO 0,0", fx(() -> ((Label) node("yearLabel")).getText()));
             fx(() -> { ((ToggleButton) node("presentationToggle")).fire(); return null; });
