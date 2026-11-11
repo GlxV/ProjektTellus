@@ -25,6 +25,8 @@ mvn javafx:run
 
 Teste gráfico opcional, com um desktop disponível: `mvn -Pgui-tests test`. Ele usa um banco temporário, percorre os controles/diálogos reais e gera capturas em `target/gui-verification/`. Sem esse perfil, a suíte não inicia JavaFX.
 
+A janela inicial respeita a área útil do monitor. Em telas menores, role o painel direito para acessar condições, eventos e passagem do tempo; a apresentação e os retratos também mantêm seus controles acessíveis. [Correções dos issues #1 e #2, matriz de validação e limitações](docs/CORRECOES_ISSUES_1_2.md).
+
 `target/ProjektTellus.jar` inclui dependências JavaFX/JDBC; **requer Java 25**, cujo runtime não está embutido. O pacote gerado neste ambiente é Windows x64; em outro sistema, compile novamente para obter os binários nativos correspondentes.
 
 Banco automático: `data/projekttellus.db`, relativo ao diretório de execução. O lançador fixa esse diretório na raiz do projeto. Para outro banco:

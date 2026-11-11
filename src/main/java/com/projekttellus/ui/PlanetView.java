@@ -37,7 +37,7 @@ public final class PlanetView extends StackPane {
     private WritableImage transitionTexture;
 
     public PlanetView() {
-        setMinSize(100, 150); setFocusTraversable(true);
+        setMinSize(0, 100); setFocusTraversable(true);
         setAccessibleText("Globo planetário. Arraste para girar, use a roda para zoom. Setas giram; mais e menos aproximam e afastam.");
         createContinents();
         sphere.setMaterial(surface);

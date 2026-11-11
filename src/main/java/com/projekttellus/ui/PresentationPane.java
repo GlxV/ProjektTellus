@@ -29,13 +29,15 @@ public final class PresentationPane extends ScrollPane implements AutoCloseable 
     public PresentationPane(Consumer<EstadoPlanetario> preview, Consumer<String> demonstration) {
         this.preview = preview;
         setFitToWidth(true);
+        setMinSize(0, 0);
+        setHbarPolicy(ScrollBarPolicy.NEVER);
         VBox content = new VBox(10); content.setPadding(new Insets(12));
         Label heading = label("Reprodução da última ação", "section-title");
-        HBox navigation = new HBox(8, back, next, play, count);
+        FlowPane navigation = new FlowPane(8, 8, back, next, play, count);
         Button before = new Button("Ver globo antes"), after = new Button("Ver globo depois");
         before.setOnAction(e -> showBefore()); after.setOnAction(e -> showAfter());
-        HBox comparisonControls = new HBox(8, before, after);
-        HBox demos = new HBox(6);
+        FlowPane comparisonControls = new FlowPane(8, 8, before, after);
+        FlowPane demos = new FlowPane(6, 6);
         for (String name : new String[]{"Builder", "Factory Method", "Observer", "Memento"}) {
             Button b = new Button(name); b.setOnAction(e -> demonstration.accept(name)); demos.getChildren().add(b);
         }

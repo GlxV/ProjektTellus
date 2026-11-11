@@ -16,7 +16,12 @@ public final class BuilderDialog extends Dialog<TerraBuilder> {
         Label explanation = new Label("Builder · Reúna as condições, confira os limites e construa um mundo independente.");
         explanation.setWrapText(true); explanation.getStyleClass().add("notice");
         VBox content = new VBox(12, explanation, new Label("Nome do mundo"), name, editor); content.setPadding(new Insets(16));
-        ScrollPane scroll = new ScrollPane(content); scroll.setFitToWidth(true); scroll.setPrefViewportWidth(430); scroll.setPrefViewportHeight(590);
+        ScrollPane scroll = new ScrollPane(content); scroll.setFitToWidth(true);
+        scroll.setMinHeight(0); scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scroll.setPrefViewportWidth(Math.min(430, WindowLayout.workArea(owner).getWidth() - 100));
+        double availableHeight = WindowLayout.workArea(owner).getHeight();
+        if (owner != null) availableHeight = Math.min(availableHeight, owner.getHeight());
+        scroll.setPrefViewportHeight(Math.max(180, Math.min(590, availableHeight - 210)));
         getDialogPane().setContent(scroll);
         ButtonType create = new ButtonType("Construir e salvar", ButtonBar.ButtonData.OK_DONE);
         getDialogPane().getButtonTypes().addAll(create, ButtonType.CANCEL);

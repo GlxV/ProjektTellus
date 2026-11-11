@@ -18,6 +18,7 @@
         <sqlite.version>3.50.3.0</sqlite.version>
         <junit.version>5.13.4</junit.version>
         <test.excludedGroups>gui</test.excludedGroups>
+        <test.jvmArgs></test.jvmArgs>
     </properties>
 
     <dependencies>
@@ -65,7 +66,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.4</version>
                 <configuration>
-                    <argLine>--enable-native-access=ALL-UNNAMED</argLine>
+                    <argLine>--enable-native-access=ALL-UNNAMED ${test.jvmArgs}</argLine>
                     <excludedGroups>${test.excludedGroups}</excludedGroups>
                 </configuration>
             </plugin>

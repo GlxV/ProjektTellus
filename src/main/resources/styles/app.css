@@ -16,7 +16,7 @@
 .progress-bar { -fx-pref-height: 6px; -fx-accent: #66d5b5; }
 .progress-bar > .track { -fx-background-color: #253444; -fx-background-radius: 6; }
 .progress-bar > .bar { -fx-background-color: #66d5b5; -fx-background-radius: 6; -fx-padding: 3; }
-.inspector, .inspector > .viewport { -fx-background-color: #111c28; }
+.scroll-pane.inspector, .scroll-pane.inspector > .viewport { -fx-background-color: #111c28; }
 .inspector { -fx-border-color: transparent transparent transparent #243344; }
 .inspector-content { -fx-padding: 22 18; }
 .button, .toggle-button { -fx-background-color: #223344; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #34495a; -fx-padding: 8 11; -fx-text-fill: #e0eaf3; -fx-cursor: hand; }
@@ -56,4 +56,28 @@
 .presentation-title { -fx-text-fill: #8fe6cc; -fx-font-size: 17px; -fx-font-weight: bold; }
 .comparison { -fx-background-color: #152735; -fx-background-radius: 7; -fx-padding: 10; }
 .scroll-pane, .scroll-pane > .viewport { -fx-background-color: transparent; }
+/* Popup is a separate window. Never inherit the transparent library list style. */
+.combo-box-popup > .list-view {
+    -fx-background-color: #111c28;
+    -fx-background-insets: 0;
+    -fx-border-color: #496176;
+    -fx-border-width: 1;
+    -fx-padding: 4;
+    -fx-effect: dropshadow(gaussian, #00000099, 12, 0.2, 0, 4);
+}
+.combo-box-popup .list-cell {
+    -fx-background-color: #111c28;
+    -fx-text-fill: #dce6ef;
+    -fx-background-radius: 3;
+    -fx-padding: 10 12;
+}
+.combo-box-popup .list-cell:filled:hover { -fx-background-color: #30485b; -fx-text-fill: #ffffff; }
+.combo-box-popup .list-cell:filled:selected { -fx-background-color: #244239; -fx-text-fill: #aeefdb; }
+.combo-box-popup .list-cell:filled:selected:hover { -fx-background-color: #396451; -fx-text-fill: #ffffff; }
+.combo-box-popup .list-cell:filled:pressed,
+.combo-box-popup .list-cell:filled:selected:hover:pressed { -fx-background-color: #80dfc1; -fx-text-fill: #102c28; }
+.app-root:compact .header { -fx-padding: 12 18; }
+.app-root:compact .main-content { -fx-padding: 12; -fx-spacing: 8; }
+.app-root:compact .sidebar { -fx-padding: 16 12; -fx-spacing: 9; }
+.app-root:compact .inspector-content { -fx-padding: 16 12; }
 .tooltip { -fx-background-color: #263e50; -fx-text-fill: #ecf7ff; }

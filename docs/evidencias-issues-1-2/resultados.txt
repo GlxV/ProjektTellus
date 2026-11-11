@@ -1,0 +1,34 @@
+ProjektTellus - issues #1 e #2 - 2026-11-10
+
+BASELINE: mvn -B -ntp -Pgui-tests verify - 54 testes aprovados.
+REGRESSOES ANTES DA CORRECAO: 2 testes falharam por minimo de altura e popup transparente.
+
+FINAL: mvn -B -ntp -Pgui-tests verify
+GUI outer 1366x720; scene 1350x681; output scale 1.00x1.00; SCENE3D=true
+GUI outer 1366x720; scene 1350x681; output scale 1.00x1.00; SCENE3D=true
+GUI outer 1366x720; scene 1350x681; output scale 1.00x1.00; SCENE3D=true
+GUI outer 1366x720; scene 1350x681; output scale 1.00x1.00; SCENE3D=true
+GUI outer 1366x720; scene 1350x681; output scale 1.00x1.00; SCENE3D=true
+[INFO] Tests run: 57, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+
+1080p / 100%: percurso grafico completo e matriz 1920x1032 logicos.
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 40.89 s -- in com.projekttellus.ui.DesktopFlowTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+
+125%: mvn -B -ntp -Pgui-tests -Dtest=DesktopFlowTest -Dtest.jvmArgs=-Dglass.win.uiScale=1.25 -Dtest.expectedScale=1.25 -Dtest.window.width=1536 -Dtest.window.height=825 test
+GUI outer 1440x826; scene 1427x794; output scale 1.25x1.25; SCENE3D=true
+GUI outer 1440x826; scene 1427x794; output scale 1.25x1.25; SCENE3D=true
+GUI outer 1440x826; scene 1427x794; output scale 1.25x1.25; SCENE3D=true
+GUI outer 1440x826; scene 1427x794; output scale 1.25x1.25; SCENE3D=true
+GUI outer 1440x826; scene 1427x794; output scale 1.25x1.25; SCENE3D=true
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 45.49 s -- in com.projekttellus.ui.DesktopFlowTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+
+Inspecao interativa do JAR: 1366x720 externos, 1350x681 de conteudo, escala 1.00.
+Monitor fisico e escala global do Windows nao foram alterados. Ver limites no relatorio.
+
+JAR SHA-256: D425EED263890694CF30E08B73316D7E13102774B34D3287D734B6F1EEA727CF
+JAR bytes: 24872484

@@ -26,6 +26,8 @@ public final class MainController implements AutoCloseable {
     @FXML private BorderPane interactionRoot;
     @FXML private StackPane globeHost, presentationHost;
     @FXML private VBox environmentHost;
+    @FXML private VBox worldSidebar;
+    @FXML private ScrollPane inspectorScroll;
     @FXML private ListView<MundoResumo> worldList;
     @FXML private ListView<RegistroEvento> historyList;
     @FXML private ListView<TerraMemento> snapshotList;
@@ -62,6 +64,12 @@ public final class MainController implements AutoCloseable {
     private static final DateTimeFormatter DATE = DateTimeFormatter.ofPattern("dd/MM HH:mm:ss").withZone(ZoneId.systemDefault());
 
     @FXML private void initialize() {
+        // Keep side columns readable while returning extra space to the observatory.
+        worldSidebar.prefWidthProperty().bind(interactionRoot.widthProperty().multiply(.16).map(w -> Math.clamp(w.doubleValue(), 180, 218)));
+        inspectorScroll.prefWidthProperty().bind(interactionRoot.widthProperty().multiply(.25).map(w -> Math.clamp(w.doubleValue(), 300, 360)));
+        var compact = javafx.css.PseudoClass.getPseudoClass("compact");
+        interactionRoot.heightProperty().addListener((o, a, b) ->
+                interactionRoot.getParent().pseudoClassStateChanged(compact, b.doubleValue() < 760));
         globe = new PlanetView(); globeHost.getChildren().add(globe);
         animator = new PlanetEventAnimator(globe);
         animationMode.getItems().setAll(AnimationMode.values());
@@ -77,6 +85,9 @@ public final class MainController implements AutoCloseable {
             statusLabel.setText("Comparação visual da última ação · O estado salvo do mundo permanece no resultado final.");
         }, this::demonstrate);
         presentationHost.getChildren().add(presentation);
+        mainSplit.heightProperty().addListener((o, a, b) -> Platform.runLater(() -> {
+            if (!closed) mainSplit.setDividerPositions(activityTabs.getSelectionModel().getSelectedItem() == presentationTab ? .48 : .63);
+        }));
         activityTabs.getSelectionModel().selectedItemProperty().addListener((o, previous, selected) -> {
             boolean presenting = selected == presentationTab;
             presentationToggle.setSelected(presenting);

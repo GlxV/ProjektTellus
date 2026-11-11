@@ -6,7 +6,7 @@
   <VBox spacing="2"><Label text="◉  PROJEKT TELLUS" styleClass="brand"/><Label text="LABORATÓRIO DE MUNDOS" styleClass="eyebrow"/></VBox><Region HBox.hgrow="ALWAYS"/><Label text="Um planeta. Infinitas possibilidades." styleClass="muted"/><ToggleButton fx:id="presentationToggle" text="Modo apresentação" onAction="#togglePresentation"/>
  </HBox></top>
  <center><BorderPane fx:id="interactionRoot">
-  <left><VBox spacing="12" prefWidth="218" minWidth="195" styleClass="sidebar">
+  <left><VBox fx:id="worldSidebar" spacing="12" prefWidth="218" minWidth="180" styleClass="sidebar">
    <Label text="EXPLORADOR" styleClass="eyebrow"/><HBox alignment="CENTER_LEFT"><Label text="Meus mundos" styleClass="section-title"/><Region HBox.hgrow="ALWAYS"/><Label fx:id="worldCount" text="0" styleClass="count"/></HBox>
    <Button text="＋ Criar mundo" onAction="#createWorld" maxWidth="Infinity" styleClass="primary"/><ListView fx:id="worldList" VBox.vgrow="ALWAYS" minHeight="100"/>
    <Button text="Carregar selecionado" onAction="#loadWorld" maxWidth="Infinity"/>
@@ -15,26 +15,26 @@
     <Button text="Salvar" onAction="#saveWorld" GridPane.rowIndex="1" maxWidth="Infinity"/><Button text="Excluir" onAction="#deleteWorld" GridPane.columnIndex="1" GridPane.rowIndex="1" maxWidth="Infinity" styleClass="danger"/>
    </GridPane><Separator/><Label text="● Mundo carregado: renomear, duplicar e salvar. Excluir usa a seleção da lista. Alterações confirmadas são salvas localmente." wrapText="true" styleClass="muted"/>
   </VBox></left>
-  <center><VBox spacing="12" styleClass="main-content">
-   <HBox alignment="CENTER_LEFT" spacing="12"><VBox spacing="3"><Label text="OBSERVATÓRIO PLANETÁRIO" styleClass="eyebrow"/><Label fx:id="worldTitle" text="Seu próximo mundo começa aqui" styleClass="world-title"/></VBox><Region HBox.hgrow="ALWAYS"/><Label fx:id="yearLabel" text="ANO 0" styleClass="pill"/></HBox>
-   <SplitPane fx:id="mainSplit" orientation="VERTICAL" dividerPositions="0.63" VBox.vgrow="ALWAYS">
-    <VBox spacing="10" minHeight="260"><StackPane fx:id="globeHost" VBox.vgrow="ALWAYS" minHeight="180" styleClass="globe-host"/>
+  <center><VBox spacing="12" minWidth="0" minHeight="0" styleClass="main-content">
+   <HBox alignment="CENTER_LEFT" spacing="12"><VBox spacing="3" minWidth="0" HBox.hgrow="ALWAYS"><Label text="OBSERVATÓRIO PLANETÁRIO" styleClass="eyebrow"/><Label fx:id="worldTitle" text="Seu próximo mundo começa aqui" minWidth="0" maxWidth="Infinity" styleClass="world-title"/></VBox><Label fx:id="yearLabel" text="ANO 0" styleClass="pill"/></HBox>
+   <SplitPane fx:id="mainSplit" orientation="VERTICAL" dividerPositions="0.63" minWidth="0" minHeight="200" VBox.vgrow="ALWAYS">
+    <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" minWidth="0" minHeight="160" styleClass="observatory-scroll"><VBox spacing="10" minWidth="0"><StackPane fx:id="globeHost" VBox.vgrow="ALWAYS" minWidth="0" minHeight="100" styleClass="globe-host"/>
      <FlowPane alignment="CENTER" hgap="8" vgap="5"><Label text="Arraste para girar · Role para aproximar" styleClass="muted"/><Button text="Recentrar" onAction="#resetGlobe"/><CheckBox fx:id="lightToggle" text="Luz solar" selected="true"/><Button fx:id="skipAnimation" text="Pular animação" accessibleText="Pular animação e mostrar resultado confirmado"/></FlowPane>
      <HBox spacing="10" styleClass="metrics"><VBox HBox.hgrow="ALWAYS" spacing="4"><Label text="HABITABILIDADE HUMANA" styleClass="eyebrow"/><Label fx:id="humanValue" text="—" styleClass="metric-number"/><ProgressBar fx:id="humanBar" progress="0" maxWidth="Infinity"/></VBox><VBox HBox.hgrow="ALWAYS" spacing="4"><Label text="POTENCIAL BIOLÓGICO" styleClass="eyebrow"/><Label fx:id="bioValue" text="—" styleClass="metric-number"/><ProgressBar fx:id="bioBar" progress="0" maxWidth="Infinity"/></VBox></HBox>
-    </VBox>
-    <TabPane fx:id="activityTabs" tabClosingPolicy="UNAVAILABLE" minHeight="180"><tabs>
+    </VBox></ScrollPane>
+    <TabPane fx:id="activityTabs" tabClosingPolicy="UNAVAILABLE" minWidth="0" minHeight="130"><tabs>
      <Tab text="Linha do tempo"><ListView fx:id="historyList"/></Tab>
-     <Tab text="Retratos salvos"><VBox spacing="8" styleClass="tab-content-pad"><Label text="Retratos completos e persistentes deste mundo." styleClass="muted"/><ListView fx:id="snapshotList" VBox.vgrow="ALWAYS"/><HBox spacing="8"><Button text="＋ Capturar retrato" onAction="#captureSnapshot"/><Button text="Restaurar selecionado" onAction="#restoreSnapshot"/></HBox></VBox></Tab>
+     <Tab text="Retratos salvos"><ScrollPane fx:id="snapshotsScroll" fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" minWidth="0" minHeight="0"><VBox spacing="8" minWidth="0" styleClass="tab-content-pad"><Label text="Retratos completos e persistentes deste mundo." wrapText="true" styleClass="muted"/><ListView fx:id="snapshotList" minHeight="30" VBox.vgrow="ALWAYS"/><FlowPane hgap="8" vgap="6"><Button text="＋ Capturar retrato" onAction="#captureSnapshot"/><Button text="Restaurar selecionado" onAction="#restoreSnapshot"/></FlowPane></VBox></ScrollPane></Tab>
      <Tab fx:id="presentationTab" text="Apresentação"><StackPane fx:id="presentationHost"/></Tab>
     </tabs></TabPane>
    </SplitPane>
    <Label fx:id="alertLabel" text="Crie um mundo ou carregue um cenário da biblioteca." wrapText="true" styleClass="notice"/>
    <Label text="Modelo educacional simplificado e ficcional · Textura ilustrativa · Indicadores sem validação científica" wrapText="true" styleClass="footnote"/>
   </VBox></center>
-  <right><ScrollPane fitToWidth="true" prefWidth="324" minWidth="290" hbarPolicy="NEVER" styleClass="inspector"><VBox spacing="14" styleClass="inspector-content">
+  <right><ScrollPane fx:id="inspectorScroll" fitToWidth="true" fitToHeight="false" prefWidth="324" minWidth="290" minHeight="0" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="inspector"><VBox spacing="14" minWidth="0" styleClass="inspector-content">
    <Label text="PAINEL DE CONTROLE" styleClass="eyebrow"/><Label text="Condições ambientais" styleClass="section-title"/><VBox fx:id="environmentHost"/>
    <Button fx:id="applyButton" text="Aplicar condições" onAction="#applyEnvironment" maxWidth="Infinity" styleClass="primary"/><Separator/>
-   <Label text="Eventos planetários" styleClass="section-title"/><ComboBox fx:id="eventChoice" maxWidth="Infinity"/>
+   <Label text="Eventos planetários" styleClass="section-title"/><ComboBox fx:id="eventChoice" visibleRowCount="5" maxWidth="Infinity"/>
    <HBox><Label text="Intensidade"/><Region HBox.hgrow="ALWAYS"/><Label fx:id="intensityLabel" text="40%" styleClass="accent-text"/></HBox><Slider fx:id="intensitySlider" min="0" max="100" value="40" blockIncrement="5"/>
    <Button text="Aplicar evento" onAction="#applyEvent" maxWidth="Infinity"/><Label text="Animações"/><ComboBox fx:id="animationMode" maxWidth="Infinity" accessibleText="Animações: completas, movimento reduzido ou desativadas"/><Label text="O resultado é salvo antes da animação. Você pode pular ou iniciar outra ação a qualquer momento." wrapText="true" styleClass="muted"/><Separator/>
    <Label text="Passagem do tempo" styleClass="section-title"/><HBox spacing="8" alignment="CENTER_LEFT"><Spinner fx:id="yearsSpinner" prefWidth="130"/><Label text="anos por avanço" styleClass="muted"/></HBox><Button text="Avançar tempo →" onAction="#advanceTime" maxWidth="Infinity"/>
