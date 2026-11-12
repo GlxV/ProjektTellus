@@ -6,7 +6,7 @@ Pacotes todos sob `com.projekttellus`. Java 25. Componentes abaixo são records 
 
 - `domain.Atmosfera(double oxigenio, double nitrogenio, double co2, double helio, double pressao)` — gases em %, soma 100 (tolerância 1e-6), pressão em atm [0,20].
 - `domain.Clima(double temperatura, double aerossol, double radiacao)` — °C [-150,200], aerossol e radiação [0,100].
-- `domain.Biosfera(double vegetacao)` — % [0,100].
+- `domain.Biosfera(double vegetacao)` — % [0,100] do continente seco disponível; área planetária derivada.
 - `domain.Hidrosfera(double agua, double gelo)` — cobertura em % [0,100], soma <=100.
 - `domain.Civilizacao(long populacao)` — [0,100000000000].
 - `domain.EstadoPlanetario(Atmosfera atmosfera, Clima clima, Biosfera biosfera, Hidrosfera hidrosfera, Civilizacao civilizacao, double anos)` — anos >=0, finito.
@@ -27,7 +27,7 @@ Pacotes todos sob `com.projekttellus`. Java 25. Componentes abaixo são records 
 - `criar(TerraBuilder builder)`, `alterar(Terra terra, EstadoPlanetario estado)`, `aplicar(Terra terra, events.EventoCreator creator, double intensidade)`, `avancar(Terra terra, double anos)`, `restaurar(Terra terra, TerraMemento snapshot)`, `salvar(Terra terra)`, `capturar(Terra terra, String rotulo)`, `duplicar(Terra terra, String nome)` retornam `application.ResultadoOperacao`.
 - `ResultadoOperacao(Terra terra, EstadoPlanetario antes, EstadoPlanetario depois, List<Passo> passos, simulation.Indicadores indicadores, String descricao)`.
 - `Passo(String titulo, String detalhe, String padrao)`; vazio para nenhum padrão.
-- `simulation.Indicadores(double humana, double biologica)` (%); `simulation.ModeloPlanetario.calcular(EstadoPlanetario)` estático.
+- `simulation.Indicadores(double humana, double biologica, double sustentabilidade, long capacidadeSuporte, List<FatorAmbiental> fatoresHumanos, List<FatorAmbiental> fatoresBiologicos, List<FatorAmbiental> fatoresCivilizacao)` (% e pessoas; listas imutáveis); `simulation.ModeloPlanetario.calcular(EstadoPlanetario)` estático.
 - `events.EventoCreator`: abstrato, `String nome()`, `EventoPlanetario criar(double intensidade)` Factory Method sobrescrito.
 - Criadores em `events`: `AsteroideCreator`, `SupervulcaoCreator`, `GuerraNuclearCreator`, `InvasaoAlienigenaCreator`, `RestauracaoEcologicaCreator`. `toString()` retorna nome amigável. Intensidade [0,1].
 - Observer: `patterns.observer.SimulacaoObserver` com `String nome()` e `void aoMudar(MudancaPlanetaria mudanca)`; `ObserverBus.inscrever(observer)` retorna AutoCloseable, `remover(observer)`.
@@ -35,3 +35,5 @@ Pacotes todos sob `com.projekttellus`. Java 25. Componentes abaixo são records 
 ## Responsabilidade UI (tarefa delegada)
 
 `ui.MainController`, `ui.PlanetView` e helpers UI, `fxml/main.fxml`, `styles/app.css`; atualizar `ProjektTellusApp` para carregar controller e liberar recursos no fechamento. A interface cria serviço/repositório e usa a API acima; banco default `data/projekttellus.db`, override system property `projekttellus.db`. Não alterar núcleo/persistência/pom/tests de outros responsáveis. Interface FXML mostra modo apresentação com Passos reais, avanço manual/replay, comparações. Operações SQLite em executor de uma thread com busy state. UI deve inscrever observador com responsabilidade de atualização real.
+
+Revisão planetária: `EstadoPlanetario.superficieContinental()` e `superficieVegetada()` retornam percentuais derivados da superfície total. `ModeloPlanetario.temperaturaAlvo(estado)` expõe o alvo educacional usado pelo motor e pela explicação de estabilidade. Nenhum contrato persistido foi alterado; o construtor de Indicadores mudou após conferir todos os seus consumidores no repositório.

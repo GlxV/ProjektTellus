@@ -24,15 +24,15 @@ import java.util.function.Consumer;
 public final class MainController implements AutoCloseable {
     @FXML private HBox header;
     @FXML private BorderPane interactionRoot;
-    @FXML private StackPane globeHost, presentationHost;
+    @FXML private StackPane globeHost, presentationHost, indicatorsHost;
     @FXML private VBox environmentHost;
     @FXML private VBox worldSidebar;
     @FXML private ScrollPane inspectorScroll;
     @FXML private ListView<MundoResumo> worldList;
     @FXML private ListView<RegistroEvento> historyList;
     @FXML private ListView<TerraMemento> snapshotList;
-    @FXML private Label worldCount, worldTitle, yearLabel, humanValue, bioValue, alertLabel, observerLabel, statusLabel, intensityLabel;
-    @FXML private ProgressBar humanBar, bioBar;
+    @FXML private Label worldCount, worldTitle, yearLabel, humanValue, bioValue, civilizationValue, capacityLabel, alertLabel, observerLabel, statusLabel, intensityLabel;
+    @FXML private ProgressBar humanBar, bioBar, civilizationBar;
     @FXML private ProgressIndicator busyIndicator;
     @FXML private Button applyButton;
     @FXML private ToggleButton presentationToggle;
@@ -57,6 +57,7 @@ public final class MainController implements AutoCloseable {
     private PlanetView globe;
     private PlanetEventAnimator animator;
     private PresentationPane presentation;
+    private final IndicatorDetails indicatorDetails = new IndicatorDetails();
     private SimulacaoService service; // mutations on worker; only thread-safe observer projections read on FX
     private AutoCloseable subscription;
     private Terra current;
@@ -85,6 +86,7 @@ public final class MainController implements AutoCloseable {
             statusLabel.setText("Comparação visual da última ação · O estado salvo do mundo permanece no resultado final.");
         }, this::demonstrate);
         presentationHost.getChildren().add(presentation);
+        indicatorsHost.getChildren().add(indicatorDetails);
         mainSplit.heightProperty().addListener((o, a, b) -> Platform.runLater(() -> {
             if (!closed) mainSplit.setDividerPositions(activityTabs.getSelectionModel().getSelectedItem() == presentationTab ? .48 : .63);
         }));
@@ -195,6 +197,7 @@ public final class MainController implements AutoCloseable {
                 animator.discard();
                 current = null; hasWorld.set(false); presentation.clear(); historyList.getItems().clear(); snapshotList.getItems().clear();
                 worldTitle.setText("Seu próximo mundo começa aqui"); yearLabel.setText("ANO 0"); humanValue.setText("—"); bioValue.setText("—"); humanBar.setProgress(0); bioBar.setProgress(0);
+                civilizationValue.setText("—"); civilizationBar.setProgress(0); capacityLabel.setText("Capacidade estimada: —"); indicatorDetails.clear();
                 editor.setState(new TerraBuilder().build().estado()); globe.update(new TerraBuilder().build().estado());
                 alertLabel.setText("Mundo excluído. Crie ou carregue outro cenário."); observerLabel.setText("Observer · aguardando mudanças");
             }
@@ -299,6 +302,9 @@ public final class MainController implements AutoCloseable {
     private void renderState(EstadoPlanetario state, Indicadores indicators) {
         humanValue.setText(f(indicators.humana()) + "%"); bioValue.setText(f(indicators.biologica()) + "%");
         humanBar.setProgress(indicators.humana() / 100); bioBar.setProgress(indicators.biologica() / 100);
+        civilizationValue.setText(f(indicators.sustentabilidade()) + "%"); civilizationBar.setProgress(indicators.sustentabilidade() / 100);
+        capacityLabel.setText("Suporte estimado: " + java.text.NumberFormat.getIntegerInstance(Locale.of("pt", "BR")).format(indicators.capacidadeSuporte()) + " pessoas · fatores na aba Indicadores");
+        indicatorDetails.show(state, indicators);
     }
     private <T> void run(String message, Callable<T> action, Consumer<T> success) {
         if (closed || busy.get()) return;

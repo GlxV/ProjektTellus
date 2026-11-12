@@ -100,7 +100,7 @@ public final class SimulacaoService {
                                          String descricao, double intensidade, TerraMemento snapshot,
                                          ArrayList<Passo> passos, boolean notificar) {
         var indicadores = ModeloPlanetario.calcular(candidato.estado());
-        passos.add(new Passo("Condições planetárias recalculadas", "Habitabilidade humana e potencial biológico foram avaliados separadamente a partir do ambiente.", ""));
+        passos.add(new Passo("Condições planetárias recalculadas", "Sobrevivência humana, potencial biológico e sustentabilidade foram avaliados separadamente; população e continente determinam a ocupação do suporte estimado.", ""));
         var registro = new RegistroEvento(UUID.randomUUID(), candidato.id(), Instant.now(), descricao, intensidade, candidato.estado().anos());
         repository.salvar(candidato, registro, snapshot);
         destino.renomear(candidato.nome()); destino.atualizar(candidato.estado());

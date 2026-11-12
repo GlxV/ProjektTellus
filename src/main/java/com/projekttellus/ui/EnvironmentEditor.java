@@ -16,6 +16,7 @@ public final class EnvironmentEditor extends VBox {
     private final BooleanProperty dirty = new SimpleBooleanProperty(false);
     private final Label feedback = new Label();
     private final Label gases = new Label();
+    private final Label geography = new Label();
     private boolean filling;
 
     public EnvironmentEditor() {
@@ -34,19 +35,20 @@ public final class EnvironmentEditor extends VBox {
         });
         getChildren().add(balance);
         field("pressure", "Pressão", "atm"); field("temperature", "Temperatura", "°C");
-        field("aerosol", "Aerossóis", "%"); field("radiation", "Radiação", "%");
-        field("vegetation", "Vegetação", "%"); field("water", "Água líquida", "%");
-        field("ice", "Gelo", "%"); field("population", "População", "pessoas");
+        field("aerosol", "Aerossóis", "índice"); field("radiation", "Radiação", "índice");
+        field("vegetation", "Vegetação terrestre", "% terra"); field("water", "Oceano líquido", "% globo");
+        field("ice", "Superfície glacial", "% globo"); field("population", "População", "pessoas");
+        geography.setWrapText(true); geography.getStyleClass().add("muted"); getChildren().add(geography);
         feedback.setWrapText(true); feedback.getStyleClass().add("error-text");
         getChildren().add(feedback);
         setState(new TerraBuilder().build().estado());
     }
 
     private void field(String key, String title, String unit) {
-        TextField input = new TextField(); input.setPrefWidth(98); input.setMaxWidth(110);
+        TextField input = new TextField(); input.setPrefWidth(92); input.setMinWidth(60); input.setMaxWidth(110);
         input.setAccessibleText(title + ", " + unit); input.setTooltip(new Tooltip(title + " (" + unit + ")"));
         fields.put(key, input);
-        Label label = new Label(title); label.setLabelFor(input);
+        Label label = new Label(title); label.setLabelFor(input); label.setWrapText(true); label.setMinWidth(0);
         Region space = new Region(); HBox.setHgrow(space, Priority.ALWAYS);
         Label units = new Label(unit); units.getStyleClass().add("muted"); units.setMinWidth(27);
         HBox row = new HBox(6, label, space, input, units); row.setAlignment(Pos.CENTER_LEFT);
@@ -74,8 +76,12 @@ public final class EnvironmentEditor extends VBox {
     private void validate() {
         try { gases.setText("Soma dos gases: " + number(value("o2") + value("n2") + value("co2") + value("he")) + "% / 100%"); }
         catch (IllegalArgumentException ex) { gases.setText("Soma dos gases: confira os quatro valores"); }
-        try { read(0); valid.set(true); feedback.setText(""); }
-        catch (IllegalArgumentException ex) { valid.set(false); feedback.setText(ex.getMessage()); }
+        try {
+            var s = read(0); valid.set(true); feedback.setText("");
+            geography.setText("Continente disponível: " + number(s.superficieContinental()) + "% do globo. Área vegetada: "
+                    + number(s.superficieVegetada()) + "% do globo.\nÁgua e gelo dividem a superfície; vegetação é uma fração somente da terra seca. Índices de aerossóis e radiação: 0–100.");
+        }
+        catch (IllegalArgumentException ex) { valid.set(false); feedback.setText(ex.getMessage()); geography.setText(""); }
     }
 
     public void setState(EstadoPlanetario s) {

@@ -56,6 +56,7 @@ public final class PlanetEventAnimator implements AutoCloseable {
                     if (closed || token != generation) return;
                     beforePixels = a; afterPixels = b;
                     if (skip || plan.seconds() == 0 || result.antes().equals(result.depois()) && kind == AnimationKind.TRANSITION) { finish(); return; }
+                    view.beginAtmosphereTransition(result.antes(), result.depois());
                     view.blend(a, b, 0);
                     effect = new PlanetEventEffect(view, plan); effect.frame(0);
                     started = 0; rendered = 0; timer.start();

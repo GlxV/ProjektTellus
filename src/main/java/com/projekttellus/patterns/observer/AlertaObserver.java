@@ -15,6 +15,10 @@ public final class AlertaObserver implements SimulacaoObserver {
         if (m.estado().clima().radiacao() > 20) lista.add("Radiação elevada; recuperação será lenta.");
         if (m.estado().hidrosfera().agua() < 10) lista.add("Pouca água líquida na superfície.");
         if (m.indicadores().biologica() < 20) lista.add("Potencial biológico muito reduzido.");
+        if (m.estado().civilizacao().populacao() > m.indicadores().capacidadeSuporte())
+            lista.add("População acima do suporte estimado; recursos limitam o crescimento e causam declínio gradual.");
+        if (m.estado().superficieContinental() < 1)
+            lista.add("Quase nenhuma terra disponível para uma civilização convencional.");
         if (lista.isEmpty()) lista.add("Condições estáveis neste modelo didático.");
         alertas.put(m.mundoId(), List.copyOf(lista));
     }

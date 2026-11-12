@@ -20,12 +20,18 @@
    <SplitPane fx:id="mainSplit" orientation="VERTICAL" dividerPositions="0.63" minWidth="0" minHeight="200" VBox.vgrow="ALWAYS">
     <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" minWidth="0" minHeight="160" styleClass="observatory-scroll"><VBox spacing="10" minWidth="0"><StackPane fx:id="globeHost" VBox.vgrow="ALWAYS" minWidth="0" minHeight="100" styleClass="globe-host"/>
      <FlowPane alignment="CENTER" hgap="8" vgap="5"><Label text="Arraste para girar · Role para aproximar" styleClass="muted"/><Button text="Recentrar" onAction="#resetGlobe"/><CheckBox fx:id="lightToggle" text="Luz solar" selected="true"/><Button fx:id="skipAnimation" text="Pular animação" accessibleText="Pular animação e mostrar resultado confirmado"/></FlowPane>
-     <HBox spacing="10" styleClass="metrics"><VBox HBox.hgrow="ALWAYS" spacing="4"><Label text="HABITABILIDADE HUMANA" styleClass="eyebrow"/><Label fx:id="humanValue" text="—" styleClass="metric-number"/><ProgressBar fx:id="humanBar" progress="0" maxWidth="Infinity"/></VBox><VBox HBox.hgrow="ALWAYS" spacing="4"><Label text="POTENCIAL BIOLÓGICO" styleClass="eyebrow"/><Label fx:id="bioValue" text="—" styleClass="metric-number"/><ProgressBar fx:id="bioBar" progress="0" maxWidth="Infinity"/></VBox></HBox>
+     <HBox spacing="10" styleClass="metrics">
+      <VBox HBox.hgrow="ALWAYS" spacing="4" minWidth="0" prefWidth="160"><Label text="HABITABILIDADE HUMANA" wrapText="true" styleClass="eyebrow"/><Label fx:id="humanValue" text="—" styleClass="metric-number"/><ProgressBar fx:id="humanBar" progress="0" maxWidth="Infinity"/></VBox>
+      <VBox HBox.hgrow="ALWAYS" spacing="4" minWidth="0" prefWidth="160"><Label text="POTENCIAL BIOLÓGICO" wrapText="true" styleClass="eyebrow"/><Label fx:id="bioValue" text="—" styleClass="metric-number"/><ProgressBar fx:id="bioBar" progress="0" maxWidth="Infinity"/></VBox>
+      <VBox HBox.hgrow="ALWAYS" spacing="4" minWidth="0" prefWidth="160"><Label text="SUSTENTABILIDADE CIVIL" wrapText="true" styleClass="eyebrow"/><Label fx:id="civilizationValue" text="—" styleClass="metric-number"/><ProgressBar fx:id="civilizationBar" progress="0" maxWidth="Infinity"/></VBox>
+     </HBox>
+     <Label fx:id="capacityLabel" text="Capacidade estimada: —" wrapText="true" styleClass="muted"/>
     </VBox></ScrollPane>
     <TabPane fx:id="activityTabs" tabClosingPolicy="UNAVAILABLE" minWidth="0" minHeight="130"><tabs>
      <Tab text="Linha do tempo"><ListView fx:id="historyList"/></Tab>
      <Tab text="Retratos salvos"><ScrollPane fx:id="snapshotsScroll" fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" minWidth="0" minHeight="0"><VBox spacing="8" minWidth="0" styleClass="tab-content-pad"><Label text="Retratos completos e persistentes deste mundo." wrapText="true" styleClass="muted"/><ListView fx:id="snapshotList" minHeight="30" VBox.vgrow="ALWAYS"/><FlowPane hgap="8" vgap="6"><Button text="＋ Capturar retrato" onAction="#captureSnapshot"/><Button text="Restaurar selecionado" onAction="#restoreSnapshot"/></FlowPane></VBox></ScrollPane></Tab>
      <Tab fx:id="presentationTab" text="Apresentação"><StackPane fx:id="presentationHost"/></Tab>
+     <Tab text="Indicadores"><StackPane fx:id="indicatorsHost"/></Tab>
     </tabs></TabPane>
    </SplitPane>
    <Label fx:id="alertLabel" text="Crie um mundo ou carregue um cenário da biblioteca." wrapText="true" styleClass="notice"/>

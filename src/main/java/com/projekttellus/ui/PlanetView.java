@@ -29,7 +29,18 @@ public final class PlanetView extends StackPane {
     private final Group effects = new Group();
     private final Scale globeScale = new Scale(1, 1, 1, 0, 0, 0);
     private final Canvas glowLayer = new Canvas();
+    private final Canvas atmosphereLayer = new Canvas();
+    private AtmosphereOptics optics = new AtmosphereOptics(0, 0, 0), opticsBefore = optics, opticsAfter = optics;
+    private boolean sunEnabled = true;
+    private record SurfaceKey(double water, double ice, double vegetation, double temperature) {
+        static SurfaceKey from(EstadoPlanetario s) { return new SurfaceKey(s.hidrosfera().agua(), s.hidrosfera().gelo(), s.biosfera().vegetacao(), s.clima().temperatura()); }
+    }
+    private final java.util.Map<SurfaceKey, int[]> textureCache = java.util.Collections.synchronizedMap(
+            new java.util.LinkedHashMap<>(6, .75f, true) {
+                @Override protected boolean removeEldestEntry(java.util.Map.Entry<SurfaceKey, int[]> e) { return size() > 6; }
+            });
     private final double[] land = new double[W * H];
+    private final double[] relief = new double[W * H];
     private double pressX, pressY, startX, startY, zoom = 1;
     private EstadoPlanetario displayedState;
     private int[] displayedPixels;
@@ -46,6 +57,8 @@ public final class PlanetView extends StackPane {
         planet.getChildren().setAll(rotating);
         planet.getTransforms().add(globeScale);
         effects.setMouseTransparent(true);
+        rotating.translateXProperty().addListener((o,a,b) -> drawAtmosphere());
+        rotating.translateYProperty().addListener((o,a,b) -> drawAtmosphere());
         sunlight.setTranslateX(-280); sunlight.setTranslateY(-180); sunlight.setTranslateZ(-340);
         Group sceneRoot = new Group(planet, sunlight, ambient);
         SubScene scene = new SubScene(sceneRoot, 500, 350, true, SceneAntialiasing.BALANCED);
@@ -56,7 +69,12 @@ public final class PlanetView extends StackPane {
         widthProperty().addListener((o, a, b) -> resizeGlobe()); heightProperty().addListener((o, a, b) -> resizeGlobe());
         glowLayer.setMouseTransparent(true);
         glowLayer.widthProperty().bind(widthProperty()); glowLayer.heightProperty().bind(heightProperty());
-        getChildren().addAll(scene, glowLayer);
+        atmosphereLayer.setMouseTransparent(true);
+        atmosphereLayer.widthProperty().bind(widthProperty()); atmosphereLayer.heightProperty().bind(heightProperty());
+        // Canvas sizes settle after the parent's resize listener; repaint against the final projection.
+        atmosphereLayer.widthProperty().addListener((o,a,b) -> drawAtmosphere());
+        atmosphereLayer.heightProperty().addListener((o,a,b) -> drawAtmosphere());
+        getChildren().addAll(scene, atmosphereLayer, glowLayer);
         if (!Platform.isSupported(ConditionalFeature.SCENE3D)) {
             Label warning = new Label("A aceleração 3D não está disponível neste computador.");
             warning.getStyleClass().add("notice"); getChildren().add(warning);
@@ -84,11 +102,64 @@ public final class PlanetView extends StackPane {
     private void resizeGlobe() {
         double scale = Math.max(.1, Math.min(getWidth(), getHeight()) / 310) * zoom;
         globeScale.setX(scale); globeScale.setY(scale); globeScale.setZ(scale);
+        drawAtmosphere();
     }
     public void reset() { longitude.setAngle(-25); latitude.setAngle(-12); zoom = 1; resizeGlobe(); }
     public void setSunlight(boolean enabled) {
+        sunEnabled = enabled;
         sunlight.setLightOn(enabled); ambient.setColor(enabled ? Color.color(.32, .38, .45) : Color.color(.85, .88, .9));
+        drawAtmosphere();
     }
+
+    /** Orthographic projection of a homogeneous atmosphere. Its limb follows zoom, resize and event shake.
+     * Looking through the limb lengthens the optical path. A uniform gas shell does not rotate with land. */
+    private void drawAtmosphere() {
+        var g = atmosphereLayer.getGraphicsContext2D();
+        g.clearRect(0, 0, atmosphereLayer.getWidth(), atmosphereLayer.getHeight());
+        if (optics.haloOpacity() < .00001) return;
+        double scale = globeScale.getX(), r = 130 * scale;
+        double x = getWidth() / 2 + effects.getParent().getTranslateX() * scale;
+        double y = getHeight() / 2 + effects.getParent().getTranslateY() * scale;
+        if (r <= 0) return;
+        double outer = r * (1 + optics.thickness() * 2.8);
+        double dust = -Math.expm1(-optics.particles());
+        Color molecular = Color.color(.26, .58, 1);
+        Color particles = Color.color(.65, .57, .46); // One documented generic ash/dust population, never a gas hue.
+        Color tint = molecular.interpolate(particles, dust * .88);
+        // The halo is integrated by angle so the illuminated limb faces the same PointLight as the sphere.
+        double lx = sunlight.getTranslateX() - x, ly = sunlight.getTranslateY() - y;
+        double length = Math.hypot(lx, ly); lx /= length; ly /= length;
+        // Continuous illumination gradient avoids radial seams between angular sectors.
+        double inner = r * .94;
+        int rings = Math.max(16, Math.min(72, (int)Math.ceil(outer-inner)));
+        double step = (outer-inner)/rings;
+        g.setLineWidth(step + .15);
+        for (int i = 0; i < rings; i++) {
+            double radius = inner + (i+.5)*step;
+            double radial = radius < r ? (radius-inner)/(r-inner)
+                    : Math.exp(-4 * (radius-r)/(outer-r)) * (outer-radius)/(outer-r);
+            double alpha = Math.min(.85, optics.haloOpacity() * radial);
+            double dark = sunEnabled ? .08 : .75, bright = sunEnabled ? 1 : .75;
+            g.setStroke(new LinearGradient(x+lx*outer,y+ly*outer,x-lx*outer,y-ly*outer,false,CycleMethod.NO_CYCLE,
+                    new Stop(0,tint.deriveColor(0,1,1,alpha*bright)),
+                    new Stop(.5,tint.deriveColor(0,1,1,alpha*(sunEnabled?.22:.75))),
+                    new Stop(1,tint.deriveColor(0,1,1,alpha*dark))));
+            g.strokeOval(x-radius,y-radius,2*radius,2*radius);
+        }
+        // Front column: denser paths toward the limb partially veil the lit surface. No texture regeneration.
+        double haze = Math.min(.86, (1 - optics.transmission()) * .82);
+        g.setFill(new RadialGradient(0, 0, x-r*.25, y-r*.20, r*1.35, false, CycleMethod.NO_CYCLE,
+                new Stop(0, tint.deriveColor(0, .65, 1.15, haze*.30)),
+                new Stop(.65, tint.deriveColor(0, .8, .85, haze*.65)),
+                new Stop(1, tint.deriveColor(0, .8, .45, haze))));
+        g.fillOval(x-r, y-r, 2*r, 2*r);
+    }
+
+    void beginAtmosphereTransition(EstadoPlanetario before, EstadoPlanetario after) {
+        opticsBefore = AtmosphereOptics.from(before); opticsAfter = AtmosphereOptics.from(after);
+        optics = opticsBefore; drawAtmosphere();
+    }
+    AtmosphereOptics atmosphereProperties() { return optics; }
 
     private void createContinents() {
         Canvas canvas = new Canvas(W, H); var g = canvas.getGraphicsContext2D();
@@ -104,43 +175,61 @@ public final class PlanetView extends StackPane {
         polygon(g, .79,.63, .86,.60, .91,.65, .90,.72, .84,.75, .78,.71);
         polygon(g, .93,.74, .95,.69, .96,.73, .94,.79);
         WritableImage mask = canvas.snapshot(null, null); PixelReader reader = mask.getPixelReader();
-        for (int y = 0; y < H; y++) for (int x = 0; x < W; x++) land[y * W + x] = reader.getColor(x, y).getRed();
+        for (int y = 0; y < H; y++) for (int x = 0; x < W; x++) {
+            land[y * W + x] = reader.getColor(x, y).getRed();
+            relief[y * W + x] = (land[y * W + x] > .5 ? .55 : 0) + .45 * noise(x, y);
+        }
     }
     private void polygon(javafx.scene.canvas.GraphicsContext g, double... pairs) {
         int n = pairs.length / 2; double[] x = new double[n], y = new double[n];
         for (int i = 0; i < n; i++) { x[i] = pairs[i * 2] * W; y[i] = pairs[i * 2 + 1] * H; }
         g.fillPolygon(x, y, n);
     }
+    private static double noise(int x, int y) {
+        return .5 + .23 * Math.sin(x * .061 + Math.sin(y * .053) * 3) + .17 * Math.cos(y * .093 + Math.cos(x * .04) * 2);
+    }
 
     /** Pure pixel preparation: may run on the animator worker; topology is immutable after construction. */
     int[] prepareTexture(EstadoPlanetario state) {
+        SurfaceKey key = SurfaceKey.from(state);
+        int[] cached = textureCache.get(key);
+        if (cached != null) return cached;
         int[] pixels = new int[W * H];
         double water = state.hidrosfera().agua() / 100, ice = state.hidrosfera().gelo() / 100;
         double vegetation = state.biosfera().vegetacao() / 100;
         double heat = Math.clamp((state.clima().temperatura() - 25) / 130, 0, 1);
         double cold = Math.clamp((-state.clima().temperatura()) / 150, 0, 1);
-        double haze = Math.clamp(state.clima().aerossol() / 130, 0, .75);
-        double radiation = state.clima().radiacao() / 100;
         Color soil = Color.web("#b69866").interpolate(Color.web("#36825b"), vegetation).interpolate(Color.web("#6c342d"), heat * .7);
         Color sea = Color.web("#124b70").interpolate(Color.web("#593e32"), heat * .8).interpolate(Color.web("#8cc4d8"), cold * .55);
+        // Area-weighted waterline over the non-glacial sphere. Equirectangular pixels near poles cover less area.
+        double[] histogram = new double[2048]; double available = 0;
+        for (int y = 0; y < H; y++) {
+            double latitudeSin = Math.abs(Math.cos(Math.PI * (y + .5) / H));
+            if (latitudeSin >= 1 - ice) continue;
+            double area = Math.sin(Math.PI * (y + .5) / H);
+            for (int x = 0; x < W; x++) histogram[Math.min(2047, (int)(relief[y*W+x]*2048))] += area;
+            available += W * area;
+        }
+        double target = available * Math.min(1, water / Math.max(1e-12, 1-ice)), accumulated = 0;
+        int level = 0;
+        while (level < 2048 && accumulated < target) accumulated += histogram[level++];
+        double waterline = level / 2048.0;
         for (int y = 0; y < H; y++) {
             if (Thread.currentThread().isInterrupted()) throw new java.util.concurrent.CancellationException("Textura substituída");
-            double polar = Math.abs(y - H / 2.0) / (H / 2.0);
+            double polar = Math.abs(Math.cos(Math.PI * (y + .5) / H));
             for (int x = 0; x < W; x++) {
-                double noise = (.5 + .23 * Math.sin(x * .061 + Math.sin(y * .053) * 3) + .17 * Math.cos(y * .093 + Math.cos(x * .04) * 2));
-                boolean continent = land[y * W + x] > .5;
-                // Coverage is qualitative rather than a geographic/physical projection.
-                boolean wet = continent ? water > .72 && noise < (water - .72) * 3.5 : noise < Math.min(1, water / .71);
+                double noise = noise(x, y);
+                boolean wet = relief[y * W + x] < waterline;
                 Color c = wet ? sea : soil;
-                if (polar > 1 - ice * 1.7 - cold * .08) c = Color.web("#dcecf0");
+                boolean frozen = ice >= 1 || polar >= 1 - ice;
+                if (frozen) c = Color.web("#dcecf0");
                 c = c.deriveColor(0, 1, .86 + noise * .24, 1);
-                c = c.interpolate(Color.web("#7c6b5b"), haze * (.45 + noise * .5));
-                c = c.interpolate(Color.web("#8f658e"), radiation * .25);
-                if (!wet && vegetation > .1 && noise > .65) c = c.interpolate(Color.web("#76a866"), vegetation * .3);
+                if (!wet && !frozen && vegetation > .1 && noise > .65) c = c.interpolate(Color.web("#76a866"), vegetation * .3);
                 pixels[y * W + x] = 0xff000000 | ((int) Math.round(c.getRed() * 255) << 16)
                         | ((int) Math.round(c.getGreen() * 255) << 8) | (int) Math.round(c.getBlue() * 255);
             }
         }
+        textureCache.put(key, pixels);
         return pixels;
     }
 
@@ -153,8 +242,10 @@ public final class PlanetView extends StackPane {
         texture.getPixelWriter().setPixels(0, 0, W, H, PixelFormat.getIntArgbInstance(), pixels, 0, W);
         surface.setDiffuseMap(texture); surface.setSpecularColor(Color.color(.24, .34, .40)); surface.setSpecularPower(18);
         displayedState = state; displayedPixels = pixels; transitionTexture = null;
+        optics = AtmosphereOptics.from(state); drawAtmosphere();
     }
     void blend(int[] before, int[] after, double progress) {
+        optics = opticsBefore.interpolate(opticsAfter, progress); drawAtmosphere();
         if (transitionTexture == null) { transitionTexture = new WritableImage(W, H); surface.setDiffuseMap(transitionTexture); }
         int weight = (int) Math.round(Math.clamp(progress, 0, 1) * 256), inverse = 256 - weight;
         for (int n = 0; n < blended.length; n++) {

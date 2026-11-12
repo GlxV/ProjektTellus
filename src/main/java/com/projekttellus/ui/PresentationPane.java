@@ -93,6 +93,7 @@ public final class PresentationPane extends ScrollPane implements AutoCloseable 
         var first = ModeloPlanetario.calcular(a); var last = ModeloPlanetario.calcular(b);
         return "ANTES  →  DEPOIS\n" +
                 "Humanos: " + f(first.humana()) + "% → " + f(last.humana()) + "%   ·   Vida: " + f(first.biologica()) + "% → " + f(last.biologica()) + "%\n" +
+                "Civilização: " + f(first.sustentabilidade()) + "% → " + f(last.sustentabilidade()) + "%   ·   Suporte: " + first.capacidadeSuporte() + " → " + last.capacidadeSuporte() + " pessoas\n" +
                 "Temperatura: " + f(a.clima().temperatura()) + " → " + f(b.clima().temperatura()) + " °C   ·   Vegetação: " + f(a.biosfera().vegetacao()) + " → " + f(b.biosfera().vegetacao()) + "%\n" +
                 "Água / gelo: " + f(a.hidrosfera().agua()) + " / " + f(a.hidrosfera().gelo()) + " → " + f(b.hidrosfera().agua()) + " / " + f(b.hidrosfera().gelo()) + "%\n" +
                 "População: " + NumberFormat.getIntegerInstance(Locale.of("pt", "BR")).format(a.civilizacao().populacao()) + " → " + NumberFormat.getIntegerInstance(Locale.of("pt", "BR")).format(b.civilizacao().populacao()) +

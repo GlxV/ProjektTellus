@@ -10,4 +10,8 @@ public record EstadoPlanetario(Atmosfera atmosfera, Clima clima, Biosfera biosfe
         Objects.requireNonNull(civilizacao);
         Validacao.intervalo("Tempo", anos, 0, 1_000_000_000);
     }
+    /** Percentual seco e não glacial da superfície total, disponível para ocupação. */
+    public double superficieContinental() { return Math.max(0, 100 - hidrosfera.agua() - hidrosfera.gelo()); }
+    /** Vegetação é uma fração do continente, nunca uma segunda cobertura planetária sobre o oceano. */
+    public double superficieVegetada() { return superficieContinental() * biosfera.vegetacao() / 100; }
 }

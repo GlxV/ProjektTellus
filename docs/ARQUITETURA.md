@@ -94,3 +94,13 @@ sequenceDiagram
 Schema versionado por `PRAGMA user_version`; migration `src/main/resources/db/migrations/V001__mundos.sql`. Tabelas `mundos`, `eventos` e `snapshots`, chaves estrangeiras e exclusão em cascata. Mundo e snapshot guardam todos os componentes em colunas. Valores externos usam parâmetros JDBC. `TransacaoSqlite` trata commit, rollback e falhas de autocommit; conexão serializada e tempo limite para bloqueios.
 
 Não há física por pixel, engine gráfico próprio, processos remotos ou segundo motor didático.
+
+## Indicadores e atmosfera revisados
+
+`ModeloPlanetario` continua sendo o único motor. `Indicadores` acrescenta sustentabilidade, suporte e fatores imutáveis; `FatorAmbiental` não depende da interface. Os componentes persistidos não mudam. `EstadoPlanetario` fornece área continental e área vegetada como funções derivadas. Os quatro padrões e a fronteira transacional continuam iguais.
+
+`AtmosphereOptics` é uma projeção pura, sem JavaFX/JDBC, de `EstadoPlanetario` para propriedades ópticas. `PlanetView` apresenta a esfera e duas camadas Canvas independentes: atmosfera permanente derivada do estado e clarões temporários de eventos. O halo acompanha projeção paralela, escala, redimensionamento e tremor, com intensidade angular em relação à mesma luz solar. Composição uniforme não depende da longitude dos continentes. `PlanetEventAnimator` interpola as propriedades dos endpoints confirmados e conclui exatamente no estado persistido; não salva efeitos intermediários.
+
+A textura usa linha d’água ponderada pela área esférica, gelo polar e vegetação somente em solo seco. Cache LRU de seis texturas por água/gelo/vegetação/temperatura, cerca de 7 MiB de pixels por globo. Pressão, gases, população, tempo e partículas não regeneram o mapa. As texturas de eventos são preparadas no executor existente; durante animação há mistura dos buffers RGB, desenho vetorial limitado do halo e geometria retida. Não há solver atmosférico por pixel por frame.
+
+`IndicatorDetails` ocupa uma aba com rolagem e usa as mesmas listas de fatores do resultado confirmado; `PresentationPane` inclui C/K na comparação. Não existe um motor separado de apresentação. O schema V001 permanece intacto; compatibilidade coberta por fixture SQL legada e restauração/reabertura.

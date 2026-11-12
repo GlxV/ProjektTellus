@@ -11,6 +11,7 @@ import javafx.animation.AnimationTimer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.scene.image.WritableImage;
 import javafx.scene.shape.Sphere;
 import javafx.scene.paint.PhongMaterial;
@@ -108,8 +109,11 @@ class DesktopFlowTest {
         }); idle();
     }
     private void picture(String name) throws Exception {
+        picture(root, name);
+    }
+    private void picture(Parent subject, String name) throws Exception {
         fx(() -> {
-            root.applyCss(); root.layout(); WritableImage image = root.snapshot(null, null);
+            subject.applyCss(); subject.layout(); WritableImage image = subject.snapshot(null, null);
             BufferedImage png = new BufferedImage((int) image.getWidth(), (int) image.getHeight(), BufferedImage.TYPE_INT_ARGB);
             for (int y = 0; y < png.getHeight(); y++) for (int x = 0; x < png.getWidth(); x++)
                 png.setRGB(x, y, image.getPixelReader().getArgb(x, y));
@@ -395,6 +399,7 @@ class DesktopFlowTest {
                 try (var repo = new SqliteMundoRepository(db)) {
                     var expected = repo.carregar(id).orElseThrow().estado();
                     assertEquals(expected, fx(() -> globe().displayedState()));
+                    assertEquals(AtmosphereOptics.from(expected), fx(() -> globe().atmosphereProperties()));
                     assertTrue(fx(() -> globe().effectLayer().getChildren().isEmpty()));
                     assertEquals(i + 2, repo.historico(id).size(), "A animação não deve duplicar operações");
                 }
@@ -416,6 +421,7 @@ class DesktopFlowTest {
             dialog("Restaurar selecionado", null); await(() -> !globe().effectLayer().getChildren().isEmpty());
             Thread.sleep(900); picture("memento-pulse"); animatedIdle();
             assertEquals(original, fx(() -> globe().displayedState())); assertEquals(baseline, fx(this::globeFingerprint));
+            assertEquals(AtmosphereOptics.from(original), fx(() -> globe().atmosphereProperties()));
             // Real key, scroll and light handlers remain active.
             fx(() -> {
                 globe().requestFocus();
@@ -578,6 +584,86 @@ class DesktopFlowTest {
         } finally {
             fx(() -> { if (controller != null) controller.close(); if (stage != null) stage.close(); return null; });
             if (previous == null) System.clearProperty("projekttellus.db"); else System.setProperty("projekttellus.db", previous);
+        }
+    }
+
+    @Test void atmosphericScenariosAndExplanationsOnRealLaptopLayout() throws Exception {
+        Path db = temporary.resolve("atmospheres.db");
+        String previous = System.getProperty("projekttellus.db"); System.setProperty("projekttellus.db", db.toString());
+        try (var repo = new SqliteMundoRepository(db)) { new SimulacaoService(repo).criar(new TerraBuilder().nome("Laboratório atmosférico")); }
+        try {
+            open(); assertTrue(fx(() -> Platform.isSupported(ConditionalFeature.SCENE3D)));
+            fx(() -> { list("worldList").getSelectionModel().selectFirst(); return null; }); dialog("Carregar selecionado",null);
+            fx(() -> { ((ComboBox<AnimationMode>)node("animationMode")).setValue(AnimationMode.OFF); return null; });
+            var scenarios = new LinkedHashMap<String,EstadoPlanetario>();
+            scenarios.put("reference",new TerraBuilder().build().estado());
+            scenarios.put("vacuum",new TerraBuilder().atmosfera(new Atmosfera(21,78.96,.04,0,0)).build().estado());
+            scenarios.put("thin",new TerraBuilder().atmosfera(new Atmosfera(21,78.96,.04,0,.03)).build().estado());
+            scenarios.put("dense",new TerraBuilder().atmosfera(new Atmosfera(21,78.96,.04,0,5)).build().estado());
+            scenarios.put("aerosols",new TerraBuilder().clima(new Clima(15,100,0)).build().estado());
+            scenarios.put("co2",new TerraBuilder().atmosfera(new Atmosfera(21,29,50,0,1)).build().estado());
+            scenarios.put("helium20",new TerraBuilder().atmosfera(new Atmosfera(21,58.96,.04,20,1)).build().estado());
+            scenarios.put("helium100",new TerraBuilder().atmosfera(new Atmosfera(0,0,0,100,1)).build().estado());
+            scenarios.put("hot",new TerraBuilder().clima(new Clima(150,0,0)).build().estado());
+            scenarios.put("ocean",new TerraBuilder().hidrosfera(new Hidrosfera(100,0)).biosfera(new Biosfera(93)).build().estado());
+            scenarios.put("frozen",new TerraBuilder().hidrosfera(new Hidrosfera(0,100)).clima(new Clima(-80,0,0)).build().estado());
+            scenarios.put("desert",new TerraBuilder().hidrosfera(new Hidrosfera(0,0)).biosfera(new Biosfera(0)).build().estado());
+            var fingerprints = new HashSet<Long>();
+            for (var entry : scenarios.entrySet()) {
+                fx(() -> { ((EnvironmentEditor)((VBox)node("environmentHost")).getChildren().getFirst()).setState(entry.getValue()); return null; });
+                action("Aplicar condições"); animatedIdle();
+                assertEquals(entry.getValue(),fx(() -> globe().displayedState()));
+                assertEquals(AtmosphereOptics.from(entry.getValue()),fx(() -> globe().atmosphereProperties()));
+                long fingerprint = fx(() -> {
+                    var image = globe().snapshot(null,null); var reader = image.getPixelReader(); long hash=1;
+                    for(int y=0;y<image.getHeight();y+=3) for(int x=0;x<image.getWidth();x+=3) hash=31*hash+reader.getArgb(x,y);
+                    return hash;
+                });
+                assertTrue(fingerprints.add(fingerprint),"Atmosfera/superfície deve produzir resultado distinto: "+entry.getKey());
+                picture("atmosphere-"+entry.getKey());
+                if(entry.getKey().equals("ocean")) {
+                    assertEquals("0,0%",fx(() -> ((Label)node("civilizationValue")).getText()));
+                    assertTrue(fx(() -> ((Label)node("capacityLabel")).getText().contains("0 pessoas")));
+                    fx(() -> { ((TabPane)node("activityTabs")).getSelectionModel().select(3); return null; });
+                    picture("atmosphere-explanations");
+                    assertTrue(fx(() -> node("indicatorsHost").lookupAll(".label").stream().anyMatch(n -> n instanceof Label l && l.getText().contains("perda condicional"))));
+                    assertTrue(fx(() -> node("indicatorsHost").lookupAll(".label").stream().anyMatch(n -> n instanceof Label l && l.getText().contains("0,0004 atm pCO₂"))),"Pressões parciais pequenas não devem aparecer como zero");
+                    fx(() -> { ((TabPane)node("activityTabs")).getSelectionModel().selectFirst(); return null; });
+                }
+            }
+            // Larger simultaneous specimens for human review, rendered by the real JavaFX 3D pipeline.
+            javafx.scene.layout.GridPane gallery = fx(() -> {
+                var grid = new javafx.scene.layout.GridPane(); grid.getStyleClass().add("app-root");
+                grid.setHgap(8); grid.setVgap(8); grid.setPadding(new javafx.geometry.Insets(12));
+                int index=0;
+                for(var entry:scenarios.entrySet()) {
+                    var view=new PlanetView(); view.update(entry.getValue()); view.setPrefSize(290,215);
+                    var caption=new Label(entry.getKey()+" · "+entry.getValue().atmosfera().pressao()+" atm");
+                    caption.getStyleClass().add("section-title");
+                    var optics=AtmosphereOptics.from(entry.getValue());
+                    var detail=new Label(String.format(Locale.ROOT,"τR %.3f · τP %.3f · extensão %.3f",optics.rayleigh(),optics.particles(),optics.thickness()));
+                    detail.getStyleClass().add("muted");
+                    var cell=new VBox(5,caption,detail,view); cell.setPrefSize(290,270);
+                    VBox.setVgrow(view,javafx.scene.layout.Priority.ALWAYS); grid.add(cell,index%4,index/4); index++;
+                }
+                var window=new Stage();window.initOwner(stage);window.setScene(new Scene(grid,1220,860));
+                grid.getStylesheets().add(getClass().getResource("/styles/app.css").toExternalForm());
+                window.show(); return grid;
+            });
+            try { Thread.sleep(250); picture(gallery,"atmosphere-gallery"); }
+            finally { fx(() -> { ((Stage)gallery.getScene().getWindow()).close(); return null; }); }
+            fx(() -> {
+                globe().beginAtmosphereTransition(scenarios.get("vacuum"),scenarios.get("dense"));
+                globe().blend(globe().prepareTexture(scenarios.get("vacuum")),globe().prepareTexture(scenarios.get("dense")),.5);
+                assertEquals(AtmosphereOptics.from(scenarios.get("vacuum")).interpolate(AtmosphereOptics.from(scenarios.get("dense")),.5),globe().atmosphereProperties());
+                globe().update(scenarios.get("dense"));
+                assertSame(globe().prepareTexture(scenarios.get("reference")),globe().prepareTexture(scenarios.get("vacuum")),"Composição não recompila textura superficial");
+                javafx.event.Event.fireEvent(globe(),new javafx.scene.input.KeyEvent(javafx.scene.input.KeyEvent.KEY_PRESSED,"","",javafx.scene.input.KeyCode.ADD,false,false,false,false));
+                ((CheckBox)node("lightToggle")).fire(); return null;
+            }); picture("atmosphere-zoom-diffuse-light");
+        } finally {
+            fx(() -> { if(controller!=null)controller.close();if(stage!=null)stage.close();return null; });
+            if(previous==null)System.clearProperty("projekttellus.db");else System.setProperty("projekttellus.db",previous);
         }
     }
 }

@@ -29,7 +29,7 @@ Eventos completos duram 3,8 s; Memento, 2,4 s; outras mudanças ambientais, 0,8 
 
 Os indicadores Observer mostram o resultado confirmado imediatamente. A notificação não pinta o globo antecipadamente: a aparência é coordenada pelo retorno bem-sucedido da operação. Falhas de persistência não chegam a `play`.
 
-As duas texturas de 768 × 384 são preparadas em um executor dedicado. Durante os quadros, somente os canais RGB dessas imagens são interpolados em um buffer reutilizado; o mapa procedural não é recalculado e nenhum EstadoPlanetario intermediário é criado. Ao concluir ou pular, a textura preparada do estado final substitui a mistura, sem erro acumulado de interpolação. Temperatura, vegetação, água, gelo, aerossóis e radiação continuam usando as mesmas fórmulas de aparência.
+As duas texturas de 768 × 384 são preparadas em um executor dedicado. Durante os quadros, somente os canais RGB dessas imagens são interpolados em um buffer reutilizado; o mapa procedural não é recalculado e nenhum EstadoPlanetario intermediário é criado. Ao concluir ou pular, a textura preparada do estado final substitui a mistura, sem erro acumulado de interpolação. Temperatura, vegetação, água e gelo determinam a superfície. As propriedades de espalhamento, partículas e espessura são interpoladas em paralelo pelo mesmo progresso; a conclusão restaura exatamente `AtmosphereOptics.from(estado final)`. Aerossóis não ficam embutidos na textura.
 
 Os uploads de pixels são limitados a aproximadamente 60 Hz mesmo quando o JavaFX fornece pulsos em frequência maior. Partículas, naves, ondas e tremor acompanham cada pulso para manter a fluidez em telas de alta frequência. A duração segue o relógio monotônico; uma queda de frequência não alonga a operação.
 
@@ -60,3 +60,5 @@ Capturas em `target/gui-verification/` incluem aproximação/impacto, erupção/
 Os modelos são geométricos estilizados e a atmosfera é ilustrativa. A verificação gráfica depende de JavaFX SCENE3D e de um desktop disponível; testes unitários isolados não certificam qualidade visual ou desempenho em outros computadores.
 
 Referências de implementação: [PhongMaterial JavaFX 25](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/paint/PhongMaterial.html) e [Node JavaFX 25](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/Node.html).
+
+Revisão atmosférica: `DesktopFlowTest` verifica também propriedades ópticas finais nos cinco eventos e Memento, matriz de doze atmosferas/superfícies e fatores na aba Indicadores. Ver [ATMOSFERA.md](ATMOSFERA.md) e [VALIDACAO_REFORMULACAO.md](VALIDACAO_REFORMULACAO.md).
