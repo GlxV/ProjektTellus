@@ -1,0 +1,5 @@
+world=fb3d70b7-4426-49c6-92e7-8767f2614e29
+history=15
+snapshots=14
+state=EstadoPlanetario[atmosfera=Atmosfera[oxigenio=21.0, nitrogenio=78.96, co2=0.04, helio=0.0, pressao=1.0], clima=Clima[temperatura=15.0, aerossol=0.0, radiacao=0.0], biosfera=Biosfera[vegetacao=65.0], hidrosfera=Hidrosfera[agua=71.0, gelo=3.0], civilizacao=Civilizacao[populacao=8000000000], anos=0.0]
+name=Terra · demo acadêmica

@@ -1,0 +1,87 @@
+[
+  {
+    "file": "src/main/java/com/projekttellus/domain/TerraBuilder.java",
+    "sha256": "343f8f91b81ea5adec70d88ab333933d7b653361dad55f261e321666a06ac4c5",
+    "lines": 24
+  },
+  {
+    "file": "src/main/java/com/projekttellus/domain/Terra.java",
+    "sha256": "9485f4f340428b4eceace5edd0bf02bad52f4f375585d79b052c8149df6d285c",
+    "lines": 33
+  },
+  {
+    "file": "src/main/java/com/projekttellus/domain/EstadoPlanetario.java",
+    "sha256": "4c12964bf0fbf4fe35f84a7365a98c2f15c333f31bff9fc566b2da9afe131640",
+    "lines": 17
+  },
+  {
+    "file": "src/main/java/com/projekttellus/patterns/memento/TerraMemento.java",
+    "sha256": "2aced3e34a159a45de80380bcca911be3b5720bb3c3620f096939df5cb91f868",
+    "lines": 19
+  },
+  {
+    "file": "src/main/java/com/projekttellus/events/EventoCreator.java",
+    "sha256": "c34f81f2a55d79197dff5bbbcac350cb37a5962216447d04d825cb6ea9bf2c77",
+    "lines": 8
+  },
+  {
+    "file": "src/main/java/com/projekttellus/events/EventoPlanetario.java",
+    "sha256": "31da8902cb5c800bc2645035816a97e881eab3e732d7d8dc3f6c61838e1ef854",
+    "lines": 7
+  },
+  {
+    "file": "src/main/java/com/projekttellus/events/EventoBase.java",
+    "sha256": "6125c5541ff729a14a2770363a8a2d53b6a051261919fc22b3d35a04ebaef355",
+    "lines": 16
+  },
+  {
+    "file": "src/main/java/com/projekttellus/events/AsteroideCreator.java",
+    "sha256": "ba546cf8db530241b9b79c855234bfa42094dd2bfbded696fbe1e08bd9eb6e90",
+    "lines": 6
+  },
+  {
+    "file": "src/main/java/com/projekttellus/events/Asteroide.java",
+    "sha256": "e8a8ebfa8fd631df603f9c9bed0a31542c31cb405288231b5c22e353643dc55b",
+    "lines": 9
+  },
+  {
+    "file": "src/main/java/com/projekttellus/patterns/observer/SimulacaoObserver.java",
+    "sha256": "587daed61d4603111988e9f5f57fe44b8309db2445b64754cf8dc3b4cdb2e94b",
+    "lines": 5
+  },
+  {
+    "file": "src/main/java/com/projekttellus/patterns/observer/ObserverBus.java",
+    "sha256": "a55341166220dc09bb3cc2b7b4a5f768f941bba18fb00de07aad829cd2c0dd57",
+    "lines": 44
+  },
+  {
+    "file": "src/main/java/com/projekttellus/patterns/observer/MudancaPlanetaria.java",
+    "sha256": "2c23fe09174c55723276e80fe72ce8f4448caa0acf75506a44e4a49ff760512d",
+    "lines": 11
+  },
+  {
+    "file": "src/main/java/com/projekttellus/patterns/observer/AlertaObserver.java",
+    "sha256": "58fae5084a11321133d1287c7b8ca6328ac15bf606b7fcf6f7c52c9c63282c98",
+    "lines": 26
+  },
+  {
+    "file": "src/main/java/com/projekttellus/patterns/observer/EstatisticasObserver.java",
+    "sha256": "7c7af9b4e05c04bfb7e3682f215f51face8442d4df19d01ca3f21564e140a585",
+    "lines": 18
+  },
+  {
+    "file": "src/main/java/com/projekttellus/application/SimulacaoService.java",
+    "sha256": "c05e683fcc16ed42661e4bcd5f9d440a948f00902452c1c12e1dfaadbdb9a981",
+    "lines": 118
+  },
+  {
+    "file": "src/main/java/com/projekttellus/persistence/MundoRepository.java",
+    "sha256": "27f586472fae1ac556f6f4c93cca27f5ccc3cc04e6ae36658be87cfe3d2372e6",
+    "lines": 35
+  },
+  {
+    "file": "src/main/java/com/projekttellus/ui/BuilderDialog.java",
+    "sha256": "5a4a28763461b0c76bb5341953d2e4f4b02c1159b17f6bb2a6137040139edde3",
+    "lines": 42
+  }
+]

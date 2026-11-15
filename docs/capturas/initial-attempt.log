@@ -1,0 +1,19 @@
+Nov 15, 2026 12:40:09 PM com.sun.javafx.application.PlatformImpl startup
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @5e265ba4'
+PASS JavaFX SCENE3D disponível
+PASS PNG gravado: 00-vazio-1366x768
+java.util.concurrent.ExecutionException: java.lang.AssertionError: viewport lógico 1366x720 (768p menos 48)
+	at java.base/java.util.concurrent.FutureTask.report(FutureTask.java:124)
+	at java.base/java.util.concurrent.FutureTask.get(FutureTask.java:207)
+	at com.projekttellus.ui.AcademicDemoCapture.fx(AcademicDemoCapture.java:74)
+	at com.projekttellus.ui.AcademicDemoCapture.run(AcademicDemoCapture.java:228)
+	at com.projekttellus.ui.AcademicDemoCapture.main(AcademicDemoCapture.java:60)
+Caused by: java.lang.AssertionError: viewport lógico 1366x720 (768p menos 48)
+	at com.projekttellus.ui.AcademicDemoCapture.require(AcademicDemoCapture.java:106)
+	at com.projekttellus.ui.AcademicDemoCapture.lambda$run$5(AcademicDemoCapture.java:228)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$0(PlatformImpl.java:424)
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.lambda$runLoop$0(WinApplication.java:168)
+	at java.base/java.lang.Thread.run(Thread.java:1474)

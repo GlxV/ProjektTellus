@@ -1,0 +1,24 @@
+checkpoint,index_zero_based,position_one_based,id,label,world_name,years
+apos_captura,0,1,a85dc3d8-e0c4-478b-8e28-f0748d024743,"Origem do mundo","Terra · demo acadêmica",0.0
+apos_captura,1,2,fb18c274-a737-40d3-9519-f3215246d3c5,"Antes da catástrofe · demo","Terra · demo acadêmica",0.0
+apos_asteroide,0,1,a85dc3d8-e0c4-478b-8e28-f0748d024743,"Origem do mundo","Terra · demo acadêmica",0.0
+apos_asteroide,1,2,fb18c274-a737-40d3-9519-f3215246d3c5,"Antes da catástrofe · demo","Terra · demo acadêmica",0.0
+apos_asteroide,2,3,43532765-ed27-4a61-8294-53a7f0f9876b,"Antes: Impacto de asteroide","Terra · demo acadêmica",0.0
+apos_primeira_restauracao,0,1,a85dc3d8-e0c4-478b-8e28-f0748d024743,"Origem do mundo","Terra · demo acadêmica",0.0
+apos_primeira_restauracao,1,2,fb18c274-a737-40d3-9519-f3215246d3c5,"Antes da catástrofe · demo","Terra · demo acadêmica",0.0
+apos_primeira_restauracao,2,3,43532765-ed27-4a61-8294-53a7f0f9876b,"Antes: Impacto de asteroide","Terra · demo acadêmica",0.0
+apos_primeira_restauracao,3,4,638c1ff0-1967-4b3f-b163-27098fc958aa,"Antes da restauração","Terra · demo acadêmica",0.0
+reaberto,0,1,a85dc3d8-e0c4-478b-8e28-f0748d024743,"Origem do mundo","Terra · demo acadêmica",0.0
+reaberto,1,2,fb18c274-a737-40d3-9519-f3215246d3c5,"Antes da catástrofe · demo","Terra · demo acadêmica",0.0
+reaberto,2,3,43532765-ed27-4a61-8294-53a7f0f9876b,"Antes: Impacto de asteroide","Terra · demo acadêmica",0.0
+reaberto,3,4,638c1ff0-1967-4b3f-b163-27098fc958aa,"Antes da restauração","Terra · demo acadêmica",0.0
+reaberto,4,5,1e5e51de-faca-42e7-a5f6-37fbc5b372e6,"Antes: Supervulcão","Terra · demo acadêmica",0.0
+reaberto,5,6,a82d8b39-8d6e-4ab5-8616-88b5de035702,"Antes da restauração","Terra · demo acadêmica",0.0
+reaberto,6,7,1647d679-403b-4f6b-89ce-225883be7cfe,"Antes: Guerra nuclear","Terra · demo acadêmica",0.0
+reaberto,7,8,919a3a38-e3bf-4371-b108-b3fef45fbda1,"Antes da restauração","Terra · demo acadêmica",0.0
+reaberto,8,9,c20f4ec7-5675-4d94-ba63-c4780d15e1aa,"Antes: Invasão alienígena · ficção","Terra · demo acadêmica",0.0
+reaberto,9,10,f4f5a30b-8066-452c-a96c-2e69a8628050,"Antes da restauração","Terra · demo acadêmica",0.0
+reaberto,10,11,5141dfc9-66eb-4f4d-a36d-878827fde422,"Antes: Restauração ecológica","Terra · demo acadêmica",0.0
+reaberto,11,12,656919f2-ce7c-4a40-8edb-c08628aabb04,"Antes da restauração","Terra · demo acadêmica",0.0
+reaberto,12,13,c1e961a0-3691-424f-9ffb-cf7179a4dcb0,"Antes do avanço do tempo","Terra · demo acadêmica",0.0
+reaberto,13,14,b4f051bc-0ca4-4121-9ad6-eeaff3a03087,"Antes da restauração","Terra · demo acadêmica",10.0

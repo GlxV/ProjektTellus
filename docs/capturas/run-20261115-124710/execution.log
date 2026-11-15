@@ -1,0 +1,251 @@
+Nov 15, 2026 12:47:11 PM com.sun.javafx.application.PlatformImpl startup
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @26f0a63f'
+PASS JavaFX SCENE3D disponível
+PASS PNG gravado: 00-vazio-1366x768
+PASS viewport lógico 1366x720 (768p menos 48)
+PASS Builder real: 21/78.96/.04/0, 1 atm, 15 °C, água 71, gelo 3, vegetação 65, 8 bi
+PASS PNG gravado: 01-builder-dialogo
+PASS diálogo confirma: ＋ Criar mundo
+PASS estado completo GUI = serviço: antes
+PASS rótulo humano = indicador: antes
+PASS rótulo biológico = indicador: antes
+PASS rótulo civil = indicador: antes
+PASS barra humana = indicador: antes
+PASS barra biológica = indicador: antes
+PASS barra civil = indicador: antes
+PASS Observer real visível: antes
+PASS alertas GUI = AlertaObserver: antes
+PASS PNG gravado: 02-antes-asteroide
+PASS diálogo confirma: ＋ Capturar retrato
+PASS PNG gravado: 03-snapshot-selecionavel
+PASS snapshot manual preserva todos os componentes
+PASS rolagem alcança Avançar tempo →
+PASS cinco criadores disponíveis
+PASS seleção evento 0
+PASS habilitado: Aplicar evento
+PASS efeito real em 50%: ASTEROID
+PASS PNG gravado: evento-1-asteroid-meio
+PASS estado completo GUI = serviço: evento_0
+PASS rótulo humano = indicador: evento_0
+PASS rótulo biológico = indicador: evento_0
+PASS rótulo civil = indicador: evento_0
+PASS barra humana = indicador: evento_0
+PASS barra biológica = indicador: evento_0
+PASS barra civil = indicador: evento_0
+PASS Observer real visível: evento_0
+PASS alertas GUI = AlertaObserver: evento_0
+PASS globo final = serviço evento 0
+PASS PNG gravado: 04-depois-asteroide
+PASS Modo apresentação abre aba real
+PASS apresentação consome resultado confirmado GUI = serviço
+PASS três assinantes reais: monitor, estatísticas, globo/painel
+PASS habilitado: Próximo →
+PASS habilitado: ← Anterior
+PASS habilitado: Próximo →
+PASS habilitado: Próximo →
+PASS habilitado: Próximo →
+PASS habilitado: Próximo →
+PASS habilitado: Próximo →
+PASS habilitado: Próximo →
+PASS habilitado: Próximo →
+PASS limite final da navegação da apresentação
+PASS PNG gravado: 09-apresentacao-observer
+PASS habilitado: ▶ Reproduzir
+PASS replay iniciou por botão real
+PASS habilitado: Ⅱ Pausar
+PASS habilitado: Ver globo antes
+PASS comparação antes muda apenas projeção
+PASS habilitado: Ver globo depois
+PASS comparação depois muda apenas projeção
+PASS PNG gravado: 10-apresentacao-controles
+PASS habilitado: Factory Method
+PASS habilitado: Observer
+PASS habilitado: Memento
+PASS atalho Memento abre retratos
+PASS replay/comparação/atalhos não geram novas transações
+PASS diálogo confirma: Restaurar selecionado
+PASS estado completo GUI = serviço: restaurado
+PASS rótulo humano = indicador: restaurado
+PASS rótulo biológico = indicador: restaurado
+PASS rótulo civil = indicador: restaurado
+PASS barra humana = indicador: restaurado
+PASS barra biológica = indicador: restaurado
+PASS barra civil = indicador: restaurado
+PASS Observer real visível: restaurado
+PASS alertas GUI = AlertaObserver: restaurado
+PASS PNG gravado: 05-restaurado-ui
+PASS Memento restaura nome/ambiente/população/ano exatos
+PASS cinco criadores disponíveis
+PASS seleção evento 1
+PASS habilitado: Aplicar evento
+PASS efeito real em 50%: VOLCANO
+PASS PNG gravado: evento-2-volcano-meio
+PASS estado completo GUI = serviço: evento_1
+PASS rótulo humano = indicador: evento_1
+PASS rótulo biológico = indicador: evento_1
+PASS rótulo civil = indicador: evento_1
+PASS barra humana = indicador: evento_1
+PASS barra biológica = indicador: evento_1
+PASS barra civil = indicador: evento_1
+PASS Observer real visível: evento_1
+PASS alertas GUI = AlertaObserver: evento_1
+PASS globo final = serviço evento 1
+PASS PNG gravado: evento-2-depois
+PASS diálogo confirma: Restaurar selecionado
+PASS cinco criadores disponíveis
+PASS seleção evento 2
+PASS habilitado: Aplicar evento
+PASS efeito real em 50%: NUCLEAR
+PASS PNG gravado: evento-3-nuclear-meio
+PASS estado completo GUI = serviço: evento_2
+PASS rótulo humano = indicador: evento_2
+PASS rótulo biológico = indicador: evento_2
+PASS rótulo civil = indicador: evento_2
+PASS barra humana = indicador: evento_2
+PASS barra biológica = indicador: evento_2
+PASS barra civil = indicador: evento_2
+PASS Observer real visível: evento_2
+PASS alertas GUI = AlertaObserver: evento_2
+PASS globo final = serviço evento 2
+PASS PNG gravado: evento-3-depois
+PASS diálogo confirma: Restaurar selecionado
+PASS cinco criadores disponíveis
+PASS seleção evento 3
+PASS habilitado: Aplicar evento
+PASS efeito real em 50%: ALIEN
+PASS PNG gravado: evento-4-alien-meio
+PASS estado completo GUI = serviço: evento_3
+PASS rótulo humano = indicador: evento_3
+PASS rótulo biológico = indicador: evento_3
+PASS rótulo civil = indicador: evento_3
+PASS barra humana = indicador: evento_3
+PASS barra biológica = indicador: evento_3
+PASS barra civil = indicador: evento_3
+PASS Observer real visível: evento_3
+PASS alertas GUI = AlertaObserver: evento_3
+PASS globo final = serviço evento 3
+PASS PNG gravado: evento-4-depois
+PASS diálogo confirma: Restaurar selecionado
+PASS cinco criadores disponíveis
+PASS seleção evento 4
+PASS habilitado: Aplicar evento
+PASS efeito real em 50%: ECOLOGY
+PASS PNG gravado: evento-5-ecology-meio
+PASS estado completo GUI = serviço: evento_4
+PASS rótulo humano = indicador: evento_4
+PASS rótulo biológico = indicador: evento_4
+PASS rótulo civil = indicador: evento_4
+PASS barra humana = indicador: evento_4
+PASS barra biológica = indicador: evento_4
+PASS barra civil = indicador: evento_4
+PASS Observer real visível: evento_4
+PASS alertas GUI = AlertaObserver: evento_4
+PASS globo final = serviço evento 4
+PASS PNG gravado: evento-5-depois
+PASS diálogo confirma: Restaurar selecionado
+PASS estado completo GUI = serviço: restaurado_final
+PASS rótulo humano = indicador: restaurado_final
+PASS rótulo biológico = indicador: restaurado_final
+PASS rótulo civil = indicador: restaurado_final
+PASS barra humana = indicador: restaurado_final
+PASS barra biológica = indicador: restaurado_final
+PASS barra civil = indicador: restaurado_final
+PASS Observer real visível: restaurado_final
+PASS alertas GUI = AlertaObserver: restaurado_final
+PASS habilitado: Avançar tempo →
+PASS estado completo GUI = serviço: avanco_10_anos
+PASS rótulo humano = indicador: avanco_10_anos
+PASS rótulo biológico = indicador: avanco_10_anos
+PASS rótulo civil = indicador: avanco_10_anos
+PASS barra humana = indicador: avanco_10_anos
+PASS barra biológica = indicador: avanco_10_anos
+PASS barra civil = indicador: avanco_10_anos
+PASS Observer real visível: avanco_10_anos
+PASS alertas GUI = AlertaObserver: avanco_10_anos
+PASS diálogo confirma: Restaurar selecionado
+PASS PNG gravado: 06-indicadores-fatores
+PASS indicadores sem transbordamento horizontal
+PASS PNG gravado: 07-indicadores-fim
+PASS layout 720p contém mainSplit
+PASS layout 720p contém activityTabs
+PASS layout 720p contém alertLabel
+PASS layout 720p contém worldList
+PASS seta direita gira globo em 8 graus
+PASS tecla + altera zoom real
+PASS scroll local altera zoom real
+PASS checkbox desliga luz real
+PASS PNG gravado: 11-globo-navegacao-luz
+PASS habilitado: Recentrar
+PASS Recentrar restaura zoom/rotação
+PASS rolagem alcança ＋ Capturar retrato
+PASS rolagem alcança Restaurar selecionado
+PASS diálogo confirma: Salvar
+PASS SQLite reaberto: estado/nome íntegros
+PASS SQLite reaberto: histórico/retratos íntegros
+PASS diálogo confirma: Carregar selecionado
+PASS Carregar selecionado recupera SQLite em sessão nova
+PASS carregar não simula notificação Observer
+PASS PNG gravado: 08-sqlite-reaberto-ui
+PASS PNG gravado: planeta-referencia
+PASS habilitado: Aplicar condições
+PASS estado completo GUI = serviço: visual_oceano
+PASS rótulo humano = indicador: visual_oceano
+PASS rótulo biológico = indicador: visual_oceano
+PASS rótulo civil = indicador: visual_oceano
+PASS barra humana = indicador: visual_oceano
+PASS barra biológica = indicador: visual_oceano
+PASS barra civil = indicador: visual_oceano
+PASS Observer real visível: visual_oceano
+PASS alertas GUI = AlertaObserver: visual_oceano
+PASS PNG gravado: cenario-oceano-ui
+PASS PNG gravado: planeta-oceano
+PASS habilitado: Aplicar condições
+PASS estado completo GUI = serviço: visual_co2
+PASS rótulo humano = indicador: visual_co2
+PASS rótulo biológico = indicador: visual_co2
+PASS rótulo civil = indicador: visual_co2
+PASS barra humana = indicador: visual_co2
+PASS barra biológica = indicador: visual_co2
+PASS barra civil = indicador: visual_co2
+PASS Observer real visível: visual_co2
+PASS alertas GUI = AlertaObserver: visual_co2
+PASS PNG gravado: cenario-co2-ui
+PASS PNG gravado: planeta-co2
+PASS habilitado: Aplicar condições
+PASS estado completo GUI = serviço: visual_he
+PASS rótulo humano = indicador: visual_he
+PASS rótulo biológico = indicador: visual_he
+PASS rótulo civil = indicador: visual_he
+PASS barra humana = indicador: visual_he
+PASS barra biológica = indicador: visual_he
+PASS barra civil = indicador: visual_he
+PASS Observer real visível: visual_he
+PASS alertas GUI = AlertaObserver: visual_he
+PASS PNG gravado: cenario-he-ui
+PASS PNG gravado: planeta-he
+PASS habilitado: Aplicar condições
+PASS estado completo GUI = serviço: visual_aerossol
+PASS rótulo humano = indicador: visual_aerossol
+PASS rótulo biológico = indicador: visual_aerossol
+PASS rótulo civil = indicador: visual_aerossol
+PASS barra humana = indicador: visual_aerossol
+PASS barra biológica = indicador: visual_aerossol
+PASS barra civil = indicador: visual_aerossol
+PASS Observer real visível: visual_aerossol
+PASS alertas GUI = AlertaObserver: visual_aerossol
+PASS PNG gravado: cenario-aerossol-ui
+PASS PNG gravado: planeta-aerossol
+PASS habilitado: Aplicar condições
+PASS estado completo GUI = serviço: visual_congelado
+PASS rótulo humano = indicador: visual_congelado
+PASS rótulo biológico = indicador: visual_congelado
+PASS rótulo civil = indicador: visual_congelado
+PASS barra humana = indicador: visual_congelado
+PASS barra biológica = indicador: visual_congelado
+PASS barra civil = indicador: visual_congelado
+PASS Observer real visível: visual_congelado
+PASS alertas GUI = AlertaObserver: visual_congelado
+PASS PNG gravado: cenario-congelado-ui
+PASS PNG gravado: planeta-congelado
+PASS diálogo confirma: Restaurar selecionado
+PASS PNG gravado: 12-uml-companheiro-harness

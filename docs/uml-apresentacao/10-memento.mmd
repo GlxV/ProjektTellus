@@ -1,0 +1,36 @@
+classDiagram
+  class Terra {
+    <<originador>>
+    -UUID id
+    -String nome
+    -EstadoPlanetario estado
+    +capturar(String) TerraMemento
+    +restaurar(TerraMemento) void
+  }
+  class TerraMemento {
+    <<record publico imutavel>>
+    +UUID id
+    +UUID mundoId
+    +String rotulo
+    +String nomeMundo
+    +Instant criadoEm
+    +EstadoPlanetario estado
+  }
+  class EstadoPlanetario {
+    <<record imutavel>>
+  }
+  class SimulacaoService {
+    <<caretaker>>
+    +restaurar(Terra, TerraMemento) ResultadoOperacao
+  }
+  class MundoRepository {
+    <<interface>>
+    +snapshots(UUID) List
+  }
+  Terra ..> TerraMemento : captura e restaura
+  Terra --> EstadoPlanetario : referencia atual
+  TerraMemento --> EstadoPlanetario : referencia preservada
+  SimulacaoService --> Terra : coordena
+  SimulacaoService --> MundoRepository : armazena e consulta
+  MundoRepository ..> TerraMemento : persiste e reconstroi
+  note for TerraMemento "Estado publicamente legivel. Nao ha opacidade estrita GoF."

@@ -1,0 +1,16 @@
+flowchart LR
+  UI[MainController / JavaFX] -->|casos de uso| S[SimulacaoService]
+  D[BuilderDialog] --> B[TerraBuilder]
+  UI --> D
+  B --> T[Terra + EstadoPlanetario]
+  S --> T
+  S --> C[EventoCreator / EventoPlanetario]
+  S --> M[ModeloPlanetario]
+  S --> R[MundoRepository]
+  R -. implementação .-> SQL[SqliteMundoRepository]
+  SQL --> DB[(SQLite local)]
+  S -->|publica após salvar| O[ObserverBus]
+  O --> A[AlertaObserver]
+  O --> E[EstatisticasObserver]
+  O --> F[Assinante anônimo da UI]
+  F -->|Platform.runLater| UI

@@ -1,0 +1,1508 @@
+{
+  "checks": 281,
+  "failed": 0,
+  "results": [
+    {
+      "check": "audit_actual_state_count",
+      "pass": true,
+      "details": 4125
+    },
+    {
+      "check": "audit_unique_experiments",
+      "pass": true,
+      "details": 2026
+    },
+    {
+      "check": "audit_checks_count",
+      "pass": true,
+      "details": 252628
+    },
+    {
+      "check": "audit_contracts_zero_failures",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "rejected_values_count",
+      "pass": true,
+      "details": 137
+    },
+    {
+      "check": "rejection_outcomes",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "independent_process_reproducibility",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "canonical_data_hash_snapshots.csv",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "canonical_data_hash_factors.csv.gz",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "canonical_data_hash_checks-summary.csv",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "canonical_data_hash_rejections.csv",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "all_requested_o2",
+      "pass": true,
+      "details": {
+        "missing": [],
+        "requested": [
+          0,
+          1,
+          5,
+          10,
+          15,
+          21,
+          30,
+          50,
+          70,
+          90,
+          100
+        ]
+      }
+    },
+    {
+      "check": "all_requested_co2",
+      "pass": true,
+      "details": {
+        "missing": [],
+        "requested": [
+          0,
+          0.04,
+          0.1,
+          1,
+          5,
+          10,
+          30,
+          50,
+          80,
+          100
+        ]
+      }
+    },
+    {
+      "check": "all_requested_he",
+      "pass": true,
+      "details": {
+        "missing": [],
+        "requested": [
+          0,
+          1,
+          10,
+          20,
+          40,
+          60,
+          80,
+          100
+        ]
+      }
+    },
+    {
+      "check": "all_requested_pressure",
+      "pass": true,
+      "details": {
+        "missing": [],
+        "requested": [
+          0,
+          0.1,
+          0.3,
+          0.5,
+          1,
+          2,
+          5,
+          10,
+          20
+        ]
+      }
+    },
+    {
+      "check": "all_requested_temperature",
+      "pass": true,
+      "details": {
+        "missing": [],
+        "requested": [
+          -150,
+          -100,
+          -50,
+          -20,
+          0,
+          15,
+          30,
+          50,
+          80,
+          120,
+          200
+        ]
+      }
+    },
+    {
+      "check": "all_requested_water",
+      "pass": true,
+      "details": {
+        "missing": [],
+        "requested": [
+          0,
+          10,
+          30,
+          50,
+          70,
+          90,
+          100
+        ]
+      }
+    },
+    {
+      "check": "all_requested_population",
+      "pass": true,
+      "details": {
+        "missing": [],
+        "requested": [
+          0,
+          1000000.0,
+          100000000.0,
+          1000000000.0,
+          8000000000.0,
+          10000000000.0,
+          100000000000.0
+        ]
+      }
+    },
+    {
+      "check": "at_least_20_combined_scenarios",
+      "pass": true,
+      "details": 36
+    },
+    {
+      "check": "scenario_horizons_pure_n2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_earth",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_population1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_pure_he",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_he20",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_pure_co2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_radiation100",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_hot_max",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_cold_min",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_max_degraded",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_co2_50",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_vegetation0",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_pressure20",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_land1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_water1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_thin",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_cold_vacuum_dry",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_alien100",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_population100b",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_ocean",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_nuclear100",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_dry",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_supervolcano100",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_population0",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_vacuum",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_all_ice",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_aerosol100",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_restoration_after_nuclear100",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_frozen_cold_water5_ice69_v5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_mixed_extreme",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_pure_o2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_anoxic",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_o2_2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_asteroid100",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_vegetation100",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "scenario_horizons_ocean_legacy_he20_v93_pop10b",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "all_five_event_types",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "all_six_event_intensities",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "event_240_trials",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "deck_java_literal_0",
+      "pass": true,
+      "details": "src/main/java/com/projekttellus/domain/TerraBuilder.java"
+    },
+    {
+      "check": "deck_java_literal_1",
+      "pass": true,
+      "details": "src/main/java/com/projekttellus/domain/TerraBuilder.java"
+    },
+    {
+      "check": "deck_java_literal_2",
+      "pass": true,
+      "details": "src/main/java/com/projekttellus/events/AsteroideCreator.java"
+    },
+    {
+      "check": "deck_java_literal_3",
+      "pass": true,
+      "details": "src/main/java/com/projekttellus/application/SimulacaoService.java"
+    },
+    {
+      "check": "deck_java_literal_4",
+      "pass": true,
+      "details": "src/main/java/com/projekttellus/application/SimulacaoService.java"
+    },
+    {
+      "check": "deck_java_literal_5",
+      "pass": true,
+      "details": "src/main/java/com/projekttellus/patterns/observer/ObserverBus.java"
+    },
+    {
+      "check": "deck_java_literal_6",
+      "pass": true,
+      "details": "src/main/java/com/projekttellus/patterns/observer/SimulacaoObserver.java"
+    },
+    {
+      "check": "deck_java_literal_7",
+      "pass": true,
+      "details": "src/main/java/com/projekttellus/patterns/observer/ObserverBus.java"
+    },
+    {
+      "check": "deck_java_literal_8",
+      "pass": true,
+      "details": "src/main/java/com/projekttellus/domain/Terra.java"
+    },
+    {
+      "check": "deck_java_literal_9",
+      "pass": true,
+      "details": "src/main/java/com/projekttellus/domain/Terra.java"
+    },
+    {
+      "check": "study_source_hash_B-completo",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_B-completo",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_B-dialogo",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_B-dialogo",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_F-contrato",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_F-contrato",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_F-Asteroide",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_F-Asteroide",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_F-Supervulcao",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_F-Supervulcao",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_F-GuerraNuclear",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_F-GuerraNuclear",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_F-InvasaoAlienigena",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_F-InvasaoAlienigena",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_F-RestauracaoEcologica",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_F-RestauracaoEcologica",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_F-base",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_F-base",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_F-produto",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_F-produto",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_F-efeitos",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_F-efeitos",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_I-aplicar",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_I-aplicar",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_O-bus",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_O-bus",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_O-alertas",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_O-alertas",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_O-estatisticas",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_O-estatisticas",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_O-ui",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_O-ui",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_M-capturar",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_M-capturar",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_M-restaurar",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_M-restaurar",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_M-record",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_M-record",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_M-servico",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_M-servico",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_I-confirmar",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_I-confirmar",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_P-salvar",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_P-salvar",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_A-avancar",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_A-avancar",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_B-fluente-deck",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_B-fluente-deck",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_B-build-deck",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_B-build-deck",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_source_hash_O-publicar-deck",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "study_literal_O-publicar-deck",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_display_preserves_tokens_0",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_display_preserves_tokens_1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_display_preserves_tokens_2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_display_preserves_tokens_3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_display_preserves_tokens_4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_display_preserves_tokens_5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_display_preserves_tokens_6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_display_preserves_tokens_7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_display_preserves_tokens_8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_no_newline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_literal_closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "java_display_preserves_tokens_9",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "required_document_AUDITORIA_EXPERIMENTAL",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "required_document_CONFORMIDADE_TRABALHO",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "required_document_ROTEIRO_APRESENTACAO",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "required_document_DEMO_APRESENTACAO",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "required_document_PERGUNTAS_APRESENTACAO",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "required_document_ESTUDO_PADROES",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "required_document_CODIGO_JAVA_APRESENTACAO",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "required_document_ENUNCIADO_ORIGINAL_TRANSCRITO",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "62_questions",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "four_pdf_criteria_Builder",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "four_pdf_criteria_Factory Method",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "four_pdf_criteria_Observer",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "four_pdf_criteria_Memento",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "pptx_15_slides",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "pptx_15_speaker_notes",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "editable_UML_slide_4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "editable_UML_slide_6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "editable_UML_slide_8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "editable_UML_slide_10",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "editable_java_slide_5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "editable_java_slide_7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "editable_java_slide_9",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "editable_java_slide_11",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preview_1366x768_1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preview_1366x768_2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preview_1366x768_3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preview_1366x768_4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preview_1366x768_5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preview_1366x768_6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preview_1366x768_7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preview_1366x768_8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preview_1366x768_9",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preview_1366x768_10",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preview_1366x768_11",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preview_1366x768_12",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preview_1366x768_13",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preview_1366x768_14",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preview_1366x768_15",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "pdf_15_pages",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "uml_high_resolution_Builder",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "uml_high_resolution_Factory-Method",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "uml_high_resolution_Observer",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "uml_high_resolution_Memento",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "gui_249_passes",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "gui_success_receipt",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "real_capture_alias_terra-referencia.png",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "real_capture_alias_demo-restaurado.png",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "real_capture_alias_planeta-aerossol.png",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "real_capture_alias_planeta-co2.png",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "real_capture_alias_planeta-congelado.png",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "real_capture_alias_planeta-he.png",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "real_capture_alias_planeta-oceano.png",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "real_capture_alias_planeta-referencia.png",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "video_full_decode",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "video_canonical_capture_source",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "final_junit_69_passed",
+      "pass": true,
+      "details": {
+        "tests": 69,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "check": "personal_save_unchanged",
+      "pass": true,
+      "details": "Z:\\ArqPoo\\ProjektTellus\\data\\projekttellus.db"
+    }
+  ],
+  "boundary": "Automated artifact/traceability checks; visual review, scientific validity and physical college computer are separate."
+}

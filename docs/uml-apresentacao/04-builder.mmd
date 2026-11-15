@@ -1,0 +1,30 @@
+classDiagram
+  class TerraBuilder {
+    -String nome
+    -Atmosfera atmosfera
+    -Clima clima
+    +nome(String) TerraBuilder
+    +atmosfera(Atmosfera) TerraBuilder
+    +clima(Clima) TerraBuilder
+    +build() Terra
+  }
+  class Terra {
+    -UUID id
+    -String nome
+    -EstadoPlanetario estado
+    +estado() EstadoPlanetario
+  }
+  class EstadoPlanetario {
+    <<record imutavel>>
+    +Atmosfera atmosfera
+    +Clima clima
+    +Biosfera biosfera
+    +Hidrosfera hidrosfera
+    +Civilizacao civilizacao
+    +double anos
+  }
+  TerraBuilder ..> Terra : constroi
+  TerraBuilder ..> EstadoPlanetario : reune valores
+  Terra --> EstadoPlanetario : referencia atual substituivel
+  note for TerraBuilder "Concreto e fluente. Sem Director. Biosfera, hidrosfera, civilizacao e anos omitidos no Builder para legibilidade."
+  note for EstadoPlanetario "Valores podem ser compartilhados com snapshots por serem imutaveis."

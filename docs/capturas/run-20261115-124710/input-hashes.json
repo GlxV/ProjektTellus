@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "78D044F525FCFD2EC0ACF36B420442B68159949C909003345DFB0BB19EF5A4A8",
+    "Path": "Z:\\ArqPoo\\ProjektTellus\\target\\ProjektTellus.jar"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "8E2B8C01056F515725712A2E123EAA3652305C9125AC4838B3875307EEE6693B",
+    "Path": "Z:\\ArqPoo\\ProjektTellus\\src\\test\\java\\com\\projekttellus\\ui\\AcademicDemoCapture.java"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "B89B88CD58821953B30C0490E4085962F89C1B3CDBB0DDA732F5939E7D0BDD86",
+    "Path": "Z:\\ArqPoo\\ProjektTellus\\scripts\\Capture-AcademicDemo.ps1"
+  }
+]

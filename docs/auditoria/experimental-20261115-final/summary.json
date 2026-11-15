@@ -1,0 +1,12 @@
+{
+  "completed_utc": "2026-11-15T15:44:16.731081700Z",
+  "java_version": "25.0.5",
+  "seed": 20261115,
+  "experiments": 2026,
+  "snapshots": 4125,
+  "factor_rows": 156750,
+  "checks": 252628,
+  "failed_checks": 0,
+  "rejection_experiments": 137,
+  "categories": {"sweep_o2":101,"sweep_co2":80,"sweep_he_fixed":80,"sweep_o2_binary":101,"sweep_co2_binary":101,"sweep_he_binary":101,"sweep_ternary":231,"sweep_pressure":18,"sweep_temperature":16,"sweep_water":101,"sweep_ice":101,"sweep_phase":101,"sweep_vegetation":101,"sweep_population":11,"request_pressure":1,"request_temperature":5,"request_co2":1,"request_population":1,"scenario":36,"event":240,"rejection":137,"fractional":5,"partition":2,"seeded_random":250,"normalization":6,"rounding_probe":33,"sensitivity":8,"step_rounding":21,"memento_persistence":36}
+}

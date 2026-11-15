@@ -1,0 +1,13 @@
+﻿{
+    "RunName":  "experimental-20261115-reproduce",
+    "ExitCode":  0,
+    "Classpath":  "Z:\\ArqPoo\\ProjektTellus\\docs\\auditoria\\experimental-20261115-reproduce\\classes;Z:\\ArqPoo\\ProjektTellus\\target\\classes;C:\\Users\\Admin\\.m2\\repository\\org\\xerial\\sqlite-jdbc\\3.50.3.0\\sqlite-jdbc-3.50.3.0.jar",
+    "Java":  "Z:\\ArqPoo\\ProjektTellus\\.tools\\jdk-25.0.5+8\\bin\\java.exe",
+    "Javac":  "Z:\\ArqPoo\\ProjektTellus\\.tools\\jdk-25.0.5+8\\bin\\javac.exe",
+    "Command":  "scripts/Run-ExperimentalAudit.ps1",
+    "MavenStarted":  false,
+    "PersonalDatabases":  1,
+    "PersonalDatabasesUnchanged":  true,
+    "Commit":  "3e153f07d8e7c5a6d65975afe5b06984be9f576f",
+    "CompletedUtc":  "2026-11-15T15:45:45.0189733Z"
+}

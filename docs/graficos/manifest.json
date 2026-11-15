@@ -1,0 +1,37 @@
+[
+  {
+    "file": "01-gases.png",
+    "source": "docs\\auditoria\\experimental-20261115-final\\snapshots.csv",
+    "description": "Varreduras com 1 atm, 15 °C, água 71%, gelo 3%, vegetação 65%, 8 bilhões. Casos binários extremos estão no CSV separado por família."
+  },
+  {
+    "file": "02-pressao-temperatura.png",
+    "source": "docs\\auditoria\\experimental-20261115-final\\snapshots.csv",
+    "description": "Estados iniciais, sem pressupor estabilidade física de cada combinação."
+  },
+  {
+    "file": "03-oceano-suporte.png",
+    "source": "docs\\auditoria\\experimental-20261115-final\\snapshots.csv",
+    "description": "A terra muda ao variar água; esta é uma dependência geométrica intencional, não uma variável independente escondida."
+  },
+  {
+    "file": "04-evolucao.png",
+    "source": "docs\\auditoria\\experimental-20261115-final\\snapshots.csv",
+    "description": "Amostras reais em 0, 1, 10, 100 e 1.000 anos. As linhas apenas conectam os pontos medidos."
+  },
+  {
+    "file": "05-populacao.png",
+    "source": "docs\\auditoria\\experimental-20261115-final\\snapshots.csv",
+    "description": "Patamares medidos: 2 pessoas sem O₂, 4 no oceano e uma pessoa em cenário favorável. Ponto 0 permanece zero; não há colonização espontânea."
+  },
+  {
+    "file": "06-eventos.png",
+    "source": "docs\\auditoria\\experimental-20261115-final\\snapshots.csv",
+    "description": "Efeitos imediatos na referência. Os índices são não lineares mesmo quando o efeito ambiental é linear na intensidade."
+  },
+  {
+    "file": "07-sensibilidade.png",
+    "source": "docs\\auditoria\\experimental-20261115-final\\snapshots.csv",
+    "description": "Cada rótulo identifica a perturbação no CSV. Não é um ranking universal: magnitude e intervalo de cada variável são diferentes."
+  }
+]

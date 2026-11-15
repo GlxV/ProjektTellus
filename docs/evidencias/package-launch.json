@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "startedUtc": "2026-11-15T16:01:24.1691788Z",
+  "java": "Z:\\ArqPoo\\ProjektTellus\\.tools\\jdk-25.0.5+8\\bin\\java.exe",
+  "javaVersion": "openjdk version \"25.0.5\" 2026-10-20 LTS\nOpenJDK Runtime Environment Temurin-25.0.5+8 (build 25.0.5+8-LTS)\nOpenJDK 64-Bit Server VM Temurin-25.0.5+8 (build 25.0.5+8-LTS, mixed mode, sharing)",
+  "jar": "Z:\\ArqPoo\\ProjektTellus\\target\\ProjektTellus.jar",
+  "jarSha256": "78d044f525fcfd2ec0acf36b420442b68159949c909003345dfb0bb19ef5a4a8",
+  "jarSha256After": "78d044f525fcfd2ec0acf36b420442b68159949c909003345dfb0bb19ef5a4a8",
+  "database": "C:\\Users\\Admin\\AppData\\Local\\Temp\\tellus-package-smoke-d63ab771832f4a4f97f0ed2dc4792013\\package.db",
+  "databaseWasAbsent": true,
+  "desktop": "winsta0\\TellusPackage_2ba4c66e9ede47ff91dad520cb1ea936",
+  "privateDesktop": true,
+  "desktopActivated": false,
+  "pidCreated": 13912,
+  "windowTitle": "ProjektTellus — Simulador Planetario",
+  "windowHandle": "0x100A2E",
+  "processAliveAtVerification": true,
+  "databaseHeaderVersion": 1,
+  "schema": {
+    "userVersion": 1,
+    "tables": [
+      "eventos",
+      "mundos",
+      "snapshots"
+    ],
+    "allTablesEmpty": true,
+    "quickCheck": "ok",
+    "probeReadOnly": true
+  },
+  "closeMethod": "WM_CLOSE, janela do PID criado",
+  "exitCode": 0,
+  "mavenExecuted": false,
+  "error": null,
+  "limits": "Abertura do JAR real e criação do schema local somente. Não equivale a testar PC/projetor da faculdade, fluidez/FPS ou fluxo completo de interação.",
+  "commandLine": "\"Z:\\ArqPoo\\ProjektTellus\\.tools\\jdk-25.0.5+8\\bin\\java.exe\" --enable-native-access=ALL-UNNAMED \"-Dprojekttellus.db=C:\\Users\\Admin\\AppData\\Local\\Temp\\tellus-package-smoke-d63ab771832f4a4f97f0ed2dc4792013\\package.db\" -jar \"Z:\\ArqPoo\\ProjektTellus\\target\\ProjektTellus.jar\"",
+  "finishedUtc": "2026-11-15T16:01:26.5110340Z",
+  "databaseBytes": 36864
+}

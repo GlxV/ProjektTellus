@@ -1,0 +1,138 @@
+experiment,case,expected_exception,actual_exception,message,pass
+1529,oxygen=NaN,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Oxigênio deve estar entre 0.0 e 100.0.,true
+1530,vegetation=NaN,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Vegetação deve estar entre 0.0 e 100.0.,true
+1531,water=NaN,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Água deve estar entre 0.0 e 100.0.,true
+1532,aerosol=NaN,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Aerossóis deve estar entre 0.0 e 100.0.,true
+1533,radiation=NaN,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Radiação deve estar entre 0.0 e 100.0.,true
+1534,oxygen=Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Oxigênio deve estar entre 0.0 e 100.0.,true
+1535,vegetation=Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Vegetação deve estar entre 0.0 e 100.0.,true
+1536,water=Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Água deve estar entre 0.0 e 100.0.,true
+1537,aerosol=Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Aerossóis deve estar entre 0.0 e 100.0.,true
+1538,radiation=Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Radiação deve estar entre 0.0 e 100.0.,true
+1539,oxygen=-Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Oxigênio deve estar entre 0.0 e 100.0.,true
+1540,vegetation=-Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Vegetação deve estar entre 0.0 e 100.0.,true
+1541,water=-Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Água deve estar entre 0.0 e 100.0.,true
+1542,aerosol=-Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Aerossóis deve estar entre 0.0 e 100.0.,true
+1543,radiation=-Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Radiação deve estar entre 0.0 e 100.0.,true
+1544,oxygen=-1.0,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Oxigênio deve estar entre 0.0 e 100.0.,true
+1545,vegetation=-1.0,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Vegetação deve estar entre 0.0 e 100.0.,true
+1546,water=-1.0,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Água deve estar entre 0.0 e 100.0.,true
+1547,aerosol=-1.0,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Aerossóis deve estar entre 0.0 e 100.0.,true
+1548,radiation=-1.0,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Radiação deve estar entre 0.0 e 100.0.,true
+1549,oxygen=101.0,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Oxigênio deve estar entre 0.0 e 100.0.,true
+1550,vegetation=101.0,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Vegetação deve estar entre 0.0 e 100.0.,true
+1551,water=101.0,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Água deve estar entre 0.0 e 100.0.,true
+1552,aerosol=101.0,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Aerossóis deve estar entre 0.0 e 100.0.,true
+1553,radiation=101.0,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Radiação deve estar entre 0.0 e 100.0.,true
+1554,pressure=NaN,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Pressão deve estar entre 0.0 e 20.0.,true
+1555,pressure=Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Pressão deve estar entre 0.0 e 20.0.,true
+1556,pressure=-0.01,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Pressão deve estar entre 0.0 e 20.0.,true
+1557,pressure=20.01,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Pressão deve estar entre 0.0 e 20.0.,true
+1558,temperature=NaN,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Temperatura deve estar entre -150.0 e 200.0.,true
+1559,temperature=-Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Temperatura deve estar entre -150.0 e 200.0.,true
+1560,temperature=-150.01,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Temperatura deve estar entre -150.0 e 200.0.,true
+1561,temperature=200.01,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Temperatura deve estar entre -150.0 e 200.0.,true
+1562,advance=NaN,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Avanço de tempo deve estar entre 0.01 e 1000.0.,true
+1563,advance=Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Avanço de tempo deve estar entre 0.01 e 1000.0.,true
+1564,advance=-1.0,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Avanço de tempo deve estar entre 0.01 e 1000.0.,true
+1565,advance=0.0,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Avanço de tempo deve estar entre 0.01 e 1000.0.,true
+1566,advance=0.009,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Avanço de tempo deve estar entre 0.01 e 1000.0.,true
+1567,advance=1000.01,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Avanço de tempo deve estar entre 0.01 e 1000.0.,true
+1568,AsteroideCreator=NaN,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1569,AsteroideCreator=Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1570,AsteroideCreator=-0.01,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1571,AsteroideCreator=1.01,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1572,SupervulcaoCreator=NaN,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1573,SupervulcaoCreator=Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1574,SupervulcaoCreator=-0.01,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1575,SupervulcaoCreator=1.01,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1576,GuerraNuclearCreator=NaN,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1577,GuerraNuclearCreator=Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1578,GuerraNuclearCreator=-0.01,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1579,GuerraNuclearCreator=1.01,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1580,InvasaoAlienigenaCreator=NaN,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1581,InvasaoAlienigenaCreator=Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1582,InvasaoAlienigenaCreator=-0.01,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1583,InvasaoAlienigenaCreator=1.01,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1584,RestauracaoEcologicaCreator=NaN,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1585,RestauracaoEcologicaCreator=Infinity,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1586,RestauracaoEcologicaCreator=-0.01,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1587,RestauracaoEcologicaCreator=1.01,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Intensidade deve estar entre 0.0 e 1.0.,true
+1588,population_negative,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,População deve estar entre zero e 100 bilhões.,true
+1589,population_over_max,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,População deve estar entre zero e 100 bilhões.,true
+1590,water_plus_ice,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Água líquida e gelo juntos não podem exceder 100%.,true
+1591,gas_sum_low,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,A soma dos quatro gases deve ser 100%.,true
+1592,gas_sum_high,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,A soma dos quatro gases deve ser 100%.,true
+1593,years_overflow,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Tempo total deve estar entre 0.0 e 1.0E9.,true
+1920,foreign_memento_earth,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1921,transaction_duplicate_event_earth,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1923,foreign_memento_ocean_legacy_he20_v93_pop10b,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1924,transaction_duplicate_event_ocean_legacy_he20_v93_pop10b,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1926,foreign_memento_ocean,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1927,transaction_duplicate_event_ocean,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1929,foreign_memento_all_ice,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1930,transaction_duplicate_event_all_ice,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1932,foreign_memento_dry,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1933,transaction_duplicate_event_dry,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1935,foreign_memento_vacuum,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1936,transaction_duplicate_event_vacuum,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1938,foreign_memento_thin,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1939,transaction_duplicate_event_thin,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1941,foreign_memento_pressure20,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1942,transaction_duplicate_event_pressure20,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1944,foreign_memento_pure_o2,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1945,transaction_duplicate_event_pure_o2,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1947,foreign_memento_pure_co2,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1948,transaction_duplicate_event_pure_co2,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1950,foreign_memento_pure_he,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1951,transaction_duplicate_event_pure_he,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1953,foreign_memento_pure_n2,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1954,transaction_duplicate_event_pure_n2,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1956,foreign_memento_anoxic,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1957,transaction_duplicate_event_anoxic,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1959,foreign_memento_o2_2,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1960,transaction_duplicate_event_o2_2,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1962,foreign_memento_co2_50,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1963,transaction_duplicate_event_co2_50,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1965,foreign_memento_he20,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1966,transaction_duplicate_event_he20,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1968,foreign_memento_cold_min,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1969,transaction_duplicate_event_cold_min,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1971,foreign_memento_hot_max,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1972,transaction_duplicate_event_hot_max,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1974,foreign_memento_radiation100,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1975,transaction_duplicate_event_radiation100,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1977,foreign_memento_aerosol100,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1978,transaction_duplicate_event_aerosol100,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1980,foreign_memento_vegetation0,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1981,transaction_duplicate_event_vegetation0,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1983,foreign_memento_vegetation100,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1984,transaction_duplicate_event_vegetation100,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1986,foreign_memento_population0,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1987,transaction_duplicate_event_population0,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1989,foreign_memento_population1,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1990,transaction_duplicate_event_population1,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1992,foreign_memento_population100b,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1993,transaction_duplicate_event_population100b,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1995,foreign_memento_land1,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1996,transaction_duplicate_event_land1,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+1998,foreign_memento_water1,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+1999,transaction_duplicate_event_water1,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+2001,foreign_memento_max_degraded,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+2002,transaction_duplicate_event_max_degraded,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+2004,foreign_memento_cold_vacuum_dry,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+2005,transaction_duplicate_event_cold_vacuum_dry,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+2007,foreign_memento_mixed_extreme,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+2008,transaction_duplicate_event_mixed_extreme,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+2010,foreign_memento_asteroid100,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+2011,transaction_duplicate_event_asteroid100,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+2013,foreign_memento_supervolcano100,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+2014,transaction_duplicate_event_supervolcano100,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+2016,foreign_memento_nuclear100,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+2017,transaction_duplicate_event_nuclear100,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+2019,foreign_memento_alien100,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+2020,transaction_duplicate_event_alien100,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+2022,foreign_memento_restoration_after_nuclear100,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+2023,transaction_duplicate_event_restoration_after_nuclear100,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true
+2025,foreign_memento_frozen_cold_water5_ice69_v5,java.lang.IllegalArgumentException,java.lang.IllegalArgumentException,Este retrato pertence a outro mundo.,true
+2026,transaction_duplicate_event_frozen_cold_water5_ice69_v5,com.projekttellus.persistence.PersistenciaException,com.projekttellus.persistence.PersistenciaException,Não foi possível salvar o mundo e seus registros.,true

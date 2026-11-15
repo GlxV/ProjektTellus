@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "canonical": "run-20261115-124710",
+  "decodedPng": 33,
+  "uniqueVisualRows": 33,
+  "aliasesByteIdentical": 8,
+  "allPlanetCornersTransparent": true,
+  "harnessChecks": 249,
+  "controlledEventFrames": 5,
+  "captureScriptParses": true,
+  "mavenExecuted": false,
+  "initialFailurePreserved": true,
+  "videoSourceArchived": true,
+  "verifiedUtc": "2026-11-15T15:50:41.5691752Z"
+}

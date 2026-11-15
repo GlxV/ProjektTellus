@@ -1,0 +1,33 @@
+{
+  "verification_run": "target/audit-drafts/experimental-20261115-reproduce",
+  "same_jdk": "25.0.5",
+  "runner_lookup": "Find-TellusJava from scripts/Tools.ps1",
+  "comparisons": [
+    {
+      "file": "snapshots.csv",
+      "canonical_sha256": "817efbb92ec179d34ec9af8198de5d7bee087f8f30597a6c6dcb7f166e20338f",
+      "repeat_sha256": "817efbb92ec179d34ec9af8198de5d7bee087f8f30597a6c6dcb7f166e20338f",
+      "identical": true
+    },
+    {
+      "file": "factors.csv.gz",
+      "canonical_sha256": "55cdfe0754f6641ae85368c0864735ff18bbada638cbdfe705fad4f2589d91d9",
+      "repeat_sha256": "55cdfe0754f6641ae85368c0864735ff18bbada638cbdfe705fad4f2589d91d9",
+      "identical": true
+    },
+    {
+      "file": "checks-summary.csv",
+      "canonical_sha256": "7a739ffb5262dcd9ad455ef6489c0a496dd7dff4fe31ed1e65803e6f9e6733b7",
+      "repeat_sha256": "7a739ffb5262dcd9ad455ef6489c0a496dd7dff4fe31ed1e65803e6f9e6733b7",
+      "identical": true
+    },
+    {
+      "file": "rejections.csv",
+      "canonical_sha256": "117b15a316377ebe3954248ae6bf78b9a48fe97fc255212619f4e83ea53d2927",
+      "repeat_sha256": "117b15a316377ebe3954248ae6bf78b9a48fe97fc255212619f4e83ea53d2927",
+      "identical": true
+    }
+  ],
+  "gzip_mtime_seconds": 0,
+  "note": "Snapshots, factors, check aggregates and rejection data repeat exactly. Raw checks include UUID/Instant metadata for Memento and are not required to match bytewise."
+}

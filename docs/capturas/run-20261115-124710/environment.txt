@@ -1,0 +1,6 @@
+OS=Windows 11 amd64
+Java=25.0.5
+JavaFX=25.0.1
+OutputScale=1.0x1.0
+DB temporário=C:\Users\Admin\AppData\Local\Temp\tellus-demo-90c444054fef4a6e935b2f5138c8607a\controller-demo.db
+Desktop privado; Stage UNDECORATED; nenhum SwitchDesktop.

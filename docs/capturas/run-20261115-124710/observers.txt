@@ -1,0 +1,4 @@
+Sistema notificado: Monitor de condições de vida
+Sistema notificado: Estatísticas da sessão
+Sistema notificado: Globo e painel de indicadores
+Alertas após Asteroide 25%: [Condições estáveis neste modelo didático.]

@@ -1,0 +1,6 @@
+{
+  "canonical_run_runner": "Input hash stored in input-hashes.csv; first execution used pinned local JDK path.",
+  "current_runner_sha256": "63e3e62daffcda5e87fe8e36183b13356f40e3323ec4ae938bbf0295625fdef1",
+  "change": "Final runner discovers the same JDK 25 via Tools.ps1/Find-TellusJava. Production, audit Java source and numeric data are unchanged. Independent repeated data hashes are recorded in reproducibility.json.",
+  "encoding": "UTF-8 BOM for Windows PowerShell 5.1"
+}

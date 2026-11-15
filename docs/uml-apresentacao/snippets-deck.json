@@ -1,0 +1,291 @@
+{
+  "description": "Trechos literais e mapa de diagramas para integracao; verificacao estatica, sem Maven.",
+  "snippets": [
+    {
+      "id": "B-completo",
+      "slide": 5,
+      "file": "src/main/java/com/projekttellus/domain/TerraBuilder.java",
+      "start_line": 5,
+      "end_line": 24,
+      "source_sha256": "343f8f91b81ea5adec70d88ab333933d7b653361dad55f261e321666a06ac4c5",
+      "code_sha256": "48eb985bc6d18560026cc02902da35602981d46e1d41aec58f39c9ec5dafcbb5",
+      "code": "public final class TerraBuilder {\n    private String nome = \"Nova Terra\";\n    private Atmosfera atmosfera = new Atmosfera(21, 78.96, .04, 0, 1);\n    private Clima clima = new Clima(15, 0, 0);\n    private Biosfera biosfera = new Biosfera(65);\n    private Hidrosfera hidrosfera = new Hidrosfera(71, 3);\n    private Civilizacao civilizacao = new Civilizacao(8_000_000_000L);\n    private double anos;\n    public TerraBuilder nome(String valor) { nome = valor; return this; }\n    public TerraBuilder atmosfera(Atmosfera valor) { atmosfera = valor; return this; }\n    public TerraBuilder clima(Clima valor) { clima = valor; return this; }\n    public TerraBuilder biosfera(Biosfera valor) { biosfera = valor; return this; }\n    public TerraBuilder hidrosfera(Hidrosfera valor) { hidrosfera = valor; return this; }\n    public TerraBuilder civilizacao(Civilizacao valor) { civilizacao = valor; return this; }\n    public TerraBuilder anos(double valor) { anos = valor; return this; }\n    public Terra build() {\n        return new Terra(UUID.randomUUID(), nome,\n                new EstadoPlanetario(atmosfera, clima, biosfera, hidrosfera, civilizacao, anos));\n    }\n}"
+    },
+    {
+      "id": "B-dialogo",
+      "slide": null,
+      "file": "src/main/java/com/projekttellus/ui/BuilderDialog.java",
+      "start_line": 30,
+      "end_line": 35,
+      "source_sha256": "5a4a28763461b0c76bb5341953d2e4f4b02c1159b17f6bb2a6137040139edde3",
+      "code_sha256": "d72b993c901af08356432e73f2dbb50a4174caac69646098268e7509dd76f02c",
+      "code": "        setResultConverter(button -> {\n            if (button != create) return null;\n            var state = editor.read(0);\n            return new TerraBuilder().nome(name.getText()).atmosfera(state.atmosfera()).clima(state.clima())\n                    .biosfera(state.biosfera()).hidrosfera(state.hidrosfera()).civilizacao(state.civilizacao());\n        });"
+    },
+    {
+      "id": "F-contrato",
+      "slide": 7,
+      "file": "src/main/java/com/projekttellus/events/EventoCreator.java",
+      "start_line": 4,
+      "end_line": 8,
+      "source_sha256": "c34f81f2a55d79197dff5bbbcac350cb37a5962216447d04d825cb6ea9bf2c77",
+      "code_sha256": "89cf76fdd5d546f08752f539f6bc9854a5975dd9e1e73905f1fc11036d859506",
+      "code": "public abstract class EventoCreator {\n    public abstract String nome();\n    public abstract EventoPlanetario criar(double intensidade);\n    @Override public final String toString() { return nome(); }\n}"
+    },
+    {
+      "id": "F-Asteroide",
+      "slide": 7,
+      "file": "src/main/java/com/projekttellus/events/AsteroideCreator.java",
+      "start_line": 3,
+      "end_line": 6,
+      "source_sha256": "ba546cf8db530241b9b79c855234bfa42094dd2bfbded696fbe1e08bd9eb6e90",
+      "code_sha256": "4b229fcf95951d02ef129b14a6cd08b202d9a87560b2089853115e99bc3c2485",
+      "code": "public final class AsteroideCreator extends EventoCreator {\n    public String nome() { return new Asteroide(0).nome(); }\n    @Override public EventoPlanetario criar(double intensidade) { return new Asteroide(intensidade); }\n}"
+    },
+    {
+      "id": "F-Supervulcao",
+      "slide": null,
+      "file": "src/main/java/com/projekttellus/events/SupervulcaoCreator.java",
+      "start_line": 3,
+      "end_line": 6,
+      "source_sha256": "5888c15051763cfedb4d1b209ea2ea6ff0d99023859ee447a739dc25259dea10",
+      "code_sha256": "ca73b772b69f4c4c69bdb8c582b72a56f90cba464a58795ddc9518c88d736793",
+      "code": "public final class SupervulcaoCreator extends EventoCreator {\n    public String nome() { return new Supervulcao(0).nome(); }\n    @Override public EventoPlanetario criar(double intensidade) { return new Supervulcao(intensidade); }\n}"
+    },
+    {
+      "id": "F-GuerraNuclear",
+      "slide": null,
+      "file": "src/main/java/com/projekttellus/events/GuerraNuclearCreator.java",
+      "start_line": 3,
+      "end_line": 6,
+      "source_sha256": "a9cc41abcebe15f617336d805f8f60da1eb045b6d24ff3e3a9d0cc180ef542e9",
+      "code_sha256": "57a51af8882c1433c0daad23a82714b21763d9d3815e36549974657c511de47a",
+      "code": "public final class GuerraNuclearCreator extends EventoCreator {\n    public String nome() { return new GuerraNuclear(0).nome(); }\n    @Override public EventoPlanetario criar(double intensidade) { return new GuerraNuclear(intensidade); }\n}"
+    },
+    {
+      "id": "F-InvasaoAlienigena",
+      "slide": null,
+      "file": "src/main/java/com/projekttellus/events/InvasaoAlienigenaCreator.java",
+      "start_line": 3,
+      "end_line": 6,
+      "source_sha256": "3acae89948c1a695fc8b04c663dab1ccf61afb28d907e312edfadf6d99310c00",
+      "code_sha256": "333f147ab7dbc32e89f39ab514f559eee9f44e52f65f32488cc50d691d73b0e7",
+      "code": "public final class InvasaoAlienigenaCreator extends EventoCreator {\n    public String nome() { return new InvasaoAlienigena(0).nome(); }\n    @Override public EventoPlanetario criar(double intensidade) { return new InvasaoAlienigena(intensidade); }\n}"
+    },
+    {
+      "id": "F-RestauracaoEcologica",
+      "slide": null,
+      "file": "src/main/java/com/projekttellus/events/RestauracaoEcologicaCreator.java",
+      "start_line": 3,
+      "end_line": 6,
+      "source_sha256": "35d1603733eb2472fd6379e7c2dc836451ef614017058b1f63112fdffa90353e",
+      "code_sha256": "f563a38841c5b50655fade228ae5ea493ad5716239a8e1163db2c3d63e1ed799",
+      "code": "public final class RestauracaoEcologicaCreator extends EventoCreator {\n    public String nome() { return new RestauracaoEcologica(0).nome(); }\n    @Override public EventoPlanetario criar(double intensidade) { return new RestauracaoEcologica(intensidade); }\n}"
+    },
+    {
+      "id": "F-base",
+      "slide": null,
+      "file": "src/main/java/com/projekttellus/events/EventoBase.java",
+      "start_line": 5,
+      "end_line": 16,
+      "source_sha256": "6125c5541ff729a14a2770363a8a2d53b6a051261919fc22b3d35a04ebaef355",
+      "code_sha256": "6617e605316e3e588e161e03abd06774d9f3abcaa73bd1fcb987c23a245543ba",
+      "code": "public abstract class EventoBase implements EventoPlanetario {\n    private final double intensidade;\n    protected EventoBase(double intensidade) {\n        this.intensidade = Validacao.intervalo(\"Intensidade\", intensidade, 0, 1);\n    }\n    public final double intensidade() { return intensidade; }\n    public final EstadoPlanetario aplicar(EstadoPlanetario estado) {\n        Objects.requireNonNull(estado);\n        return intensidade == 0 ? estado : transformar(estado, intensidade);\n    }\n    protected abstract EstadoPlanetario transformar(EstadoPlanetario estado, double intensidade);\n}"
+    },
+    {
+      "id": "F-produto",
+      "slide": null,
+      "file": "src/main/java/com/projekttellus/events/Asteroide.java",
+      "start_line": 3,
+      "end_line": 9,
+      "source_sha256": "e8a8ebfa8fd631df603f9c9bed0a31542c31cb405288231b5c22e353643dc55b",
+      "code_sha256": "b3d670f26c97f3fb0e862d2eba80224d9229c611f8306d54323610d3609aa9e8",
+      "code": "public final class Asteroide extends EventoBase {\n    public Asteroide(double intensidade) { super(intensidade); }\n    public String nome() { return \"Impacto de asteroide\"; }\n    protected EstadoPlanetario transformar(EstadoPlanetario e, double i) {\n        return Efeitos.catastrofe(e, i, 28, 85, 0, .85, .75, .12, 12);\n    }\n}"
+    },
+    {
+      "id": "F-efeitos",
+      "slide": null,
+      "file": "src/main/java/com/projekttellus/events/Efeitos.java",
+      "start_line": 8,
+      "end_line": 20,
+      "source_sha256": "1688b0400258bab1257dc4f50762e13fe3827161142e42c3d905f571685acb43",
+      "code_sha256": "2326389b87b61f8bf137c5a6814821f7940acf39b0518546304125f0ad709f63",
+      "code": "    static EstadoPlanetario catastrofe(EstadoPlanetario e, double i, double resfriamento,\n                                       double poeira, double radiacao, double perdaVegetacao,\n                                       double perdaPopulacao, double carbono, double gelo) {\n        var c = e.clima();\n        double congelado = Math.min(e.hidrosfera().agua(), gelo * i);\n        return new EstadoPlanetario(e.atmosfera().transferirCarbono(carbono * i),\n                new Clima(limitar(c.temperatura() - resfriamento * i, -150, 200),\n                        limitar(c.aerossol() + poeira * i, 0, 100),\n                        limitar(c.radiacao() + radiacao * i, 0, 100)),\n                new Biosfera(e.biosfera().vegetacao() * (1 - perdaVegetacao * i)),\n                new Hidrosfera(e.hidrosfera().agua() - congelado, e.hidrosfera().gelo() + congelado),\n                new Civilizacao(Math.round(e.civilizacao().populacao() * (1 - perdaPopulacao * i))), e.anos());\n    }"
+    },
+    {
+      "id": "I-aplicar",
+      "slide": 12,
+      "file": "src/main/java/com/projekttellus/application/SimulacaoService.java",
+      "start_line": 50,
+      "end_line": 58,
+      "source_sha256": "c05e683fcc16ed42661e4bcd5f9d440a948f00902452c1c12e1dfaadbdb9a981",
+      "code_sha256": "ea5fdf69ae70acbc02523dd4fb78cd616016d61d25d67588e305f98fcfb29ad6",
+      "code": "    public ResultadoOperacao aplicar(Terra terra, EventoCreator creator, double intensidade) {\n        var passos = new ArrayList<Passo>();\n        var evento = Objects.requireNonNull(creator).criar(intensidade);\n        passos.add(new Passo(\"Evento criado\", \"O criador de “\" + evento.nome() + \"” preparou um evento com a intensidade escolhida.\", \"Factory Method\"));\n        var snapshot = terra.capturar(\"Antes: \" + evento.nome()); passos.add(preservado());\n        var candidato = new Terra(terra.id(), terra.nome(), evento.aplicar(terra.estado()));\n        passos.add(new Passo(\"Efeitos aplicados ao planeta\", \"O evento modificou os componentes ambientais; os indicadores serão derivados dessas condições.\", \"Factory Method\"));\n        return confirmar(terra, candidato, terra.estado(), evento.nome(), intensidade, snapshot, passos, true);\n    }"
+    },
+    {
+      "id": "O-bus",
+      "slide": 9,
+      "file": "src/main/java/com/projekttellus/patterns/observer/ObserverBus.java",
+      "start_line": 8,
+      "end_line": 44,
+      "source_sha256": "a55341166220dc09bb3cc2b7b4a5f768f941bba18fb00de07aad829cd2c0dd57",
+      "code_sha256": "ba85de5e734b14c74b353cd2ffe3475603a4bbde12d7a40f45724829ccf357b7",
+      "code": "public final class ObserverBus {\n    private final CopyOnWriteArrayList<SimulacaoObserver> observers = new CopyOnWriteArrayList<>();\n    public AutoCloseable inscrever(SimulacaoObserver observer) {\n        Objects.requireNonNull(observer);\n        observers.addIfAbsent(observer);\n        return () -> remover(observer);\n    }\n    public void remover(SimulacaoObserver observer) { observers.remove(observer); }\n    public Entrega publicar(MudancaPlanetaria mudanca) {\n        var notificados = new ArrayList<String>();\n        var falhas = new ArrayList<String>();\n        for (var observer : observers) {\n            String nome = nomeSeguro(observer);\n            try {\n                observer.aoMudar(mudanca);\n                notificados.add(nome);\n            } catch (RuntimeException ex) {\n                falhas.add(nome);\n                System.getLogger(ObserverBus.class.getName()).log(System.Logger.Level.WARNING,\n                        \"Observador não recebeu a mudança: \" + nome, ex);\n            }\n        }\n        return new Entrega(notificados, falhas);\n    }\n    private static String nomeSeguro(SimulacaoObserver observer) {\n        try {\n            String nome = observer.nome();\n            if (nome != null && !nome.isBlank()) return nome;\n        } catch (RuntimeException ignorado) {\n            // Metadados defeituosos não podem abortar uma mudança já confirmada.\n        }\n        return \"Assinante sem identificação\";\n    }\n    public record Entrega(List<String> notificados, List<String> falhas) {\n        public Entrega { notificados = List.copyOf(notificados); falhas = List.copyOf(falhas); }\n    }\n}"
+    },
+    {
+      "id": "O-alertas",
+      "slide": null,
+      "file": "src/main/java/com/projekttellus/patterns/observer/AlertaObserver.java",
+      "start_line": 11,
+      "end_line": 24,
+      "source_sha256": "58fae5084a11321133d1287c7b8ca6328ac15bf606b7fcf6f7c52c9c63282c98",
+      "code_sha256": "a73a7d898692a22fd03208fe03428b8630d8b7877dc8fe412bd8ede32532fe8e",
+      "code": "    public void aoMudar(MudancaPlanetaria m) {\n        var lista = new ArrayList<String>();\n        if (m.indicadores().humana() < 30) lista.add(\"Condições críticas para humanos.\");\n        if (m.estado().atmosfera().pressaoParcialOxigenio() < .12) lista.add(\"Pouco oxigênio disponível para respirar.\");\n        if (m.estado().clima().radiacao() > 20) lista.add(\"Radiação elevada; recuperação será lenta.\");\n        if (m.estado().hidrosfera().agua() < 10) lista.add(\"Pouca água líquida na superfície.\");\n        if (m.indicadores().biologica() < 20) lista.add(\"Potencial biológico muito reduzido.\");\n        if (m.estado().civilizacao().populacao() > m.indicadores().capacidadeSuporte())\n            lista.add(\"População acima do suporte estimado; recursos limitam o crescimento e causam declínio gradual.\");\n        if (m.estado().superficieContinental() < 1)\n            lista.add(\"Quase nenhuma terra disponível para uma civilização convencional.\");\n        if (lista.isEmpty()) lista.add(\"Condições estáveis neste modelo didático.\");\n        alertas.put(m.mundoId(), List.copyOf(lista));\n    }"
+    },
+    {
+      "id": "O-estatisticas",
+      "slide": null,
+      "file": "src/main/java/com/projekttellus/patterns/observer/EstatisticasObserver.java",
+      "start_line": 9,
+      "end_line": 15,
+      "source_sha256": "7c7af9b4e05c04bfb7e3682f215f51face8442d4df19d01ca3f21564e140a585",
+      "code_sha256": "b1342b72533601e4611aa35fed836cc38d0bde97220a9562c558769f5dec6ba7",
+      "code": "    public void aoMudar(MudancaPlanetaria m) {\n        mundos.compute(m.mundoId(), (id, anterior) -> anterior == null\n                ? new Estatistica(1, m.indicadores().humana(), m.indicadores().humana())\n                : new Estatistica(anterior.mudancas() + 1,\n                Math.min(anterior.minima(), m.indicadores().humana()),\n                Math.max(anterior.maxima(), m.indicadores().humana())));\n    }"
+    },
+    {
+      "id": "O-ui",
+      "slide": null,
+      "file": "src/main/java/com/projekttellus/ui/MainController.java",
+      "start_line": 128,
+      "end_line": 137,
+      "source_sha256": "4f7e36e5d0931c92b2537a86f506ee38bceee788944e58c4221a32d41d201167",
+      "code_sha256": "d0bff4eb4e06001110f2fc40aa1e8abaa5f83a4726a5373997fac885225115c3",
+      "code": "            subscription = service.observerBus().inscrever(new SimulacaoObserver() {\n                @Override public String nome() { return \"Globo e painel de indicadores\"; }\n                @Override public void aoMudar(MudancaPlanetaria change) {\n                    Platform.runLater(() -> {\n                        if (closed) return;\n                        observed.put(change.mundoId(), change);\n                        if (current != null && current.id().equals(change.mundoId())) renderObserved(change);\n                    });\n                }\n            });"
+    },
+    {
+      "id": "M-capturar",
+      "slide": 11,
+      "file": "src/main/java/com/projekttellus/domain/Terra.java",
+      "start_line": 23,
+      "end_line": 25,
+      "source_sha256": "9485f4f340428b4eceace5edd0bf02bad52f4f375585d79b052c8149df6d285c",
+      "code_sha256": "a4155481d60ae0d2cb04a5bfce50ee71b79a7e78f21f4679506becf92f71a8b6",
+      "code": "    public TerraMemento capturar(String rotulo) {\n        return new TerraMemento(UUID.randomUUID(), id, rotulo, nome, Instant.now(), estado);\n    }"
+    },
+    {
+      "id": "M-restaurar",
+      "slide": 11,
+      "file": "src/main/java/com/projekttellus/domain/Terra.java",
+      "start_line": 26,
+      "end_line": 32,
+      "source_sha256": "9485f4f340428b4eceace5edd0bf02bad52f4f375585d79b052c8149df6d285c",
+      "code_sha256": "9dc1ab0dbd88c96973e34e1e24a80a636a0db1b17b41d19f8211b955458ae9b0",
+      "code": "    public void restaurar(TerraMemento memento) {\n        Objects.requireNonNull(memento);\n        if (!id.equals(memento.mundoId()))\n            throw new IllegalArgumentException(\"Este retrato pertence a outro mundo.\");\n        nome = memento.nomeMundo();\n        estado = memento.estado();\n    }"
+    },
+    {
+      "id": "M-record",
+      "slide": null,
+      "file": "src/main/java/com/projekttellus/patterns/memento/TerraMemento.java",
+      "start_line": 10,
+      "end_line": 19,
+      "source_sha256": "2aced3e34a159a45de80380bcca911be3b5720bb3c3620f096939df5cb91f868",
+      "code_sha256": "7c8bee03e701be185269a7a2cb2dac04694102548809f050e2691a7d099d9a23",
+      "code": "public record TerraMemento(UUID id, UUID mundoId, String rotulo, String nomeMundo,\n                          Instant criadoEm, EstadoPlanetario estado) {\n    public TerraMemento {\n        Objects.requireNonNull(id); Objects.requireNonNull(mundoId);\n        rotulo = Validacao.texto(\"Nome do retrato\", rotulo);\n        nomeMundo = Validacao.texto(\"Nome do mundo\", nomeMundo);\n        Objects.requireNonNull(criadoEm); Objects.requireNonNull(estado);\n    }\n    @Override public String toString() { return rotulo; }\n}"
+    },
+    {
+      "id": "M-servico",
+      "slide": null,
+      "file": "src/main/java/com/projekttellus/application/SimulacaoService.java",
+      "start_line": 66,
+      "end_line": 73,
+      "source_sha256": "c05e683fcc16ed42661e4bcd5f9d440a948f00902452c1c12e1dfaadbdb9a981",
+      "code_sha256": "ab2631158aa21003aecf68f4ffa1387c01ce9a0748754cd50f8c701369c641b0",
+      "code": "    public ResultadoOperacao restaurar(Terra terra, TerraMemento snapshot) {\n        var candidato = new Terra(terra.id(), terra.nome(), terra.estado());\n        candidato.restaurar(snapshot); // Verifica a identidade ANTES de qualquer gravação.\n        var passos = new ArrayList<Passo>();\n        var retorno = terra.capturar(\"Antes da restauração\"); passos.add(preservado());\n        passos.add(new Passo(\"Uma Terra anterior foi restaurada\", \"Todos os componentes, o tempo e o nome voltaram ao retrato selecionado. Outros mundos permanecem independentes.\", \"Memento\"));\n        return confirmar(terra, candidato, terra.estado(), \"Restaurado: \" + snapshot.rotulo(), 0, retorno, passos, true);\n    }"
+    },
+    {
+      "id": "I-confirmar",
+      "slide": null,
+      "file": "src/main/java/com/projekttellus/application/SimulacaoService.java",
+      "start_line": 99,
+      "end_line": 117,
+      "source_sha256": "c05e683fcc16ed42661e4bcd5f9d440a948f00902452c1c12e1dfaadbdb9a981",
+      "code_sha256": "945b1a0c545ce7f4a8ba3beea933a756d5605621738695d483d53abd99879367",
+      "code": "    private ResultadoOperacao confirmar(Terra destino, Terra candidato, EstadoPlanetario antes,\n                                         String descricao, double intensidade, TerraMemento snapshot,\n                                         ArrayList<Passo> passos, boolean notificar) {\n        var indicadores = ModeloPlanetario.calcular(candidato.estado());\n        passos.add(new Passo(\"Condições planetárias recalculadas\", \"Sobrevivência humana, potencial biológico e sustentabilidade foram avaliados separadamente; população e continente determinam a ocupação do suporte estimado.\", \"\"));\n        var registro = new RegistroEvento(UUID.randomUUID(), candidato.id(), Instant.now(), descricao, intensidade, candidato.estado().anos());\n        repository.salvar(candidato, registro, snapshot);\n        destino.renomear(candidato.nome()); destino.atualizar(candidato.estado());\n        passos.add(new Passo(\"Mundo e histórico preservados\", \"O estado e o histórico foram gravados juntos. Quando há um retrato, ele integra a mesma confirmação.\", \"\"));\n        if (notificar) {\n            var entrega = observerBus.publicar(new MudancaPlanetaria(destino.id(), destino.estado(), indicadores, descricao));\n            ultimoMundo = destino.id();\n            for (String nome : entrega.notificados())\n                passos.add(new Passo(\"Sistema notificado: \" + nome, \"Este assinante recebeu a mudança e executou sua responsabilidade, sem o planeta conhecer sua implementação.\", \"Observer\"));\n            if (!entrega.falhas().isEmpty()) passos.add(new Passo(\"Uma atualização auxiliar não foi concluída\",\n                    \"O mundo foi salvo; \" + entrega.falhas().size() + \" assinante(s) não concluíram sua atualização.\", \"Observer\"));\n        }\n        return new ResultadoOperacao(destino, antes, destino.estado(), passos, indicadores, descricao);\n    }"
+    },
+    {
+      "id": "P-salvar",
+      "slide": null,
+      "file": "src/main/java/com/projekttellus/persistence/SqliteMundoRepository.java",
+      "start_line": 84,
+      "end_line": 107,
+      "source_sha256": "0d7c84f9a259216cf199d9381769f1690875a8125962cc16f51e490eaf3454f4",
+      "code_sha256": "2ee98e03428aa2393e472454086218d2797254f48ecdec6b5850e707b9cd6f79",
+      "code": "    public synchronized void salvar(Terra terra, RegistroEvento evento, TerraMemento snapshot) {\n        executar(\"Não foi possível salvar o mundo e seus registros.\", () -> {\n            Objects.requireNonNull(terra, \"Mundo\");\n            UUID id = terra.id();\n            String nome = terra.nome();\n            EstadoPlanetario estado = terra.estado();\n            if (evento != null && !id.equals(evento.mundoId()))\n                throw new PersistenciaException(\"O evento pertence a outro mundo.\");\n            if (snapshot != null && !id.equals(snapshot.mundoId()))\n                throw new PersistenciaException(\"O retrato pertence a outro mundo.\");\n            TransacaoSqlite.executar(connection, () -> {\n                try (var query = connection.prepareStatement(SALVAR_MUNDO)) {\n                    query.setString(1, id.toString());\n                    query.setString(2, nome);\n                    query.setString(3, Instant.now().toString());\n                    preencherEstado(query, 4, estado);\n                    query.executeUpdate();\n                }\n                if (evento != null) inserirEvento(evento);\n                if (snapshot != null) inserirSnapshot(snapshot);\n            });\n            return null;\n        });\n    }"
+    },
+    {
+      "id": "A-avancar",
+      "slide": 13,
+      "file": "src/main/java/com/projekttellus/simulation/ModeloPlanetario.java",
+      "start_line": 80,
+      "end_line": 89,
+      "source_sha256": "a59d95b905d63002c9fba93caf103bbe87379a6a47c495b0dcc9817153f0d57e",
+      "code_sha256": "56a9b74852b7e3c5b1c34814d75cf63189e881d5b7e99cf16fdac9001d875762",
+      "code": "    public static EstadoPlanetario avancar(EstadoPlanetario inicial, double anos) {\n        Validacao.intervalo(\"Avanço de tempo\", anos, .01, 1000);\n        Validacao.intervalo(\"Tempo total\", inicial.anos() + anos, 0, 1_000_000_000);\n        var estado = inicial;\n        int passos = (int) Math.ceil(anos);\n        double dt = anos / passos;\n        for (int i = 0; i < passos; i++) estado = evoluir(estado, dt);\n        return new EstadoPlanetario(estado.atmosfera(), estado.clima(), estado.biosfera(),\n                estado.hidrosfera(), estado.civilizacao(), inicial.anos() + anos);\n    }"
+    },
+    {
+      "id": "B-fluente-deck",
+      "slide": 5,
+      "file": "src/main/java/com/projekttellus/domain/TerraBuilder.java",
+      "start_line": 14,
+      "end_line": 14,
+      "source_sha256": "343f8f91b81ea5adec70d88ab333933d7b653361dad55f261e321666a06ac4c5",
+      "code_sha256": "15a67732763d74594df5a37307974b4f39d8a9933b4307bb13064d600bea3727",
+      "code": "    public TerraBuilder atmosfera(Atmosfera valor) { atmosfera = valor; return this; }"
+    },
+    {
+      "id": "B-build-deck",
+      "slide": 5,
+      "file": "src/main/java/com/projekttellus/domain/TerraBuilder.java",
+      "start_line": 20,
+      "end_line": 23,
+      "source_sha256": "343f8f91b81ea5adec70d88ab333933d7b653361dad55f261e321666a06ac4c5",
+      "code_sha256": "b29817fe717333414aa3aa3e47ce2b081c5b19e139677deb51d5ad5a5b5b4985",
+      "code": "    public Terra build() {\n        return new Terra(UUID.randomUUID(), nome,\n                new EstadoPlanetario(atmosfera, clima, biosfera, hidrosfera, civilizacao, anos));\n    }"
+    },
+    {
+      "id": "O-publicar-deck",
+      "slide": 9,
+      "file": "src/main/java/com/projekttellus/patterns/observer/ObserverBus.java",
+      "start_line": 16,
+      "end_line": 31,
+      "source_sha256": "a55341166220dc09bb3cc2b7b4a5f768f941bba18fb00de07aad829cd2c0dd57",
+      "code_sha256": "6414e70bb21d84585f27ed0a88b942746605549a20fb0b94b5b87dd8f6bc132c",
+      "code": "    public Entrega publicar(MudancaPlanetaria mudanca) {\n        var notificados = new ArrayList<String>();\n        var falhas = new ArrayList<String>();\n        for (var observer : observers) {\n            String nome = nomeSeguro(observer);\n            try {\n                observer.aoMudar(mudanca);\n                notificados.add(nome);\n            } catch (RuntimeException ex) {\n                falhas.add(nome);\n                System.getLogger(ObserverBus.class.getName()).log(System.Logger.Level.WARNING,\n                        \"Observador não recebeu a mudança: \" + nome, ex);\n            }\n        }\n        return new Entrega(notificados, falhas);\n    }"
+    }
+  ],
+  "diagrams": [
+    {
+      "slide": 3,
+      "file": "docs/uml-apresentacao/03-arquitetura.mmd"
+    },
+    {
+      "slide": 4,
+      "file": "docs/uml-apresentacao/04-builder.mmd"
+    },
+    {
+      "slide": 6,
+      "file": "docs/uml-apresentacao/06-factory-method.mmd"
+    },
+    {
+      "slide": 8,
+      "file": "docs/uml-apresentacao/08-observer.mmd"
+    },
+    {
+      "slide": 10,
+      "file": "docs/uml-apresentacao/10-memento.mmd"
+    },
+    {
+      "slide": 12,
+      "file": "docs/uml-apresentacao/12-integracao.mmd"
+    }
+  ]
+}

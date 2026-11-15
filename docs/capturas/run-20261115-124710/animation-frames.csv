@@ -1,0 +1,6 @@
+event,progress,seconds,effect_nodes,visible_nodes,method
+ASTEROID,0.5,3.8,103,73,real_animator_clock_controlled
+VOLCANO,0.5,3.8,62,61,real_animator_clock_controlled
+NUCLEAR,0.5,3.8,88,46,real_animator_clock_controlled
+ALIEN,0.5,3.8,95,95,real_animator_clock_controlled
+ECOLOGY,0.5,3.8,39,27,real_animator_clock_controlled

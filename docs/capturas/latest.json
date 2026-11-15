@@ -1,0 +1,52 @@
+{
+  "directory": "run-20261115-124710",
+  "aliases": [
+    {
+      "file": "terra-referencia.png",
+      "source": "02-antes-asteroide.png",
+      "sha256": "3b3390b41aa872fd145564277d9c18cdbc21c724fc8f2e946f38ffee8f0fd695"
+    },
+    {
+      "file": "demo-restaurado.png",
+      "source": "05-restaurado-ui.png",
+      "sha256": "d9b185c49b728cd02ce40cc854884d4dd16410f2b6d11934d38768b1808105e7"
+    },
+    {
+      "file": "planeta-aerossol.png",
+      "source": "planeta-aerossol.png",
+      "sha256": "7f2ce9089f80b199740c3d1fa15e4540a5b5a70d3b8739e95d1448ffa675c90c"
+    },
+    {
+      "file": "planeta-co2.png",
+      "source": "planeta-co2.png",
+      "sha256": "593634e9ef007ff6028bdb5524087675af1e54d9c2a3cc6f8b8d07610841d059"
+    },
+    {
+      "file": "planeta-congelado.png",
+      "source": "planeta-congelado.png",
+      "sha256": "d97fc43e592ef6b26d5fa421dc6606be5bf9ab7885b5fd6df5e9aaff55c502f7"
+    },
+    {
+      "file": "planeta-he.png",
+      "source": "planeta-he.png",
+      "sha256": "29d5ac293b962311c1e653f6cfbe790061aee6fede1620117f1aecded1c5408c"
+    },
+    {
+      "file": "planeta-oceano.png",
+      "source": "planeta-oceano.png",
+      "sha256": "39ae8406a863a7db50942f9ee04d8efe047f5198037d3a76fc534c6a9770c161"
+    },
+    {
+      "file": "planeta-referencia.png",
+      "source": "planeta-referencia.png",
+      "sha256": "7cad49b077a2a6510e6e6099da1a84cea184d3986d042ff7401b3a09c553cf57"
+    }
+  ],
+  "mavenExecuted": false,
+  "existingVideoIsCanonicalRun": true,
+  "pngCount": 33,
+  "videoNote": "Vídeo final regenerado com capturas desta execução canônica: sequência de 24 s, sem gravação contínua ou medição de FPS.",
+  "harnessChecks": 249,
+  "existingVideoSource": "docs/capturas/run-20261115-124710",
+  "localDate": "2026-11-15T12:47:10-03:00"
+}

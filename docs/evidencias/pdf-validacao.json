@@ -1,0 +1,11 @@
+{
+  "file": "docs\\apresentacao\\ProjektTellus-Apresentacao.pdf",
+  "pages": 15,
+  "resolution": "1366x768 render per page",
+  "format": "Raster slides embedded in PDF; no searchable Java text. Editable source is PPTX.",
+  "rendered_all_pages": true,
+  "renderer": "PyMuPDF; bundled Poppler unavailable",
+  "sha256": "e638bff9f1064aa0495ed471d653c4f8d15672226e2a3833b13deb6f8ed5da43",
+  "bytes": 1024149,
+  "reason": "Artifact Tool direct PDF exporter could not resolve #standard-fonts/Helvetica; no bundled dependencies modified."
+}

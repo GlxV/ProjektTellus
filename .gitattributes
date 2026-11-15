@@ -1,0 +1,13 @@
+# Preserve measured evidence and exported artifacts byte-for-byte on checkout.
+docs/auditoria/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
+docs/capturas/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
+docs/evidencias/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
+# Maven writes intentional trailing spaces on its blank INFO lines; retain raw logs.
+docs/evidencias/verify-*.txt -text whitespace=-trailing-space,cr-at-eol
+docs/apresentacao/*.pdf binary
+docs/apresentacao/*.pptx binary
+docs/apresentacao/*.mp4 binary
+docs/apresentacao/*.png binary
+docs/uml-apresentacao/*.png binary
+docs/graficos/*.png binary
+docs/graficos/*.svg text eol=lf

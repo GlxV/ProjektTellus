@@ -1,0 +1,34 @@
+file,scope,o2,n2,co2,he,pressure,temperature,aerosol,radiation,water,ice,vegetation,population,years,human,biological,civil,capacity
+"00-vazio-1366x768.png","sem mundo carregado",,,,,,,,,,,,,,,,,
+"01-builder-dialogo.png","entradas reais do Builder; indicadores derivados de referência, ainda sem mundo salvo",21.0,78.96,0.04,0.0,1.0,15.0,0.0,0.0,71.0,3.0,65.0,8000000000,0.0,100.0,100.0,85.87782018658834,13740451230
+"02-antes-asteroide.png","estado confirmado exibido",21.0,78.96,0.04,0.0,1.0,15.0,0.0,0.0,71.0,3.0,65.0,8000000000,0.0,100.0,100.0,85.87782018658834,13740451230
+"03-snapshot-selecionavel.png","estado confirmado exibido",21.0,78.96,0.04,0.0,1.0,15.0,0.0,0.0,71.0,3.0,65.0,8000000000,0.0,100.0,100.0,85.87782018658834,13740451230
+"evento-1-asteroid-meio.png","indicadores/SQLite finais; globo em 50% do efeito visual, sem estado físico intermediário",21.0,78.92999999999999,0.07,0.0,1.0,8.0,21.25,0.0,68.0,6.0,51.1875,6500000000,0.0,64.72968169602449,75.4479635761296,44.765119622128324,7162419140
+"04-depois-asteroide.png","estado confirmado exibido",21.0,78.92999999999999,0.07,0.0,1.0,8.0,21.25,0.0,68.0,6.0,51.1875,6500000000,0.0,64.72968169602449,75.4479635761296,44.765119622128324,7162419140
+"09-apresentacao-observer.png","estado confirmado exibido",21.0,78.92999999999999,0.07,0.0,1.0,8.0,21.25,0.0,68.0,6.0,51.1875,6500000000,0.0,64.72968169602449,75.4479635761296,44.765119622128324,7162419140
+"10-apresentacao-controles.png","estado confirmado exibido",21.0,78.92999999999999,0.07,0.0,1.0,8.0,21.25,0.0,68.0,6.0,51.1875,6500000000,0.0,64.72968169602449,75.4479635761296,44.765119622128324,7162419140
+"05-restaurado-ui.png","estado confirmado exibido",21.0,78.96,0.04,0.0,1.0,15.0,0.0,0.0,71.0,3.0,65.0,8000000000,0.0,100.0,100.0,85.87782018658834,13740451230
+"evento-2-volcano-meio.png","indicadores/SQLite finais; globo em 50% do efeito visual, sem estado físico intermediário",21.0,78.86,0.14,0.0,1.0,10.5,23.75,0.0,69.0,5.0,56.0625,7400000000,0.0,55.96965508185181,73.9391182470071,33.577343353171166,6305202180
+"evento-2-depois.png","estado confirmado exibido",21.0,78.86,0.14,0.0,1.0,10.5,23.75,0.0,69.0,5.0,56.0625,7400000000,0.0,55.96965508185181,73.9391182470071,33.577343353171166,6305202180
+"evento-3-nuclear-meio.png","indicadores/SQLite finais; globo em 50% do efeito visual, sem estado físico intermediário",21.0,78.94,0.06,0.0,1.0,9.5,17.5,22.5,68.5,5.5,52.0,6200000000,0.0,54.37167506402684,70.5528467143433,34.44833488180314,5845746163
+"evento-3-depois.png","estado confirmado exibido",21.0,78.94,0.06,0.0,1.0,9.5,17.5,22.5,68.5,5.5,52.0,6200000000,0.0,54.37167506402684,70.5528467143433,34.44833488180314,5845746163
+"evento-4-alien-meio.png","indicadores/SQLite finais; globo em 50% do efeito visual, sem estado físico intermediário",17.85,78.96,0.04,3.15,0.925,18.0,3.75,6.25,71.0,3.0,55.25,6700000000,0.0,86.97595184330183,83.55777710914832,64.80362051320697,10368579282
+"evento-4-depois.png","estado confirmado exibido",17.85,78.96,0.04,3.15,0.925,18.0,3.75,6.25,71.0,3.0,55.25,6700000000,0.0,86.97595184330183,83.55777710914832,64.80362051320697,10368579282
+"evento-5-ecology-meio.png","indicadores/SQLite finais; globo em 50% do efeito visual, sem estado físico intermediário",21.0,78.96,0.04,0.0,1.0,15.0,0.0,0.0,71.1875,2.8125,68.9375,8000000000,0.0,100.0,99.92505620784411,87.54749612034769,14007599379
+"evento-5-depois.png","estado confirmado exibido",21.0,78.96,0.04,0.0,1.0,15.0,0.0,0.0,71.1875,2.8125,68.9375,8000000000,0.0,100.0,99.92505620784411,87.54749612034769,14007599379
+"06-indicadores-fatores.png","estado confirmado exibido",21.0,78.96,0.04,0.0,1.0,15.0,0.0,0.0,71.0,3.0,65.0,8000000000,0.0,100.0,100.0,85.87782018658834,13740451230
+"07-indicadores-fim.png","estado confirmado exibido",21.0,78.96,0.04,0.0,1.0,15.0,0.0,0.0,71.0,3.0,65.0,8000000000,0.0,100.0,100.0,85.87782018658834,13740451230
+"11-globo-navegacao-luz.png","estado confirmado exibido",21.0,78.96,0.04,0.0,1.0,15.0,0.0,0.0,71.0,3.0,65.0,8000000000,0.0,100.0,100.0,85.87782018658834,13740451230
+"08-sqlite-reaberto-ui.png","estado confirmado exibido",21.0,78.96,0.04,0.0,1.0,15.0,0.0,0.0,71.0,3.0,65.0,8000000000,0.0,100.0,100.0,85.87782018658834,13740451230
+"planeta-referencia.png","PlanetView auxiliar isolado 768x768; mesmo estado confirmado do controller; fundo transparente",21.0,78.96,0.04,0.0,1.0,15.0,0.0,0.0,71.0,3.0,65.0,8000000000,0.0,100.0,100.0,85.87782018658834,13740451230
+"cenario-oceano-ui.png","estado confirmado exibido",21.0,78.96,0.04,0.0,1.0,15.0,0.0,0.0,100.0,0.0,65.0,8000000000,0.0,100.0,98.81422924901186,0.0,0
+"planeta-oceano.png","PlanetView auxiliar isolado 768x768; mesmo estado confirmado do controller; fundo transparente",21.0,78.96,0.04,0.0,1.0,15.0,0.0,0.0,100.0,0.0,65.0,8000000000,0.0,100.0,98.81422924901186,0.0,0
+"cenario-co2-ui.png","estado confirmado exibido",21.0,69.0,10.0,0.0,1.0,15.0,0.0,0.0,71.0,3.0,65.0,8000000000,0.0,0.09064210869801674,67.17673894776577,8.140872127344743E-5,10207995
+"planeta-co2.png","PlanetView auxiliar isolado 768x768; mesmo estado confirmado do controller; fundo transparente",21.0,69.0,10.0,0.0,1.0,15.0,0.0,0.0,71.0,3.0,65.0,8000000000,0.0,0.09064210869801674,67.17673894776577,8.140872127344743E-5,10207995
+"cenario-he-ui.png","estado confirmado exibido",21.0,28.96,0.04,50.0,1.0,15.0,0.0,0.0,71.0,3.0,65.0,8000000000,0.0,100.0,100.0,85.87782018658834,13740451230
+"planeta-he.png","PlanetView auxiliar isolado 768x768; mesmo estado confirmado do controller; fundo transparente",21.0,28.96,0.04,50.0,1.0,15.0,0.0,0.0,71.0,3.0,65.0,8000000000,0.0,100.0,100.0,85.87782018658834,13740451230
+"cenario-aerossol-ui.png","estado confirmado exibido",21.0,78.96,0.04,0.0,1.0,15.0,85.0,0.0,71.0,3.0,65.0,8000000000,0.0,18.268352405273465,21.708056599048195,1.0685915292904906,1169528605
+"planeta-aerossol.png","PlanetView auxiliar isolado 768x768; mesmo estado confirmado do controller; fundo transparente",21.0,78.96,0.04,0.0,1.0,15.0,85.0,0.0,71.0,3.0,65.0,8000000000,0.0,18.268352405273465,21.708056599048195,1.0685915292904906,1169528605
+"cenario-congelado-ui.png","estado confirmado exibido",21.0,78.96,0.04,0.0,1.0,-40.0,0.0,0.0,20.0,70.0,5.0,8000000000,0.0,0.0,13.266621181108333,0.0,0
+"planeta-congelado.png","PlanetView auxiliar isolado 768x768; mesmo estado confirmado do controller; fundo transparente",21.0,78.96,0.04,0.0,1.0,-40.0,0.0,0.0,20.0,70.0,5.0,8000000000,0.0,0.0,13.266621181108333,0.0,0
+"12-uml-companheiro-harness.png","diagrama auxiliar JavaFX, não UI do aplicativo; sem cenário numérico",,,,,,,,,,,,,,,,,

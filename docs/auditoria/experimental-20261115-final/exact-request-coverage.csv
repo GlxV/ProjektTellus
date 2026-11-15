@@ -1,0 +1,34 @@
+axis,requested_value,family,experiment,case,horizon,note
+pressure_atm,0.1,request_pressure,1245,P=0.1,0.0,
+temperature_C,-100,sweep_temperature,815,T=-100.0,0.0,
+temperature_C,-50,request_temperature,1246,T=-50.0,0.0,
+temperature_C,30,request_temperature,1247,T=30.0,0.0,
+temperature_C,50,request_temperature,1248,T=50.0,0.0,
+temperature_C,80,request_temperature,1249,T=80.0,0.0,
+temperature_C,120,request_temperature,1250,T=120.0,0.0,
+co2_percent,0.1,request_co2,1251,CO2=0.1;O2=21;He=0,0.0,
+co2_percent,0.04,scenario,1253,earth,0.0,Shared reference; no duplicate sweep input needed
+population,100000000,request_population,1252,pop=100000000,0.0,
+he_fixed_o2_21_co2_004,0,sweep_he_fixed,182,He=0.0;O2=21;CO2=.04,0.0,N2 residual; P=1; O2=21; CO2=.04
+he_fixed_o2_21_co2_004,20,sweep_he_fixed,202,He=20.0;O2=21;CO2=.04,0.0,N2 residual; P=1; O2=21; CO2=.04
+he_fixed_o2_21_co2_004,40,sweep_he_fixed,222,He=40.0;O2=21;CO2=.04,0.0,N2 residual; P=1; O2=21; CO2=.04
+he_fixed_o2_21_co2_004,60,sweep_he_fixed,242,He=60.0;O2=21;CO2=.04,0.0,N2 residual; P=1; O2=21; CO2=.04
+he_fixed_o2_21_co2_004,78.96,sweep_he_fixed,261,He=78.96;O2=21;CO2=.04,0.0,N2 residual; P=1; O2=21; CO2=.04
+he_binary,0,sweep_he_binary,264,He=0;O2=CO2=0,0.0,N2 residual; P=1; O2=CO2=0; distinct baseline
+he_binary,20,sweep_he_binary,324,He=20;O2=CO2=0,0.0,N2 residual; P=1; O2=CO2=0; distinct baseline
+he_binary,40,sweep_he_binary,384,He=40;O2=CO2=0,0.0,N2 residual; P=1; O2=CO2=0; distinct baseline
+he_binary,60,sweep_he_binary,444,He=60;O2=CO2=0,0.0,N2 residual; P=1; O2=CO2=0; distinct baseline
+he_binary,80,sweep_he_binary,504,He=80;O2=CO2=0,0.0,N2 residual; P=1; O2=CO2=0; distinct baseline
+he_binary,100,sweep_he_binary,564,He=100;O2=CO2=0,0.0,N2 residual; P=1; O2=CO2=0; distinct baseline
+o2_fixed_co2004,0,sweep_o2,1,O2=0;CO2=.04;He=0,0.0,
+o2_fixed_co2004,1,sweep_o2,2,O2=1;CO2=.04;He=0,0.0,
+o2_fixed_co2004,5,sweep_o2,6,O2=5;CO2=.04;He=0,0.0,
+o2_fixed_co2004,10,sweep_o2,11,O2=10;CO2=.04;He=0,0.0,
+o2_fixed_co2004,20,sweep_o2,21,O2=20;CO2=.04;He=0,0.0,
+o2_fixed_co2004,21,sweep_o2,22,O2=21;CO2=.04;He=0,0.0,
+o2_fixed_co2004,25,sweep_o2,26,O2=25;CO2=.04;He=0,0.0,
+o2_fixed_co2004,50,sweep_o2,51,O2=50;CO2=.04;He=0,0.0,
+o2_fixed_co2004,75,sweep_o2,76,O2=75;CO2=.04;He=0,0.0,
+o2_fixed_co2004,99,sweep_o2,100,O2=99;CO2=.04;He=0,0.0,
+o2_fixed_co2004,99.96,sweep_o2,101,O2=99.96;CO2=.04;He=0,0.0,
+o2_binary,100,sweep_o2_binary,562,O2=100;CO2=He=0,0.0,
