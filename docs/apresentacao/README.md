@@ -1,57 +1,70 @@
-# Abrir, estudar e apresentar
+# ProjektTellus — defesa individual
 
-Arquivo principal: **[ProjektTellus-Apresentacao-r2.pptx](ProjektTellus-Apresentacao-r2.pptx)**, 15 slides editáveis. Texto Java e diagramas são objetos nativos; as notas contêm o roteiro completo por slide. Abra em modo Apresentação, sem depender de internet.
+**Aluno:** Matheus Luiz Bueno · **Turma:** 4P
 
-Alternativas: **[PDF](ProjektTellus-Apresentacao.pdf)**, 15 páginas; **[vídeo de capturas reais](ProjektTellus-Demo-Capturas.mp4)**, 24 segundos; PNGs `slide-01.png` a `slide-15.png`. O PDF incorpora imagens dos slides, com a aparência preservada, sem texto Java pesquisável. O vídeo tem legendas e não tem áudio; não é gravação contínua nem medição de FPS. As fontes e diagramas permanecem editáveis no PowerPoint.
+**Disciplina:** ARQUITETURA DE SOFTWARES E PADRÕES DE PROJETOS
 
-## Ordem para preparar a defesa
+**Professor:** EDER MAGALHAES MACHADO · **Período:** 2º Bimestre de 2026
 
-1. Leia a [transcrição primária](../ENUNCIADO_ORIGINAL_TRANSCRITO.md) e a [matriz de conformidade](../CONFORMIDADE_TRABALHO.md).
-2. Estude [ESTUDO_PADROES.md](../ESTUDO_PADROES.md), seguindo as chamadas e os papéis. Consulte o [Java completo](../CODIGO_JAVA_APRESENTACAO.md) se precisar de contexto.
-3. Ensaie o [roteiro de fala](../ROTEIRO_APRESENTACAO.md), alvo ajustável de 10min40s. O enunciado não fixa duração.
-4. Abra `Apresentar-ProjektTellus.cmd` na raiz e siga a [demo ensaiada](../DEMO_APRESENTACAO.md): construir → retrato manual → asteroide 25% → observar → restaurar.
-5. Responda sem consultar as primeiras perguntas de [PERGUNTAS_APRESENTACAO.md](../PERGUNTAS_APRESENTACAO.md), depois as 26 perguntas originais nas questões 37–62.
+**Trabalho:** ProjektTellus — Simulador Planetário
 
-Os quatro diagramas em [uml-apresentacao](../uml-apresentacao/) estão nos slides 4, 6, 8 e 10, em PNG 2732×1536 e fontes Mermaid complementares. O Factory do slide mostra uma família concreta e nomeia as demais; o Mermaid/estudo detalha os cinco pares. O Observer da UI é um objeto anônimo registrado pelo controlador; o controlador não implementa diretamente a interface. O Memento é legível e profundamente imutável.
+## Arquivos para abrir
 
-Para apresentar, mantenha o PPTX/PDF abertos e o aplicativo com banco temporário. O lançador cria uma biblioteca nova a cada abertura; anote o caminho mostrado para uma reabertura no mesmo banco. **Java 25 é necessário para o aplicativo, não para o PDF/vídeo/PPTX.** Consulte o [ambiente](../AMBIENTE_APRESENTACAO.md). A validação local não substitui o computador físico da faculdade. Nome, curso/turma e declaração de autoria pessoal devem ser completados pelo estudante.
+- **[PowerPoint definitivo r3](ProjektTellus-Defesa-Individual-r3.pptx)** — 15 slides editáveis, com identificação e notas nos dois modos.
+- **[PDF atualizado](ProjektTellus-Defesa-Individual-r3.pdf)** — 15 páginas para contingência; incorpora as renderizações e não oferece Java pesquisável.
+- **[Guia compacto de defesa](../GUIA_DEFESA_INDIVIDUAL.md)** — o que dominar e qual classe abrir.
+- **[Roteiro A e B](../ROTEIRO_APRESENTACAO.md)** — exposição completa e conversa individual.
+- **[Código em três níveis](../DEFESA_CODIGO_JAVA.md)** — 20 segundos, um minuto e aprofundamento para cada padrão.
+- **[Perguntas e arguição](../PERGUNTAS_APRESENTACAO.md)** — 62 perguntas anteriores e 21 itens de arguição, com respostas curta/aprofundada; vários temas se repetem.
+- **[Demo e trilhas independentes](../DEMO_APRESENTACAO.md)** e **[atalhos para classes](../ATALHOS_DEFESA.md)**.
+- **[Conformidade](../CONFORMIDADE_TRABALHO.md)** e **[mudanças dos 15 slides](../ALTERACOES_SLIDES_DEFESA.md)**.
 
-## Reproduzir a auditoria
+Abra `Apresentar-ProjektTellus.cmd` na raiz para ensaiar com Java 25 e banco temporário novo. Use `Abrir-Codigo-Defesa.cmd -Pattern FactoryMethod -Item 2` para abrir apenas o método solicitado no editor; sem parâmetros, o lançador abre o primeiro item de Builder. A opção `-ListOnly` de `scripts/Open-DefenseSources.ps1` apenas lista e valida caminhos/âncoras: não executa Java ou abre janelas.
 
-Na raiz, com o JDK 25 local e Maven já preparados:
+## Como conversar com o professor
+
+Comece: “Professor, posso fazer um panorama curto dos quatro padrões e abrir o código ou a demonstração conforme o senhor preferir.” Em cada padrão, explique o problema real, a solução e as classes, aponte o UML e siga uma chamada Java. Se houver pergunta, responda primeiro e retome no próximo padrão; não reinicie o discurso.
+
+**Modo A:** todos os 15 slides, aproximadamente 10min40s, com margem até 12 minutos sem perguntas extensas. **Modo B:** aproximadamente 6min20s; sequência `1 → 2 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 → 12 → 15`. Os pares 4/5, 6/7, 8/9 e 10/11 continuam essenciais: nenhum padrão perde propósito, motivação, UML ou código. Os slides 3, 13 e 14 são opcionais na abertura curta e podem ser consultados depois. Os tempos são sugestões; o enunciado não fixa duração.
+
+A referência à Prof. Célia foi preservada na [transcrição histórica](../ENUNCIADO_ORIGINAL_TRANSCRITO.md), pois o trabalho envolve projeto conjunto com outra disciplina. O professor desta defesa é EDER MAGALHAES MACHADO. Não foram inventados instituição ou matrícula. As notas editoriais antigas da transcrição registram o contexto da primeira entrega; os dados atuais estão neste índice e nos materiais r3.
+
+## Classes e UML
+
+| Padrão | Primeiro arquivo, sob src/main/java/com/projekttellus/ | Métodos | UML e Java |
+|---|---|---|---|
+| Builder | domain/TerraBuilder.java | atmosfera, build | slides 4–5; [UML](defesa-r3/UML-Builder.png) |
+| Factory Method | events/EventoCreator.java → AsteroideCreator.java | criar; depois EventoBase.aplicar/transformar | slides 6–7; [UML](defesa-r3/UML-Factory-Method.png) |
+| Observer | patterns/observer/ObserverBus.java | inscrever, publicar; contrato aoMudar | slides 8–9; [UML](defesa-r3/UML-Observer.png) |
+| Memento | domain/Terra.java → TerraMemento.java | capturar, restaurar | slides 10–11; [UML](defesa-r3/UML-Memento.png) |
+
+Em seguida abra `application/SimulacaoService.java` para ligar as responsabilidades. [ESTUDO_PADROES](../ESTUDO_PADROES.md) e [Java completo](../CODIGO_JAVA_APRESENTACAO.md) permanecem disponíveis. Builder é concreto/fluente, sem Director. Factory Method usa sobrescrita em subclasses reais. O bus é síncrono; o assinante da UI agenda Platform.runLater. O record Memento é público/legível e profundamente imutável; restaurar exige o mesmo UUID.
+
+## Demonstração e contingência
+
+O ciclo preservado é criar Terra → capturar retrato → Asteroide 25% → observar notificações → restaurar. Valores do ensaio anterior: H 100→64,73→100; temperatura 15→8→15 °C; população 8→6,5→8 bilhões. As trilhas do documento permitem demonstrar apenas um padrão após uma preparação comum.
+
+Se JavaFX falhar, use PDF/PPTX, [capturas reais](../capturas/latest.json), Java/UML e o **[vídeo anterior preservado](ProjektTellus-Demo-Capturas.mp4)**. O vídeo tem 24 segundos, legendas e nenhum áudio: é uma sequência de capturas reais, não gravação contínua nem medição de FPS. Java 25 é necessário para executar o aplicativo; PDF, vídeo e slides não dependem dele. [Ambiente e lançamento](../AMBIENTE_APRESENTACAO.md).
+
+## Versões anteriores preservadas
+
+- [PPTX r2](ProjektTellus-Apresentacao-r2.pptx), [PDF anterior](ProjektTellus-Apresentacao.pdf) e previews `slide-01.png` a `slide-15.png` nesta pasta.
+- A edição atual usa previews separados em `defesa-r3/`; os diagramas anteriores e as fontes Mermaid em `../uml-apresentacao/` não foram apagados.
+- A auditoria original, seus dados e recibos permanecem em [AUDITORIA_EXPERIMENTAL](../AUDITORIA_EXPERIMENTAL.md). Esta revisão não executou novos experimentos nem testes do aplicativo: as 69 aprovações e os 2.026 experimentos são evidências identificadas da base anterior.
+
+## Regenerar a edição corrigida
+
+A geração usa o runtime local do Codex com @oai/artifact-tool, a skill Presentations e Python com ReportLab, PyMuPDF e Pillow. Consulte `load_workspace_dependencies` no Codex para os caminhos reais; não altere as bibliotecas instaladas. A revisão atual não exige reinstalar Matplotlib ou repetir a auditoria.
 
 ```powershell
-. ./scripts/Tools.ps1
-$tellusJava = Initialize-TellusTools
-$tellusMaven = Find-TellusMaven
-& $tellusMaven -B -ntp -Pgui-tests verify
-if ($LASTEXITCODE -ne 0) { throw 'verify falhou' }
-./scripts/Run-ExperimentalAudit.ps1 -RunName experimental-nova-rodada
+# Os textos entre < > representam caminhos reais retornados pelo Codex.
+./scripts/Build-AcademicMaterials.ps1 -RuntimeRoot '<runtime>' -PresentationsSkill '<skill-presentations>' -DeckName 'ProjektTellus-Defesa-Individual-r4.pptx' -PreviewDirectory 'docs/apresentacao/defesa-r4' -BuildDirectory 'target/defense-r4-build'
 ```
 
-Use nome novo; o runner recusa sobrescrever evidências. O diretório canônico é `docs/auditoria/experimental-20261115-final`. [Relatório](../AUDITORIA_EXPERIMENTAL.md) e CSV detalham 2.026 experimentos, 4.125 estados e o que os checks efetivamente verificam. IDs de retrato/instantes são variáveis; dados numéricos comparáveis repetiram hashes.
+O script recusa PowerPoint/PDF ou pasta de previews existentes. Seleciona medidas anteriores, extrai Java atual, gera previews/diagramas, define metadados acadêmicos e finaliza o PPTX. `Export-AcademicPdf.py` monta o PDF raster a partir dos mesmos PNGs, preservando a aparência. Para nova edição, escolha nomes/pastas novos e revise os 15 slides visualmente. O validador específico da edição entregue é `scripts/Validate-DefenseRevision.py`; ele confere os materiais r3 e a preservação dos anteriores.
 
-## Regenerar os materiais
+## Alcance da validação
 
-A geração de PowerPoint usa **@oai/artifact-tool do runtime local do Codex**; não depende de uma conta em Canva/Google nem de slides publicados. No Codex, consulte `load_workspace_dependencies` para obter os caminhos atuais. O script recebe o diretório do runtime que contém `dependencies/` e a pasta da skill Presentations que contém `container_tools/`. Não escreva dentro dessas dependências.
+O [registro final da revisão](../VALIDACAO_DEFESA_INDIVIDUAL.md) reúne as 650 verificações, a comparação das 15 páginas do PDF e os hashes dos 77 arquivos preservados, com links para os recibos.
 
-O Python usado nesta máquina tem ReportLab, PyMuPDF e Pillow. Matplotlib 3.11.2 foi instalado de forma isolada em `.tools/audit-python`. Se for necessário preparar outra máquina de geração, instale as bibliotecas em um ambiente virtual local; não é necessário para apresentar os arquivos prontos.
-
-```powershell
-# Preparação opcional somente na máquina que vai GERAR materiais:
-python -m pip install --target .tools/audit-python matplotlib==3.11.2 reportlab PyMuPDF Pillow
-# Informe os caminhos reais retornados pelo Codex; não use literalmente os exemplos entre < >.
-./scripts/Build-AcademicMaterials.ps1 -RuntimeRoot '<runtime>' -PresentationsSkill '<skill-presentations>' -DeckName 'ProjektTellus-Apresentacao-nova.pptx'
-```
-
-`Build-AcademicDeck.mjs` extrai Java diretamente das fontes, lê os resultados do CSV e insere notas do roteiro. `Finalize-AcademicDeck.mjs` verifica estrutura, fontes/geometria e reimportação do PPTX. O nome final precisa ser novo para preservar edições. `Export-AcademicPdf.py` monta o PDF a partir das renderizações: o exportador PDF direto do runtime não conseguiu resolver `#standard-fonts/Helvetica`, portanto essa dependência não foi modificada. Foi usada a skill de PDF com ReportLab e renderização por PyMuPDF, pois Poppler não estava disponível.
-
-Para regenerar o vídeo, use `python scripts/Build-DemoVideo.py` após escolher um nome/arquivo novo ou arquivar a versão anterior. Requer FFmpeg/FFprobe no PATH; o script não sobrescreve o MP4 existente. Para nova validação completa, `python scripts/Validate-AcademicMaterials.py` verifica a entrega r2; ajuste a seleção do nome se estiver avaliando outra edição. Revise visualmente os slides após qualquer alteração.
-
-## Evidências e limites
-
-- [Maven final](../evidencias/verify-final.txt): 69 testes, zero falhas/erros/skips.
-- [Validação do PowerPoint](../evidencias/ProjektTellus-Apresentacao-r2.validacao.json): estrutura/geometria/fontes/reimportação. Nenhuma alegação de abertura no Microsoft PowerPoint.
-- [Validação dos materiais](../evidencias/materiais-validacao.json): fontes, pedidos experimentais, contagens, arquivos e recibos.
-- [PDF](../evidencias/pdf-validacao.json) e [vídeo](../evidencias/video-validacao.json): metadados e renderização/decodificação.
-- [Capturas](../capturas/latest.json): 33 PNGs, 249 verificações do harness, banco temporário, sem input global. A animação intermediária usa relógio controlado; o computador físico da faculdade e FPS não foram certificados.
+Renderização e inspeção em 1366×768, fidelidade de trechos/diagramas e integridade do pacote não equivalem a abrir o arquivo em Microsoft PowerPoint. O computador físico/projetor da faculdade e a fluidez continuam dependentes de ensaio local. A autoria histórica de cada linha do projeto não foi inferida; a compreensão precisa ser demonstrada pelo aluno ao seguir o código e reconhecer seus limites.

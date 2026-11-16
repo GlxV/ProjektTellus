@@ -43,3 +43,8 @@ Não há prova de fluidez, desempenho no projetor, funcionamento do lançador po
 ## Abertura do JAR empacotado — verificação adicional da integração
 
 Além do fluxo FXML/controller, `scripts/Smoke-PackagedApp.ps1` executou **o JAR real** com Java 25 e `-Dprojekttellus.db` em caminho temporário inexistente. [package-launch.json](evidencias/package-launch.json) registra janela com título ProjektTellus, processo vivo, esquema SQLite V1 com tabelas mundos/eventos/snapshots vazias e `quick_check=ok`. O script fechou somente a janela do PID criado via WM_CLOSE e observou saída zero. O desktop privado nunca foi ativado. Isso valida a entrada empacotada neste host; permanece separado da validação física da faculdade e da execução por duplo clique.
+
+
+## Materiais da defesa individual r3
+
+Aluno: Matheus Luiz Bueno; turma 4P; professor EDER MAGALHAES MACHADO; disciplina ARQUITETURA DE SOFTWARES E PADRÕES DE PROJETOS; 2º Bimestre de 2026. Use o [guia de defesa](GUIA_DEFESA_INDIVIDUAL.md), os [atalhos de código](ATALHOS_DEFESA.md), o [PPTX r3](apresentacao/ProjektTellus-Defesa-Individual-r3.pptx) e o [PDF r3](apresentacao/ProjektTellus-Defesa-Individual-r3.pdf). Os ensaios de aplicativo descritos acima pertencem à base anterior; a revisão de slides não modificou o motor nem afirma nova validação física. O vídeo de contingência anterior é reutilizado e preservado.

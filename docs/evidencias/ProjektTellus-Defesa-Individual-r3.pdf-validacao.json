@@ -1,0 +1,11 @@
+{
+  "file": "docs\\apresentacao\\ProjektTellus-Defesa-Individual-r3.pdf",
+  "pages": 15,
+  "resolution": "1366x768 render per page",
+  "format": "Raster slides embedded in PDF; no searchable Java text. Editable source is PPTX.",
+  "rendered_all_pages": true,
+  "renderer": "PyMuPDF; bundled Poppler unavailable",
+  "sha256": "a8bb2af2b46639646732b1db4ee8120393561c643a5a29ecd5200d606553c4c7",
+  "bytes": 1084526,
+  "reason": "Artifact Tool direct PDF exporter could not resolve #standard-fonts/Helvetica; no bundled dependencies modified."
+}

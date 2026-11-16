@@ -1,5 +1,7 @@
 # Código Java completo para estudo
 
+Material de apoio de Matheus Luiz Bueno, turma 4P, professor EDER MAGALHAES MACHADO, disciplina ARQUITETURA DE SOFTWARES E PADRÕES DE PROJETOS, 2º Bimestre de 2026. Para a conversa individual, comece por [GUIA_DEFESA_INDIVIDUAL.md](GUIA_DEFESA_INDIVIDUAL.md) e [DEFESA_CODIGO_JAVA.md](DEFESA_CODIGO_JAVA.md).
+
 Fontes da implementação do commit base `3e153f0`, exportadas diretamente do checkout. Os blocos são classes completas; dependem dos imports e demais fontes do projeto para compilar. A explicação detalhada está em [ESTUDO_PADROES.md](ESTUDO_PADROES.md).
 
 Não ler tudo durante a apresentação. Comece por TerraBuilder, EventoCreator/AsteroideCreator, ObserverBus/SimulacaoObserver e Terra/TerraMemento. Depois acompanhe a coordenação em SimulacaoService.

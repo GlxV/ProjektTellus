@@ -1,8 +1,18 @@
-# Perguntas e respostas para a apresentação
+# Perguntas e respostas para apresentação e arguição individual
 
-Banco de **62 perguntas de apoio** (36 aprofundamentos e 26 perguntas explicitamente solicitadas pelo usuário), preparado com IA nesta tarefa a partir do Java real e dos requisitos/complementos do usuário. Origem dos temas: exigências do enunciado, ordem de slides e correções conceituais fornecidas pelo usuário; formulação abaixo e respostas: material de apoio elaborado nesta frente. Não atribuir estas frases a uma lista histórica do usuário ou a perguntas efetivamente feitas pela docente. O objetivo é o estudante conseguir explicar o código, como exige o enunciado.
+- **Aluno:** Matheus Luiz Bueno
+- **Disciplina:** ARQUITETURA DE SOFTWARES E PADRÕES DE PROJETOS
+- **Professor:** EDER MAGALHAES MACHADO
+- **Turma:** 4P
+- **Trabalho:** ProjektTellus — Simulador Planetário
+- **Período:** 2º Bimestre de 2026
 
-Caminhos nesta página são relativos a `src/main/java/com/projekttellus/`, salvo indicação. “Evidência” indica fonte inspecionada e ação demonstrável, não uma alegação de teste executado. A frente acadêmica não executou Maven, testes nem GUI. Ver [ESTUDO_PADROES.md](ESTUDO_PADROES.md) para recortes literais e [CONFORMIDADE_TRABALHO.md](CONFORMIDADE_TRABALHO.md) para exigências.
+**Contagem:** banco anterior de **62 perguntas de apoio**, numeradas 1–62, preservado abaixo (36 aprofundamentos e 26 perguntas solicitadas pelo usuário na entrega anterior). Ao final, há uma **nova sessão de arguição com 21 itens**: B1–B4 básicos, I1–I4 intermediários e D1–D13 avançados, estes últimos correspondentes às 13 perguntas difíceis do pedido atual. Vários itens retomam o banco de apoio; não são 83 perguntas inéditas. Títulos da numeração anterior foram mantidos; identidade e referências temporais foram atualizadas quando necessário.
+
+As falas são apoio de IA fundamentado no código, não transcrição de perguntas reais do professor. Respostas em primeira pessoa explicam o funcionamento atual, sem inventar autoria pessoal ou dificuldade subjetiva. Referências a execução nos itens históricos dizem respeito aos recibos da entrega anterior; esta revisão documental não reexecutou Maven, GUI ou testes. A menção histórica à Prof. Célia no enunciado é preservada; esta defesa é para EDER MAGALHAES MACHADO.
+
+
+Caminhos nesta página são relativos a `src/main/java/com/projekttellus/`, salvo indicação. “Evidência” indica fonte inspecionada e ação demonstrável, não uma alegação de teste executado. Os testes e ensaios gráficos citados pertencem à entrega anterior; não foram reexecutados nesta revisão dos materiais. Ver [ESTUDO_PADROES.md](ESTUDO_PADROES.md) para recortes literais e [CONFORMIDADE_TRABALHO.md](CONFORMIDADE_TRABALHO.md) para exigências.
 
 ## 1. Por que escolher esses quatro padrões?
 
@@ -286,7 +296,7 @@ Caminhos nesta página são relativos a `src/main/java/com/projekttellus/`, salv
 
 ## 36. E a autoria, uso de IA, identificação, datas e pesos?
 
-**Resposta:** o texto integral do enunciado permite aproveitar ChatGPT, Gemini, Perplexity e outros e exige entender o código. Estes materiais tiveram apoio de IA nesta tarefa; não se infere quem escreveu anteriormente cada classe. Trabalho individual e uso no projeto conjunto com a disciplina da Prof. Célia são exigências, não fatos provados pelo repositório. A janela é 16–23/11/2026 e os pesos são 70% trabalho/30% prova. Nome do aluno e curso não foram informados; a capa deve preservar essa pendência.
+**Resposta:** o texto integral do enunciado permite aproveitar ChatGPT, Gemini, Perplexity e outros e exige entender o código. Estes materiais tiveram apoio de IA nesta tarefa; não se infere quem escreveu anteriormente cada classe. Trabalho individual e uso no projeto conjunto com a disciplina da Prof. Célia são exigências, não fatos provados pelo repositório. A janela é 16–23/11/2026 e os pesos são 70% trabalho/30% prova. A identificação atual é Matheus Luiz Bueno, turma 4P, disciplina ARQUITETURA DE SOFTWARES E PADRÕES DE PROJETOS, professor EDER MAGALHAES MACHADO, trabalho ProjektTellus — Simulador Planetário, 2º Bimestre de 2026. Instituição e matrícula não foram fornecidas.
 
 **Evidência:** `docs/ENUNCIADO_ORIGINAL_TRANSCRITO.md`, fonte primária textual integral de duas páginas. Apenas PDF binário e dois anexos Sem título estão indisponíveis.
 
@@ -295,7 +305,7 @@ Caminhos nesta página são relativos a `src/main/java/com/projekttellus/`, salv
 
 ## Perguntas originais solicitadas pelo usuário — respostas diretas
 
-As 26 perguntas abaixo preservam os temas e a formulação da solicitação atual. As respostas complementam os aprofundamentos anteriores.
+As 26 perguntas abaixo preservam os temas e a formulação da solicitação da entrega anterior. As respostas complementam os aprofundamentos anteriores.
 
 ### 37. O que é um padrão de projeto?
 
@@ -383,7 +393,7 @@ Ele não foi calibrado com dados científicos nem representa bioquímica, clima 
 
 ### 58. O que acontece se um evento falhar?
 
-Se criar/aplicar lançar antes da confirmação, não há gravação nem atualização pública do mundo pelo serviço. Se salvar falhar, a transação faz rollback e o serviço não avança para atualizar Terra/publicar. Falhas RuntimeException de observadores ocorrem depois da gravação e são registradas individualmente; não desfazem o estado confirmado. A animação apresenta o resultado salvo e não controla a física do evento.
+Se criar/aplicar lançar antes da confirmação, não há gravação nem atualização pública do mundo pelo serviço. Se a ação SQL falhar antes do commit, a transação tenta rollback. Se salvar lançar exceção, o serviço não avança para atualizar Terra/publicar; isso não prova que toda exceção desfez o banco. Restaurar autocommit pode falhar depois de um commit bem-sucedido. É preciso distinguir a falha concreta e os recibos; não há transação distribuída entre banco, memória e tela. Falhas RuntimeException de observadores ocorrem depois da gravação e são registradas individualmente; não desfazem o estado confirmado. A animação apresenta o resultado salvo e não controla a física do evento.
 
 ### 59. Como os testes verificam o projeto?
 
@@ -399,4 +409,177 @@ A auditoria recomenda tratar o arredondamento em populações pequenas e documen
 
 ### 62. Quais partes do código foram produzidas ou auxiliadas por IA e como foram verificadas?
 
-Nesta tarefa a IA auxiliou os harnesses de auditoria/captura, scripts de geração, relatórios, slides e estudo. As fontes preexistentes de produção não foram alteradas nesta entrega. O histórico disponível não prova a contribuição humana/IA de cada linha anterior: não vou inventar esse percentual. A verificação desta entrega está em Maven/JUnit, CSVs reproduzidos, comparação GUI/serviço, hashes e revisão do Java. Cabe ao estudante declarar honestamente seu processo e demonstrar que entende as chamadas e seus limites.
+Na entrega anterior, a IA auxiliou os harnesses de auditoria/captura, scripts de geração, relatórios, slides e estudo. As fontes preexistentes de produção não foram alteradas naquela entrega. O histórico disponível não prova a contribuição humana/IA de cada linha anterior: não vou inventar esse percentual. A verificação registrada da entrega anterior está em recibos Maven/JUnit, CSVs reproduzidos, comparação GUI/serviço, hashes e revisão do Java. Nesta revisão documental/visual nenhum teste do aplicativo foi reexecutado. Cabe ao estudante declarar honestamente seu processo e demonstrar que entende as chamadas e seus limites.
+
+
+## Sessão nova — arguição individual em três níveis
+
+21 itens de treino, com **resposta curta** para iniciar e **aprofundamento** para abrir o código. As 13 questões D1–D13 preservam os temas e a formulação do pedido de revisão. A sessão retoma conceitos do banco de 62, sem contar repetições como perguntas inéditas. Caminhos abaixo relativos a `src/main/java/com/projekttellus/`, salvo docs/testes.
+
+### B1 — Básico: Quem constrói a Terra?
+
+**Curta:** “TerraBuilder reúne os componentes e build cria Terra e EstadoPlanetario. O serviço coordena a gravação.”
+
+**Aprofundada:** Eu abro TerraBuilder.atmosfera e build. O primeiro recebe um componente e retorna this; o segundo devolve Terra com novo UUID. BuilderDialog coleta dados e devolve Builder configurado. SimulacaoService.criar chama build, captura origem e confirma. Não atribuo ao Builder a responsabilidade do SQLite nem invento Director.
+
+**Abrir / evidência:** domain/TerraBuilder.java: atmosfera/build; ui/BuilderDialog.java: setResultConverter; application/SimulacaoService.java: criar.
+
+### B2 — Básico: Quem cria os eventos e qual contrato o serviço usa?
+
+**Curta:** “O Creator concreto cria o produto, e o serviço usa EventoPlanetario para aplicar.”
+
+**Aprofundada:** Eu mostro EventoCreator.criar abstrato e AsteroideCreator.criar retornando new Asteroide. O retorno declarado é EventoPlanetario; por isso var evento no serviço tem esse tipo estático. O objeto concreto muda, o contrato de aplicação fica o mesmo. Os cinco pares estão na hierarquia real.
+
+**Abrir / evidência:** events/EventoCreator.java; AsteroideCreator.java; EventoPlanetario.java; SimulacaoService.aplicar.
+
+### B3 — Básico: Quem recebe as mudanças?
+
+**Curta:** “Os SimulacaoObserver inscritos no ObserverBus: monitor, estatísticas e o assinante anônimo da UI.”
+
+**Aprofundada:** O serviço publica depois de gravar/atualizar. No bus, aoMudar chama cada implementação. Monitor produz alertas e estatísticas atualiza contagem/extremos por UUID. O objeto anônimo de MainController agenda Platform.runLater; o Controller não realiza diretamente a interface. Nem todo evento gera mensagem crítica, mesmo com entrega bem-sucedida.
+
+**Abrir / evidência:** patterns/observer/SimulacaoObserver.java; ObserverBus.publicar; MainController.initialize.
+
+### B4 — Básico: Quem restaura o estado e o que o retrato contém?
+
+**Curta:** “Terra restaura o TerraMemento, e SimulacaoService coordena validação e gravação. O retrato contém nome e estado completo.”
+
+**Aprofundada:** O record guarda id próprio, mundoId, rótulo, nome, instante e EstadoPlanetario. O estado inclui componentes e anos. A restauração valida o mundo, reassocia nome/estado e mantém id de Terra. Não volta histórico, estatísticas da sessão ou câmera. SQLite torna o retrato durável, mas não é a operação de restauração.
+
+**Abrir / evidência:** domain/Terra.java: capturar/restaurar; patterns/memento/TerraMemento.java; SimulacaoService.restaurar.
+
+### I1 — Intermediário: O que return this devolve e onde o produto é instanciado?
+
+**Curta:** “this é o mesmo Builder. O produto é outra instância, criada por build.”
+
+**Aprofundada:** atmosfera(Atmosfera) guarda o argumento e devolve o configurador para encadeamento. build instancia EstadoPlanetario e Terra. Componentes validam seus construtores; o estado rejeita nulos/tempo inválido; Terra valida nome. O Builder continua mutável e não se reseta automaticamente. Compartilhar valores imutáveis não significa misturar identidades de mundos.
+
+**Abrir / evidência:** domain/TerraBuilder.java: atmosfera/build; EstadoPlanetario.java; Terra.java: construtor.
+
+### I2 — Intermediário: O que @Override e var significam no slide 7?
+
+**Curta:** “@Override confere a sobrescrita; var infere o tipo em compilação. evento é EventoPlanetario.”
+
+**Aprofundada:** Eu aponto a assinatura criar(double), declarada pelo Creator, e o retorno new Asteroide. A inferência vem do retorno declarado, não de tratar Java como linguagem dinâmica. Há despacho na escolha de criar e na hierarquia de aplicação/transformar do produto. As quebras de linha do slide mudam só whitespace; não escondem a captura automática entre os recortes do serviço.
+
+**Abrir / evidência:** events/AsteroideCreator.java: criar; EventoCreator.criar; EventoBase.aplicar/transformar; SimulacaoService.aplicar.
+
+### I3 — Intermediário: Qual a diferença entre inscrever, publicar e atualizar a tela?
+
+**Curta:** “inscrever registra; publicar chama o callback síncrono; o assinante gráfico agenda a atualização FX.”
+
+**Aprofundada:** inscrever usa addIfAbsent e devolve AutoCloseable. O serviço publica MudancaPlanetaria; o bus percorre a lista e chama observer.aoMudar(mudanca). Para a UI, aoMudar agenda runLater e retorna antes de o Runnable necessariamente desenhar. O recibo comprova retorno do callback, sem certificar os pixels. A remoção da inscrição é parte do fechamento da tela.
+
+**Abrir / evidência:** ObserverBus.inscrever/publicar; SimulacaoService.confirmar; MainController.initialize/close.
+
+### I4 — Intermediário: O snapshot manual muda a ordem interna do evento?
+
+**Curta:** “Não. O manual é outra operação. Dentro de aplicar: criar produto, capturar automaticamente, aplicar/calcular, gravar, atualizar e publicar.”
+
+**Aprofundada:** Eu separo os blocos do slide 12. Construir usa o Builder e captura a origem. Capturar manualmente grava um retrato com notificar=false. Aplicar cria um produto, depois outro retrato automático e a candidata. Restaurar é posterior, com validação de UUID na candidata, captura de retorno e confirmação. Nem todos os padrões executam em cada ação.
+
+**Abrir / evidência:** SimulacaoService.criar/capturar/aplicar/confirmar/restaurar; slide 12.
+
+### D1 — Avançado: Se você retirasse o Builder, como criaria a Terra?
+
+**Curta:** “Eu poderia chamar o construtor público de Terra com UUID, nome e EstadoPlanetario montado explicitamente.”
+
+**Aprofundada:** O construtor já existe, então Builder não é uma imposição da linguagem. Sem ele, o cliente teria de criar/reunir Atmosfera, Clima, Biosfera, Hidrosfera, Civilizacao e anos, cuidando dos defaults e da legibilidade da montagem. As validações de domínio continuariam existindo. Builder ajuda a separar configuração do produto; eu não justifico uma hierarquia abstrata inexistente nem digo que só o Builder pode chamar o construtor.
+
+**Abrir / evidência:** Terra(UUID, String, EstadoPlanetario); TerraBuilder.build; BuilderDialog.
+
+### D2 — Avançado: Factory Method não poderia ser substituído por um switch?
+
+**Curta:** “Poderia, para um catálogo pequeno. Seria uma fábrica simples centralizando a escolha; aqui a variação está nas subclasses.”
+
+**Aprofundada:** Eu comparo as alternativas sem dizer que switch é sempre errado. Com switch, incluir um tipo exige alterar a seleção central. Aqui cada Creator sobrescreve criar e o serviço recebe a abstração. A composição da UI ainda registra os Creators disponíveis; não há extensão totalmente sem alterações. O ganho verificável é manter a decisão concreta de instanciação separada da aplicação genérica do serviço.
+
+**Abrir / evidência:** EventoCreator.criar; cinco Creators; MainController.initialize; SimulacaoService.aplicar.
+
+### D3 — Avançado: O Observer é realmente necessário?
+
+**Curta:** “É útil porque há três reações diferentes à mesma mudança. Para um único consumidor, uma chamada direta também poderia ser suficiente.”
+
+**Aprofundada:** Alertas, estatísticas e UI têm regras e ciclos de vida diferentes. O bus entrega o mesmo fato por um contrato e permite inscrições/remoções sem Terra chamar telas concretas. Há custo de lista de assinantes, falhas auxiliares e entrega síncrona. O serviço ainda conhece os dois observadores padrão na composição; não alego ausência total de acoplamento. Defendo a adequação aos interessados atuais, não a necessidade universal de um bus.
+
+**Abrir / evidência:** SimulacaoService: construtor; ObserverBus; AlertaObserver/EstatisticasObserver; MainController.initialize.
+
+### D4 — Avançado: O que acontece se um observador lançar exceção?
+
+**Curta:** “RuntimeException do callback é registrada e o bus continua. A mudança já foi persistida.”
+
+**Aprofundada:** publicar tem try/catch por assinante, com listas separadas de notificados e falhas. O nome só entra como sucesso após aoMudar retornar. O serviço transforma falhas auxiliares em passos informativos, sem desfazer SQLite. nomeSeguro também tolera metadados quebrados. Não há retry durável nem captura de todo Error; um callback lento também atrasa a chamada síncrona. Receber na UI pode significar apenas que runLater foi agendado.
+
+**Abrir / evidência:** ObserverBus.publicar/nomeSeguro/Entrega; SimulacaoService.confirmar.
+
+### D5 — Avançado: O Memento está completamente encapsulado?
+
+**Curta:** “Não no sentido de opacidade estrita GoF. O record é público e estado() pode ser lido.”
+
+**Aprofundada:** Eu distingo ocultar representação de impedir modificação. Terra concentra as mudanças do objeto vivo e guarda campos privados; TerraMemento expõe valores legíveis. O grafo imutável impede editar o estado por referência compartilhada, mas não esconde seus dados do caretaker ou da persistência. A descrição honesta é uma variante legível de Memento. A checagem de mundoId garante vínculo de domínio, não privacidade ou autenticação.
+
+**Abrir / evidência:** TerraMemento público; Terra.estado/atualizar/restaurar; EstadoPlanetario.
+
+### D6 — Avançado: Por que o Memento do projeto utiliza um record público?
+
+**Curta:** “Porque representa um valor imutável e legível, com validação e acessores úteis para consulta e persistência. Essa é a propriedade técnica verificável da escolha.”
+
+**Aprofundada:** Não deduzo a intenção histórica do autor. O record declara os campos do retrato, gera acessores e tem construtor compacto para validar ids, textos e estado. Isso reduz boilerplate e permite o repositório serializar os componentes. O custo é a falta de opacidade estrita; se ela fosse necessária, poderia separar uma visão estreita para o caretaker da representação interna. Hoje não é isso que o código faz, e eu não redesenho o UML como se fizesse.
+
+**Abrir / evidência:** patterns/memento/TerraMemento.java; SqliteMundoRepository: inserirSnapshot/snapshots.
+
+### D7 — Avançado: O que diferencia capturar um snapshot de simplesmente salvar o banco?
+
+**Curta:** “Capturar cria um valor anterior restaurável; salvar mantém o estado atual durável. No aplicativo, a captura manual também grava o retrato.”
+
+**Aprofundada:** Terra.capturar não depende de disco. SimulacaoService.capturar chama o originador e pede ao repositório a persistência do snapshot. SimulacaoService.salvar confirma o mundo com snapshot=null; não cria o mesmo retrato por consequência de gravar. O banco pode guardar estado e retratos sem que sejam o mesmo conceito. Restaurar reassocia um valor anterior e acrescenta histórico, não reexecuta todo o log nem implementa Event Sourcing.
+
+**Abrir / evidência:** Terra.capturar; SimulacaoService.capturar/salvar; MundoRepository.salvar.
+
+### D8 — Avançado: O que acontece se o SQLite falhar durante um evento?
+
+**Curta:** “Na falha de gravação antes do commit, a transação tenta rollback e o serviço não chega a atualizar Terra nem publicar.”
+
+**Aprofundada:** Eu sigo confirmar: calcular → repository.salvar → atualizar destino → publicar. O repositório grava mundo, histórico e retrato juntos e TransacaoSqlite gerencia commit/rollback. O teste escrito com trigger antes de UPDATE verifica a preservação de estado/contagens e zero notificações nesse caso. Não prometo que qualquer exceção possível implica ausência de commit: falhas após confirmação/limpeza exigem distinguir os recibos. Não há transação distribuída entre SQLite, memória e GUI. Esta revisão não reexecutou o teste.
+
+**Abrir / evidência:** SimulacaoService.confirmar; SqliteMundoRepository.salvar; TransacaoSqlite.executar; ApplicationTest.failedTransactionLeavesLiveEarthAndObserversUntouched.
+
+### D9 — Avançado: Por que usar estados imutáveis?
+
+**Curta:** “Eu consigo preservar snapshots e compartilhar valores sem que uma mudança no mundo atual edite o passado.”
+
+**Aprofundada:** EstadoPlanetario contém componentes imutáveis; o evento produz outro valor e Terra.atualizar troca a referência. Memento conserva a referência anterior com segurança, sem deep copy de todo o grafo. Há alocação de novos valores e necessidade de manter o contrato profundo; se adicionasse lista mutável exposta, um record sozinho não resolveria. A identidade e o nome de Terra continuam sob controle do originador; o fato de o valor ser legível não implica que possa ser modificado.
+
+**Abrir / evidência:** EstadoPlanetario e componentes; Terra.atualizar/capturar; EventoBase.aplicar; Efeitos.
+
+### D10 — Avançado: O que mudaria se adicionássemos um sexto evento?
+
+**Curta:** “Eu acrescentaria produto e Creator, registraria o Creator no catálogo e cobriria o comportamento e sua apresentação.”
+
+**Aprofundada:** Um produto pode estender EventoBase, definir nome e transformar respeitando as invariantes; seu Creator sobrescreve criar. MainController monta a lista explícita. O serviço continua usando EventoCreator/EventoPlanetario sem selecionar uma nova fórmula por tipo. Também verificaria mapeamento em AnimationKind/animador e testes dos efeitos/intensidades; a lógica genérica do domínio não deve depender de animação. É proposta de extensão, não função já implementada.
+
+**Abrir / evidência:** events/*Creator.java; EventoBase; MainController.initialize; ui/AnimationKind.java; SimulationTest.
+
+### D11 — Avançado: Qual padrão foi mais difícil de implementar?
+
+**Curta:** “A dificuldade pessoal só eu posso relatar conforme minha participação real. Posso explicar um ponto técnico exigente sem inventar essa história.”
+
+**Aprofundada:** Como resposta técnica de apoio, posso escolher a fronteira do Memento com persistência: candidata validada, snapshot imutável, transação, atualização pública e publicação posterior; ou ciclo de vida e thread FX no Observer. Preciso demonstrar um caso concreto no método. Não devo dizer que fiquei dias num bug ou que escrevi sozinho uma parte sem isso ter acontecido. A resposta pessoal pode ser completada pelo estudante após ensaio; o material não certifica sua experiência subjetiva.
+
+**Abrir / evidência:** SimulacaoService.restaurar/confirmar; ObserverBus.publicar; MainController.initialize/close.
+
+### D12 — Avançado: Onde o aplicativo usa herança e polimorfismo?
+
+**Curta:** “Há herança nas famílias Creator/produto e polimorfismo em criar, aplicar/transformar e aoMudar.”
+
+**Aprofundada:** AsteroideCreator extends EventoCreator; Asteroide extends EventoBase. EventoBase implements EventoPlanetario, e AlertaObserver/EstatisticasObserver implements SimulacaoObserver são realizações de interfaces. O serviço chama o Creator pelo tipo base; o produto é aplicado pelo contrato; a base final encaminha a transformar especializado. O bus chama observadores pelo contrato. No UML distingo linha/triângulo da herança da realização. MainController não é subclasse de observador; cria objeto anônimo.
+
+**Abrir / evidência:** EventoCreator/EventoBase/EventoPlanetario; SimulacaoService.aplicar; ObserverBus.publicar; MainController.initialize.
+
+### D13 — Avançado: Como você verificou código desenvolvido com auxílio de IA?
+
+**Curta:** “Eu separo o que consigo demonstrar na fonte, o que os recibos anteriores registram e o que eu pessoalmente executei. Não atribuo autoria linha a linha sem evidência.”
+
+**Aprofundada:** Como demonstração de entendimento, sigo contratos, tipos inferidos, retorno/efeitos e falhas até a classe concreta. Para evidência executada anteriormente, abro testes/recibos, CSV da GUI e comparação antes/evento/restaurado; cada registro tem escopo. A revisão presente conferiu documentos, tokens/links e notas, sem reexecutar Maven/GUI. Só digo que reproduzi um teste se eu realmente o fiz. IA ser permitida não substitui explicar por que criar retorna EventoPlanetario, por que o callback é síncrono e por que o record legível é imutável.
+
+**Abrir / evidência:** DEFESA_CODIGO_JAVA.md; evidencias/verify-final.txt; capturas/run-20261115-124710/measurements.csv; testes de domínio/serviço.

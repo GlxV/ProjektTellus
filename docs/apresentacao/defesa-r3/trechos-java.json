@@ -1,0 +1,57 @@
+[
+  {
+    "file": "src/main/java/com/projekttellus/domain/TerraBuilder.java",
+    "line": 14,
+    "raw": "    public TerraBuilder atmosfera(Atmosfera valor) { atmosfera = valor; return this; }"
+  },
+  {
+    "file": "src/main/java/com/projekttellus/domain/TerraBuilder.java",
+    "line": 20,
+    "raw": "    public Terra build() {\n        return new Terra(UUID.randomUUID(), nome,\n                new EstadoPlanetario(atmosfera, clima, biosfera, hidrosfera, civilizacao, anos));\n    }"
+  },
+  {
+    "file": "src/main/java/com/projekttellus/events/AsteroideCreator.java",
+    "line": 5,
+    "raw": "    @Override public EventoPlanetario criar(double intensidade) { return new Asteroide(intensidade); }"
+  },
+  {
+    "file": "src/main/java/com/projekttellus/application/SimulacaoService.java",
+    "line": 52,
+    "raw": "        var evento = Objects.requireNonNull(creator).criar(intensidade);"
+  },
+  {
+    "file": "src/main/java/com/projekttellus/application/SimulacaoService.java",
+    "line": 55,
+    "raw": "        var candidato = new Terra(terra.id(), terra.nome(), evento.aplicar(terra.estado()));"
+  },
+  {
+    "file": "src/main/java/com/projekttellus/patterns/observer/SimulacaoObserver.java",
+    "line": 2,
+    "raw": "public interface SimulacaoObserver {\n    String nome();\n    void aoMudar(MudancaPlanetaria mudanca);\n}"
+  },
+  {
+    "file": "src/main/java/com/projekttellus/patterns/observer/ObserverBus.java",
+    "line": 11,
+    "raw": "        Objects.requireNonNull(observer);\n        observers.addIfAbsent(observer);\n        return () -> remover(observer);"
+  },
+  {
+    "file": "src/main/java/com/projekttellus/application/SimulacaoService.java",
+    "line": 109,
+    "raw": "            var entrega = observerBus.publicar(new MudancaPlanetaria(destino.id(), destino.estado(), indicadores, descricao));"
+  },
+  {
+    "file": "src/main/java/com/projekttellus/patterns/observer/ObserverBus.java",
+    "line": 22,
+    "raw": "                observer.aoMudar(mudanca);"
+  },
+  {
+    "file": "src/main/java/com/projekttellus/domain/Terra.java",
+    "line": 23,
+    "raw": "    public TerraMemento capturar(String rotulo) {\n        return new TerraMemento(UUID.randomUUID(), id, rotulo, nome, Instant.now(), estado);\n    }"
+  },
+  {
+    "file": "src/main/java/com/projekttellus/domain/Terra.java",
+    "line": 28,
+    "raw": "        if (!id.equals(memento.mundoId()))\n            throw new IllegalArgumentException(\"Este retrato pertence a outro mundo.\");\n        nome = memento.nomeMundo();\n        estado = memento.estado();"
+  }
+]
