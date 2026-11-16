@@ -1,0 +1,126 @@
+{
+  "source_sha256": "035bd7b41fd7eeac06eb2cf402799e7c7a53211d42ae5c405d5d1f96c5e3ad7c",
+  "renderer": "Artifact Tool reimport; no native PowerPoint execution",
+  "comparisons": [
+    {
+      "slide": 1,
+      "mean_channel_error": 0.0,
+      "size": [
+        1366,
+        768
+      ]
+    },
+    {
+      "slide": 2,
+      "mean_channel_error": 0.0,
+      "size": [
+        1366,
+        768
+      ]
+    },
+    {
+      "slide": 3,
+      "mean_channel_error": 2.097059541239629e-05,
+      "size": [
+        1366,
+        768
+      ]
+    },
+    {
+      "slide": 4,
+      "mean_channel_error": 9.532088823816496e-06,
+      "size": [
+        1366,
+        768
+      ]
+    },
+    {
+      "slide": 5,
+      "mean_channel_error": 0.0,
+      "size": [
+        1366,
+        768
+      ]
+    },
+    {
+      "slide": 6,
+      "mean_channel_error": 8.006954612005857e-05,
+      "size": [
+        1366,
+        768
+      ]
+    },
+    {
+      "slide": 7,
+      "mean_channel_error": 0.0,
+      "size": [
+        1366,
+        768
+      ]
+    },
+    {
+      "slide": 8,
+      "mean_channel_error": 8.705974459085734e-05,
+      "size": [
+        1366,
+        768
+      ]
+    },
+    {
+      "slide": 9,
+      "mean_channel_error": 0.0,
+      "size": [
+        1366,
+        768
+      ]
+    },
+    {
+      "slide": 10,
+      "mean_channel_error": 2.224154058890516e-05,
+      "size": [
+        1366,
+        768
+      ]
+    },
+    {
+      "slide": 11,
+      "mean_channel_error": 0.0,
+      "size": [
+        1366,
+        768
+      ]
+    },
+    {
+      "slide": 12,
+      "mean_channel_error": 0.0,
+      "size": [
+        1366,
+        768
+      ]
+    },
+    {
+      "slide": 13,
+      "mean_channel_error": 0.0,
+      "size": [
+        1366,
+        768
+      ]
+    },
+    {
+      "slide": 14,
+      "mean_channel_error": 0.0,
+      "size": [
+        1366,
+        768
+      ]
+    },
+    {
+      "slide": 15,
+      "mean_channel_error": 0.0,
+      "size": [
+        1366,
+        768
+      ]
+    }
+  ]
+}

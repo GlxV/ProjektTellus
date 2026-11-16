@@ -8,8 +8,8 @@ const root=path.resolve(import.meta.dirname,'..');
 const runtime=process.env.TELLUS_ARTIFACT_MODULE;
 if(!runtime) throw new Error('Set TELLUS_ARTIFACT_MODULE to the bundled artifact_tool.mjs');
 const {Presentation,PresentationFile}=await import(pathToFileURL(runtime).href);
-const out=path.join(root,process.env.TELLUS_PREVIEW_DIR||'docs/apresentacao/defesa-r3');
-const build=path.join(root,process.env.TELLUS_BUILD_DIR||'target/defense-r3-build');
+const out=path.join(root,process.env.TELLUS_PREVIEW_DIR||'docs/apresentacao/editorial-r4');
+const build=path.join(root,process.env.TELLUS_BUILD_DIR||'target/editorial-r4-build');
 const academic={student:'Matheus Luiz Bueno',discipline:'ARQUITETURA DE SOFTWARES E PADRÕES DE PROJETOS',professor:'EDER MAGALHAES MACHADO',class:'4P',work:'ProjektTellus — Simulador Planetário',period:'2º Bimestre de 2026'};
 await fs.mkdir(out,{recursive:true}); await fs.mkdir(build,{recursive:true});
 await fs.access(path.join(root,'docs/CONFORMIDADE_TRABALHO.md'));
@@ -94,7 +94,7 @@ function code(s,text,x,y,w=1200,size=25,formatted=null) {
  }
 }
 function file(s,name,y=679){txt(s,sourceRoot+name,56,y,1260,42,19,MUTED);}
-function notes(s,text){s.speakerNotes.text=['Aluno: '+academic.student,'Disciplina: '+academic.discipline,'Professor: '+academic.professor,'Turma: '+academic.class,'Trabalho: '+academic.work,'Período: '+academic.period].join('\n')+'\n\n'+text+'\n\nDefesa interativa: docs/GUIA_DEFESA_INDIVIDUAL.md e docs/DEFESA_CODIGO_JAVA.md. Tempos são sugestões, não exigências do enunciado.';}
+function notes(s,text){s.speakerNotes.text=['Aluno: '+academic.student,'Disciplina: '+academic.discipline,'Professor: '+academic.professor,'Turma: '+academic.class,'Trabalho: '+academic.work,'Período: '+academic.period].join('\n')+'\n\n'+text;}
 const plan=await fs.readFile(path.join(root,'docs/ROTEIRO_APRESENTACAO.md'),'utf8');
 function speech(n){const re=new RegExp('(?:^|\\n)## .*?(?:Slide|slide) '+n+'\\b[\\s\\S]*?(?=\\n## |$)');return plan.match(re)?.[0]??'Roteiro integral: docs/ROTEIRO_APRESENTACAO.md; slide '+n;}
 
@@ -108,14 +108,22 @@ txt(s,'ARQUITETURA DE SOFTWARES\nE PADRÕES DE PROJETOS',56,500,690,76,25,GREEN,
 txt(s,'Professor: '+academic.professor,56,598,690,40,23,FG);
 txt(s,'Turma: 4P · 2º Bimestre de 2026',56,646,690,35,23,MUTED);
 await image(s,'docs/capturas/planeta-referencia.png',755,180,540,500);
-notes(s,speech(1)+'\nFonte primária: docs/ENUNCIADO_ORIGINAL_TRANSCRITO.md. A referência histórica à Prof. Célia foi preservada por tratar do projeto conjunto. O professor desta apresentação é EDER MAGALHAES MACHADO, conforme informado por Matheus.');
+notes(s,speech(1));
 // 02
-s=base('Um software real para aplicar os padrões');
-para(s,'O problema','Reunir condições, executar eventos, comunicar mudanças e recuperar estados.',56,195,565);
-para(s,'A proposta','Uma aplicação Java desktop com mundos independentes e histórico persistente.',56,415,565);
-txt(s,'O enunciado pede',760,195,530,55,32,GREEN,true);
-txt(s,'No mínimo 3 padrões\n\nNome e propósito\nProblema e solução real\nUML das classes\nCódigo funcional em Java',760,270,530,390,29);
-notes(s,speech(2)+'\nO enunciado aceita os quatro padrões utilizados. 10–12 minutos é planejamento, não limite obrigatório do enunciado. Referências originais: https://refactoring.guru/pt-br/design-patterns/catalog e https://www.devmedia.com.br/guia/padroes-de-projeto-em-java/34456.');
+s=base('Mundos, eventos e histórico');
+txt(s,'O ProjektTellus simula mudanças no ambiente e na população de planetas configuráveis.',56,205,565,180,32);
+para(s,'Java 25 e JavaFX','Cada mundo tem identidade própria. O SQLite guarda condições, eventos e retratos anteriores.',56,455,565);
+for(const [i,title,body] of [
+ [0,'Construção de mundos','TerraBuilder reúne as condições iniciais.'],
+ [1,'Eventos planetários','Cinco eventos transformam o estado do mundo.'],
+ [2,'Comunicação de mudanças','Interface, alertas e estatísticas recebem a alteração.'],
+ [3,'Recuperação de estados','Retratos preservam as condições de um mundo.'],
+]){
+ const y=195+i*125;
+ txt(s,title,760,y,550,40,27,GREEN,true);
+ txt(s,body,760,y+48,550,65,25);
+}
+notes(s,speech(2));
 // 03 architecture (editable diagram)
 s=base('Arquitetura geral');
 const ui=box(s,'ui/','JavaFX · MainController',56,195,550,110);
@@ -128,7 +136,7 @@ link(s,ui,app);link(s,app,persist);link(s,app,engines,'uses','right','left');lin
 notes(s,speech(3)+'\nDiagrama de pacotes simplificado do código. O domínio não depende de JavaFX nem SQLite.');
 // 04 Builder UML
 s=base('Builder — construção por etapas','01 / 04  •  PADRÃO DE CRIAÇÃO');
-para(s,'Propósito','Montar uma Terra com componentes e valores opcionais legíveis.',56,195);
+para(s,'Propósito','Construir uma Terra por etapas, configurando cada componente.',56,195);
 para(s,'Problema real','Atmosfera, clima, água, vegetação e população precisam formar um cenário válido.',56,400);
 const bd=box(s,'BuilderDialog','coleta valores do editor',515,190,335,100);
 const tb=box(s,'TerraBuilder','+ build(): Terra\n+ atmosfera(...): TerraBuilder',515,350,335,130);
@@ -136,16 +144,16 @@ const te=box(s,'Terra','id · nome · estado',960,350,335,130);
 const es=box(s,'EstadoPlanetario','Atmosfera · Clima · Biosfera\nHidrosfera · Civilizacao',880,560,415,105);
 link(s,bd,tb);link(s,tb,te,'creates','right','left');link(s,te,es,'association');
 txt(s,'«cria»',857,374,96,35,20,MUTED);
-txt(s,'Builder concreto e fluente; sem Director separado',515,680,780,30,21,MUTED);
-notes(s,speech(4)+'\nUML: dependência BuilderDialog→TerraBuilder; build cria Terra e EstadoPlanetario; Terra referencia seu estado. Records imutáveis podem ser compartilhados com segurança. https://refactoring.guru/design-patterns/builder');
+txt(s,'O editor configura o builder; build() cria a Terra.',515,680,780,30,21,MUTED);
+notes(s,speech(4)+'\nReferência: https://refactoring.guru/design-patterns/builder');
 // 05 Builder Java
 s=base('Builder — do editor a uma nova Terra');
 code(s,await excerpt('domain/TerraBuilder.java','    public TerraBuilder atmosfera','    public TerraBuilder clima'),56,190,1240,26,'public TerraBuilder atmosfera(Atmosfera valor) {\n    atmosfera = valor;\n    return this;\n}');
-code(s,await excerpt('domain/TerraBuilder.java','    public Terra build()','\n}'),56,350,1240,26);
+code(s,await excerpt('domain/TerraBuilder.java','    public Terra build()','\n}'),56,350,1240,26,'public Terra build() {\n    return new Terra(UUID.randomUUID(), nome,\n            new EstadoPlanetario(atmosfera, clima, biosfera,\n                    hidrosfera, civilizacao, anos));\n}');
 file(s,'domain/TerraBuilder.java',550);
 txt(s,'1  O método fluente guarda o componente e devolve o próprio builder.',56,610,1240,40,25);
 txt(s,'2  build() reúne o estado e cria uma identidade UUID independente.',56,660,1240,40,25);
-notes(s,speech(5)+'\nExcertos literais de TerraBuilder.java. A validação de limites e nulos está nos records do domínio, não em uma duplicação no builder. Demonstração: Criar mundo, condições iniciais e Construir e salvar.');
+notes(s,speech(5)+'\nFonte: '+sourceRoot+'domain/TerraBuilder.java.');
 // 06 Factory UML
 s=base('Factory Method — criação polimórfica','02 / 04  •  PADRÃO DE CRIAÇÃO');
 para(s,'Propósito','Deixar cada criador concreto decidir qual evento será instanciado.',56,195);
@@ -156,8 +164,8 @@ const ac=box(s,'AsteroideCreator','+ criar(i): EventoPlanetario',510,380,350,100
 const eb=box(s,'«abstract» EventoBase','intensidade · aplicar() · transformar()',925,360,385,105);
 const ast=box(s,'Asteroide','# transformar(estado, i)',925,535,385,100);
 link(s,ac,ec,'extends','top','bottom');link(s,eb,ep,'implements','top','bottom');link(s,ast,eb,'extends','top','bottom');link(s,ac,ast,'creates','right','left');
-txt(s,'Outros pares Creator/produto: GuerraNuclear · Supervulcao\nInvasaoAlienigena · RestauracaoEcologica',510,660,800,55,21,MUTED);
-notes(s,speech(6)+'\nTriângulo vazio + linha contínua = herança; tracejada = realização de interface. AsteroideCreator cria Asteroide; os quatro outros pares seguem a mesma estrutura. https://refactoring.guru/design-patterns/factory-method');
+txt(s,'Guerra nuclear, supervulcão, invasão alienígena e restauração\necológica usam a mesma estrutura de criação.',510,660,800,55,21,MUTED);
+notes(s,speech(6)+'\nReferência: https://refactoring.guru/design-patterns/factory-method');
 // 07 Factory code
 s=base('Factory Method — criar e aplicar um evento');
 txt(s,'Criador concreto: AsteroideCreator',56,181,1240,35,24,GREEN,true);
@@ -170,7 +178,7 @@ code(s,await excerpt('application/SimulacaoService.java','        var candidato 
 file(s,'application/SimulacaoService.java',595);
 txt(s,'3  var infere EventoPlanetario, o contrato retornado por criar().',56,645,1240,35,24,BLUE);
 txt(s,'4  aplicar() executa o comportamento do produto concreto.',56,685,1240,35,24,GREEN);
-notes(s,speech(7)+'\nTrechos Java reais; apenas espaços e quebras de apresentação foram reorganizados, preservando tokens e literais. @Override verifica sobrescrita; return new Asteroide cria o produto; var evento infere EventoPlanetario a partir do retorno declarado em EventoCreator.criar. Não foi trocado var por um tipo explícito inexistente na fonte. 25% na UI equivale a intensidade 0.25.');
+notes(s,speech(7)+'\nFontes: '+sourceRoot+'events/AsteroideCreator.java; '+sourceRoot+'application/SimulacaoService.java.');
 // 08 Observer UML
 s=base('Observer — comunicação após a confirmação','03 / 04  •  PADRÃO COMPORTAMENTAL');
 para(s,'Propósito','Notificar assinantes por uma interface comum.',56,195);
@@ -183,8 +191,8 @@ const st=box(s,'EstatisticasObserver','contagem e extremos por UUID',950,520,360
 link(s,sv,ob,'association');link(s,ob,so,'association','right','left');link(s,al,so,'implements','top','bottom');
 // Shared realization branch avoids a line through the other concrete observer.
 segment(s,950,565,910,565);segment(s,910,565,910,345);segment(s,910,345,1130,345);
-txt(s,'MainController também inscreve um observador anônimo para a UI.\nO bus entrega MudancaPlanetaria; uma falha não bloqueia os demais.',520,650,790,65,22,MUTED);
-notes(s,speech(8)+'\nBus armazena referências SimulacaoObserver; o serviço cria e inscreve monitor e estatísticas, e MainController inscreve callback da interface com Platform.runLater. https://refactoring.guru/design-patterns/observer');
+txt(s,'MainController inscreve um observador para atualizar a interface.',520,655,790,55,22,MUTED);
+notes(s,speech(8)+'\nReferência: https://refactoring.guru/design-patterns/observer');
 // 09 Observer code
 s=base('Observer — uma mudança, vários assinantes');
 txt(s,'1  Contrato: SimulacaoObserver',56,184,650,40,24,GREEN,true);
@@ -199,7 +207,7 @@ code(s,await excerpt('patterns/observer/ObserverBus.java','                obser
 txt(s,'Bus síncrono: aguarda o callback.\nUI: Platform.runLater agenda a tela.',765,548,540,80,23,MUTED);
 txt(s,'Recebem: alertas, estatísticas e o assinante anônimo da interface.',56,641,1250,38,25,GREEN);
 txt(s,sourceRoot+'patterns/observer/SimulacaoObserver.java · ObserverBus.java',56,687,1250,25,17,MUTED);
-notes(s,speech(9)+'\nFontes completas: '+sourceRoot+'patterns/observer/SimulacaoObserver.java; '+sourceRoot+'patterns/observer/ObserverBus.java; '+sourceRoot+'application/SimulacaoService.java; '+sourceRoot+'ui/MainController.java. A inscrição exibida é o corpo real de inscrever; publicar percorre observers e executa a chamada destacada em try/catch. Falhas RuntimeException não impedem a entrega aos próximos. O bus é síncrono. O observador anônimo da UI recebe a mudança e agenda o desenho por Platform.runLater; callback concluído não prova que os pixels já foram atualizados.');
+notes(s,speech(9)+'\nFontes: '+sourceRoot+'patterns/observer/SimulacaoObserver.java; '+sourceRoot+'patterns/observer/ObserverBus.java; '+sourceRoot+'application/SimulacaoService.java; '+sourceRoot+'ui/MainController.java.');
 // 10 Memento UML
 s=base('Memento — um retrato restaurável','04 / 04  •  PADRÃO COMPORTAMENTAL');
 para(s,'Propósito','Preservar um estado anterior e restaurá-lo no mesmo mundo.',56,195);
@@ -209,29 +217,29 @@ const mem=box(s,'TerraMemento · Memento','mundoId · nome · estado · instante
 const care=box(s,'SimulacaoService · Caretaker','coordena captura e recuperação',520,420,350,110);
 const repo=box(s,'MundoRepository','«interface»\nsalvar() · snapshots()',940,420,370,110);
 link(s,orig,mem,'creates','right','left');link(s,care,orig,'uses','top','bottom');link(s,care,repo,'uses','right','left');link(s,repo,mem,'association','top','bottom');
-txt(s,'Estado profundamente imutável; restauração exige o mesmo UUID.\nO record permite leitura: esta variante não torna o snapshot opaco.',520,615,790,85,24,MUTED);
-notes(s,speech(10)+'\nO caretaker coordena uso e persistência. Memento não é sinônimo de SQLite: pode existir em memória. https://refactoring.guru/design-patterns/memento');
+txt(s,'O retrato preserva nome e estado.\nA restauração exige o UUID do mesmo mundo.',520,615,790,85,24,MUTED);
+notes(s,speech(10)+'\nReferência: https://refactoring.guru/design-patterns/memento');
 // 11 Memento code
 s=base('Memento — captura e restauração segura');
 code(s,await excerpt('domain/Terra.java','    public TerraMemento capturar','    public void restaurar'),56,185,1240,25);
 code(s,await excerpt('domain/Terra.java','        if (!id.equals(memento.mundoId()))','\n    }'),56,355,1240,25);
 file(s,'domain/Terra.java',570);
-txt(s,'Capturar → aplicar Asteroide 25% → selecionar retrato → Restaurar',56,635,1250,55,28,GREEN);
-notes(s,speech(11)+'\nO segundo trecho está dentro de restaurar(TerraMemento), após Objects.requireNonNull. O id da Terra é final e não é substituído. O estado imutável anterior pode ser reassociado sem clonagem profunda.');
+txt(s,'A Terra recupera o nome e o estado sem trocar sua identidade.',56,635,1250,55,28,GREEN);
+notes(s,speech(11)+'\nFonte: '+sourceRoot+'domain/Terra.java.');
 // 12 integration
 s=base('Os quatro padrões no fluxo do simulador');
-txt(s,'Operações independentes, disponíveis conforme a pergunta',56,181,1250,45,26,BLUE);
+txt(s,'Construção, captura e restauração de um mundo',56,181,1250,45,26,BLUE);
 box(s,'Builder','Construir mundo',56,240,360,105);
 box(s,'Memento','Capturar retrato manual',505,240,360,105);
-box(s,'Memento','Restaurar retrato depois',955,240,355,105);
+box(s,'Memento','Restaurar estado anterior',955,240,355,105);
 txt(s,'Aplicar evento — ordem interna de SimulacaoService.aplicar',56,380,1250,45,27,GREEN,true);
 const labels=[['Factory\nMethod','Criar produto'],['Memento','Capturar retrato\nautomático'],['Motor','Aplicar efeito\nCalcular índices'],['SQLite','Gravar estado,\nhistórico e retrato'],['Terra','Atualizar objeto'],['Observer','Publicar mudança']];
 const nodes=labels.map(([a,b],i)=>box(s,a,b,56+i*213,439,195,135));
 for(let i=0;i<nodes.length-1;i++)link(s,nodes[i],nodes[i+1],'uses','right','left');
 txt(s,'Primeiro confirma no SQLite; depois atualiza a Terra e notifica.\nCapturar manualmente e restaurar são outras operações.',56,634,1250,80,27);
-notes(s,speech(12)+'\nDentro de SimulacaoService.aplicar, a ordem é criar produto → capturar retrato automático → aplicar e formar candidato → confirmar SQLite → atualizar Terra → publicar. A restauração é outra operação posterior. A demo também realiza uma captura MANUAL anterior ao clique Aplicar evento. Snapshot manual e salvar não emitem notificação de mudança ambiental.');
+notes(s,speech(12)+'\nFonte: '+sourceRoot+'application/SimulacaoService.java.');
 // 13 complementary model
-s=base('Três indicadores, três perguntas');
+s=base('Indicadores e evolução do planeta');
 txt(s,'Humana',56,205,390,60,37,GREEN,true);txt(s,'Respiração e condições\npara humanos sem proteção.',56,290,390,130,30);
 txt(s,'Biológica',490,205,390,60,37,BLUE,true);txt(s,'Condições amplas para vida\nassociada à água líquida.',490,290,390,130,30);
 txt(s,'Civilização',935,205,390,60,37,GREEN,true);txt(s,'Recursos, área continental\ne ocupação do suporte.',935,290,390,130,30);
@@ -240,20 +248,26 @@ txt(s,'Evolução determinística em passos de até 1 ano.\nModelo global didát
 notes(s,speech(13)+'\nFonte: simulation/ModeloPlanetario.java e docs/MODELO.md. Os escores são produtos de adequações, não probabilidades. Capacidade usa terra, água, vegetação, humana e raiz do potencial biológico.');
 // 14 experiments: literal measurements read from generated selected file.
 const findings=JSON.parse(await fs.readFile(path.join(out,'experimentos-selecionados.json'),'utf8')).findings;
-s=base('Auditoria e recuperação de estados');
+s=base('Resultados dos experimentos');
 for(let i=0;i<findings.length;i++){
- const y=185+i*148;txt(s,findings[i].title,56,y,1235,48,31,GREEN,true);txt(s,findings[i].text,56,y+55,1240,83,27);
+ const y=195+i*160;txt(s,findings[i].title,56,y,1235,48,31,GREEN,true);txt(s,findings[i].text,56,y+55,1240,83,27);
 }
-txt(s,'Limite numérico: o arredondamento demográfico pode reter resíduos.\nIsso não é uma previsão de sobrevivência real.',56,650,1250,62,23,MUTED);
-notes(s,speech(14)+'\nDados reutilizados da auditoria anterior: docs/auditoria/experimental-20261115-final/snapshots.csv e docs/capturas/run-20261115-124710/measurements.csv. Nenhum experimento foi reexecutado nesta revisão documental. A evolução anóxica reteve 2 pessoas por Math.round; trata-se de limitação numérica de arredondamento, não de uma previsão realista. O terceiro exemplo agora reforça a restauração arquitetural, com estado antes/depois/restaurado medido na GUI. '+JSON.stringify(findings));
+notes(s,speech(14)+'\nFontes dos resultados: docs/auditoria/experimental-20261115-final/snapshots.csv e docs/capturas/run-20261115-124710/measurements.csv.');
 // 15 conclusion real screenshot
-s=base('Demonstração e conclusão');
-txt(s,'Construir → capturar → aplicar → observar → restaurar',56,185,1260,70,31,GREEN);
+s=base('Construção, eventos, comunicação e recuperação');
+txt(s,'Mundos configuráveis com eventos, indicadores e histórico em SQLite.',56,185,1260,70,30,GREEN);
 await image(s,'docs/capturas/demo-restaurado.png',56,280,740,417);
-txt(s,'Entender e defender',860,285,440,55,31,GREEN,true);
-txt(s,'Quem cria o objeto?\nQuem conhece o contrato?\nQuem recebe a mudança?\nQuem pode restaurar o estado?',860,365,440,220,28);
-txt(s,'Base: 69 testes aprovados\n2.026 experimentos registrados',860,615,440,80,23,MUTED);
-notes(s,speech(15)+'\nContingência: PDF, capturas, UML exportado e Java nos slides. IA auxiliou os materiais desta entrega; a autoria anterior do repositório não foi inferida.');
+for(const [i,name,role] of [
+ [0,'Builder','Constrói a Terra.'],
+ [1,'Factory Method','Cria os eventos.'],
+ [2,'Observer','Comunica as mudanças.'],
+ [3,'Memento','Recupera estados anteriores.'],
+]){
+ txt(s,name,860,280+i*85,440,36,27,GREEN,true);
+ txt(s,role,860,318+i*85,440,38,25);
+}
+txt(s,'69 testes aprovados\n2.026 experimentos registrados',860,645,440,65,22,MUTED);
+notes(s,speech(15));
 
 // Export draft and all actual previews. PPTX diagrams and text remain editable.
 await fs.writeFile(path.join(out,'trechos-java.json'),JSON.stringify(snippets,null,2));

@@ -7,21 +7,19 @@
 - **Trabalho:** ProjektTellus — Simulador Planetário
 - **Período:** 2º Bimestre de 2026
 
-### Como conduzir a conversa
+### Uso do roteiro
 
-Não é um discurso obrigatório para decorar. As falas são propostas em primeira pessoa para explicar o funcionamento atual; não inventam autoria pessoal, alternativas historicamente avaliadas, dificuldades subjetivas nem testes realizados pelo aluno. Se houver interrupção, respondo primeiro, abro a classe ou UML correspondente e retomo no próximo padrão sem recomeçar tudo. Para respostas de 20 segundos, um minuto e aprofundamento dos quatro padrões, usar [DEFESA_CODIGO_JAVA.md](DEFESA_CODIGO_JAVA.md). Para revisão rápida, [GUIA_DEFESA_INDIVIDUAL.md](GUIA_DEFESA_INDIVIDUAL.md); arguição em [PERGUNTAS_APRESENTACAO.md](PERGUNTAS_APRESENTACAO.md).
+As falas A/B podem ser adaptadas às próprias palavras. Os campos de apoio técnico e de demonstração ficam como consulta, fora da fala principal. Em uma interrupção, responder ao ponto e retomar o próximo padrão.
 
-**Modo A — completo:** todos os 15 slides; faixa de 10–12 minutos, alvo 10min40s, sem perguntas extensas. **Modo B — individual:** faixa de 5–7 minutos, alvo 6min20s de exposição inicial; sequência **1 → 2 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 → 12 → 15**. Abertura 1/2 curta; 4–11 essenciais, sem esconder nenhum padrão. Pular 3, 13 e 14 apenas como contexto opcional; continuam no arquivo e podem ser abertos sob pergunta. Os tempos não são exigência do enunciado.
+**Modo A — completo:** 15 slides, faixa de 10–12 minutos, alvo de 10min40s. **Modo B — individual:** faixa de 5–7 minutos, alvo de 6min20s; sequência **1 → 2 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 → 12 → 15**. Slides 3, 13 e 14 ficam como contexto opcional. Os pares 4/5, 6/7, 8/9 e 10/11 preservam a explicação de cada padrão, seu problema real, UML e Java. Perguntas extensas ficam fora do orçamento.
 
-Cada par 4/5, 6/7, 8/9 e 10/11 mantém **nome/propósito + problema/solução + UML + Java** acessíveis nos dois modos. Se precisar reduzir ainda mais, reduzir fala/contexto; não eliminar um padrão inteiro ou ocultar seu UML/código. Código aberto para responder pergunta substitui explicação de slide naquele momento, sem obrigar a repetir o trecho.
-
-A [transcrição do enunciado](ENUNCIADO_ORIGINAL_TRANSCRITO.md) e a [matriz](CONFORMIDADE_TRABALHO.md) são referências. A Prof. Célia aparece no texto histórico pelo projeto conjunto; esta apresentação é para EDER MAGALHAES MACHADO. A revisão atual é dos materiais; não reexecutou Maven ou GUI. Recibos antigos são identificados como anteriores. Não presumir PowerPoint desktop ou computador da faculdade validados pelas renderizações.
+Aprofundamento em [DEFESA_CODIGO_JAVA.md](DEFESA_CODIGO_JAVA.md); consulta rápida em [GUIA_DEFESA_INDIVIDUAL.md](GUIA_DEFESA_INDIVIDUAL.md); arguição em [PERGUNTAS_APRESENTACAO.md](PERGUNTAS_APRESENTACAO.md). A [transcrição histórica](ENUNCIADO_ORIGINAL_TRANSCRITO.md) mantém a referência à Prof. Célia pelo projeto conjunto; esta apresentação é para EDER MAGALHAES MACHADO.
 
 ### Preparação e contingência
 
-Deixar as classes da tabela do guia localizáveis no editor e o aplicativo no procedimento de banco temporário descrito em [DEMO_APRESENTACAO.md](DEMO_APRESENTACAO.md). A fonte real usa a propriedade `projekttellus.db`; não inventar opções do lançador. Não abrir a biblioteca pessoal para ensaio. Usar o mesmo banco se houver pedido de reabertura.
+Deixar as classes localizáveis no editor e seguir [DEMO_APRESENTACAO.md](DEMO_APRESENTACAO.md) para o banco temporário. O aplicativo usa a propriedade `projekttellus.db`; a reabertura precisa usar o mesmo arquivo. O fluxo básico é construir → capturar manualmente → asteroide 25% → observar → restaurar.
 
-Se JavaFX/aplicativo falhar, dizer o que falhou, apresentar capturas/registro anterior como tal e seguir pelo Java/UML local. Não repetir o fluxo inteiro por insistência se uma classe já responde à pergunta. A demonstração básica é construir → capturar manualmente → asteroide 25% → observar → restaurar. Caminhos independentes ficam no guia e no documento da demo; o documento da demo mantém os detalhes operacionais.
+Se o aplicativo não abrir, identificar a falha e continuar com as capturas anteriores, UML e fonte local. A evidência anterior deve ser apresentada como registro. Esta revisão é documental, sem nova execução de Maven ou GUI; abertura no PowerPoint desktop e computador da faculdade não foram validados por esta revisão.
 
 ### Orçamento de tempo
 
@@ -49,210 +47,208 @@ Total planejado: A=640 s (10min40s), B=380 s (6min20s). Perguntas e exploração
 
 **Modo A:** 0:00–0:20 (20 s). **Modo B:** 0:00–0:10 (10 s).
 
-**Fala A:** “Professor, sou Matheus Luiz Bueno, da turma 4P. Vou mostrar o ProjektTellus por quatro responsabilidades: quem constrói a Terra, quem cria os eventos, quem recebe mudanças e quem restaura os estados. Posso seguir pelos slides ou abrir diretamente uma classe conforme a pergunta.”
+**Fala A:** “Professor, sou Matheus Luiz Bueno, da turma 4P. Este é o ProjektTellus, um simulador planetário em Java. Nele, eu monto um mundo, aplico eventos, acompanho as mudanças e recupero estados anteriores. Essas quatro partes usam Builder, Factory Method, Observer e Memento.”
 
-**Fala B:** “Professor, sou Matheus Luiz Bueno, da 4P. Vou mostrar os quatro padrões no fluxo real e posso abrir as classes durante a conversa.”
+**Fala B:** “Sou Matheus Luiz Bueno, da 4P. O ProjektTellus permite construir mundos, aplicar eventos, acompanhar mudanças e restaurar estados.”
 
-**Conceito e técnica:** Identidade acadêmica completa na capa e foco no código. A disciplina é ARQUITETURA DE SOFTWARES E PADRÕES DE PROJETOS; professor EDER MAGALHAES MACHADO; período 2º Bimestre de 2026. Não inferir instituição ou matrícula.
+**Conceito e técnica:** Identificação: ARQUITETURA DE SOFTWARES E PADRÕES DE PROJETOS; professor EDER MAGALHAES MACHADO; trabalho ProjektTellus — Simulador Planetário; 2º Bimestre de 2026.
 
-**Demo / abrir código:** Apontar o planeta e os quatro nomes; deixar o aplicativo preparado, sem executar o fluxo ainda.
+**Demo / abrir código:** Aplicativo preparado no banco temporário; apresentação inicial junto à imagem do planeta.
 
-**Transição:** “O problema do sistema organiza a explicação.”
+**Transição:** “O fluxo começa nas condições que eu escolho para o mundo.”
 
-## Slide 2 — Problema e proposta
+## Slide 2 — Mundos, eventos e histórico
 
 **Modo A:** 0:20–0:50 (30 s). **Modo B:** 0:10–0:25 (15 s).
 
-**Fala A:** “Eu preciso reunir condições iniciais coerentes, aplicar eventos diferentes, avisar interessados e recuperar estados. Uso Builder, Factory Method, Observer e Memento nessas responsabilidades. Para cada um vou mostrar o propósito, o problema e a solução, o UML e o Java. O simulador é didático; os indicadores não pretendem prever a vida ou o clima real.”
+**Fala A:** “Eu escolho as condições do ambiente e a população para construir um mundo. Depois posso aplicar um dos cinco eventos e acompanhar o que mudou no globo, nos indicadores, nos alertas e nas estatísticas. Os retratos guardam estados que posso recuperar depois. A interface usa JavaFX, e o SQLite mantém os mundos, o histórico e os retratos entre as sessões.”
 
-**Fala B:** “O problema é construir, aplicar eventos, comunicar e restaurar. Vou passar por UML e Java dos quatro padrões. O modelo planetário é didático.”
+**Fala B:** “Eu construo o mundo com suas condições e população, aplico eventos, acompanho as alterações e recupero retratos. JavaFX reúne os controles; SQLite guarda os dados.”
 
-**Conceito e técnica:** O enunciado exige pelo menos três padrões; os quatro escolhidos pertencem à lista. A transcrição mantém a Prof. Célia pelo projeto conjunto; o professor desta apresentação é EDER MAGALHAES MACHADO. Datas 16–23/11/2026; 70% trabalho/30% prova.
+**Conceito e técnica:** Quatro responsabilidades: TerraBuilder monta o mundo; cinco famílias de eventos produzem transformações; ObserverBus distribui mudanças à interface, alertas e estatísticas; Terra/TerraMemento permitem recuperação. Detalhes dos critérios acadêmicos permanecem na matriz, fora desta fala.
 
-**Demo / abrir código:** No modo B, esta é a última contextualização: ir ao slide 4. Não gastar o tempo dos padrões com experimentos.
+**Demo / abrir código:** Modo B: seguir ao slide 4 depois desta introdução. Os controles da aplicação mostram as mesmas quatro responsabilidades.
 
-**Transição:** “Vou começar pela construção de uma Terra.”
+**Transição:** “Essas ações ficam divididas entre a interface e as classes que executam a simulação.”
 
 ## Slide 3 — Arquitetura geral
 
 **Modo A:** 0:50–1:25 (35 s). **Modo B:** opcional; pular na exposição inicial.
 
-**Fala A:** “Eu começo na tela, mas a operação é coordenada por SimulacaoService. Terra mantém identidade e referência ao estado atual; os componentes são valores imutáveis. ModeloPlanetario calcula indicadores e evolução. O serviço usa MundoRepository para gravar e ObserverBus para comunicar. MainController envia trabalho ao executor de uma thread e agenda a atualização visual na thread JavaFX. Isso permite explicar a lógica sem depender do desenho do planeta.”
+**Fala A:** “Na interface, MainController recebe as ações do usuário e chama SimulacaoService. O serviço coordena a operação, usa o domínio para representar o mundo e chama ModeloPlanetario para os cálculos. A gravação passa por MundoRepository, com implementação SQLite. Quando a mudança está confirmada, ObserverBus a distribui aos interessados. As operações usam um worker, enquanto os componentes visuais são atualizados na thread JavaFX.”
 
-**Fala B:** Pular na exposição B; se o professor perguntar pela arquitetura, voltar aqui e seguir MainController → SimulacaoService → domínio/repositório/bus.
+**Fala B:** “MainController recebe a ação, SimulacaoService coordena, o domínio representa o mundo e o repositório grava. ObserverBus distribui a mudança confirmada.”
 
-**Conceito e técnica:** Arquivo de orientação: src/main/java/com/projekttellus/application/SimulacaoService.java. Domínio não depende de JavaFX/SQL; Terra conhece TerraMemento. As operações e acessos ao repositório da UI são serializados pelo worker.
+**Conceito e técnica:** Consulta: application/SimulacaoService.java; ui/MainController.java. O domínio não depende de JavaFX/SQL; Terra conhece TerraMemento. Na UI, operações e acessos ao repositório são serializados pelo executor de uma thread.
 
-**Demo / abrir código:** Apontar o diagrama de arquitetura. Não iniciar uma demonstração extra.
+**Demo / abrir código:** Contexto opcional no modo B. Localizar o serviço no diagrama e seguir suas dependências; sem nova operação na aplicação.
 
-**Transição:** “O Builder cuida da montagem inicial, antes da aplicação de eventos.”
+**Transição:** “A primeira dessas operações é construir uma Terra.”
 
 ## Slide 4 — Builder: propósito, problema e UML
 
 **Modo A:** 1:25–2:00 (35 s). **Modo B:** 0:25–0:50 (25 s).
 
-**Fala A:** “Eu uso TerraBuilder para reunir nome, atmosfera, clima, água, vegetação, população e tempo. Sem ele, cada cliente teria de repetir essa montagem. No UML, o diálogo configura o Builder, e build cria EstadoPlanetario e Terra. Este é um Builder concreto e fluente, sem Director nem interface abstrata. Ele organiza a construção; salvar é outra responsabilidade, coordenada pelo serviço.”
+**Fala A:** “Montar uma Terra envolve nome, atmosfera, clima, água, vegetação e população. Eu uso TerraBuilder para escolher esses componentes em etapas, partindo de valores iniciais já definidos. O diálogo reúne as escolhas e configura o Builder. Quando chamo build, ele cria o estado planetário e a Terra. Assim, a tela não precisa repetir toda a montagem do cenário a cada criação.”
 
-**Fala B:** “Eu uso Builder para reunir componentes e defaults antes de criar Terra. O diálogo configura TerraBuilder; build cria o estado e o produto. No UML não há Director: a implementação é concreta e fluente.”
+**Fala B:** “TerraBuilder reúne as condições iniciais em etapas. O diálogo configura os componentes, e build cria o estado e a Terra. Isso concentra a montagem do cenário em um lugar.”
 
-**Conceito e técnica:** Propósito: construção em etapas. Problema: montagem extensa no cliente. Solução: configuração nomeada e construção final. UML: BuilderDialog depende de TerraBuilder; Builder cria Terra/EstadoPlanetario. Valores imutáveis podem ser compartilhados, sem posse exclusiva por composição.
+**Conceito e técnica:** Builder concreto e fluente; sem Director ou interface abstrata de Builder. Esse detalhe pertence ao estudo complementar. UML: BuilderDialog depende de TerraBuilder; build cria EstadoPlanetario e Terra. Os valores imutáveis podem ser compartilhados por referência, sem posse exclusiva do estado.
 
-**Demo / abrir código:** Para pedido isolado: abrir criação de mundo. Se pedir Java, seguir ao slide 5 ou TerraBuilder.java.
+**Demo / abrir código:** Entrada independente: abrir criação de mundo. Java principal: domain/TerraBuilder.java; cliente: ui/BuilderDialog.java, setResultConverter.
 
-**Transição:** “No código, eu aponto o retorno do configurador e a criação do produto.”
+**Transição:** “O encadeamento das escolhas aparece nestes métodos.”
 
 ## Slide 5 — Builder: Java e construção
 
 **Modo A:** 2:00–2:45 (45 s). **Modo B:** 0:50–1:20 (30 s).
 
-**Fala A:** “Aqui atmosfera recebe um componente e return this devolve o mesmo Builder, permitindo a próxima escolha. build devolve outra coisa: uma Terra com UUID novo e EstadoPlanetario montado. Os limites são validados nos componentes; o estado rejeita nulos e tempo inválido, e Terra valida o nome. O Builder continua mutável e pode ser reutilizado, sem reset automático. Os mundos podem compartilhar valores imutáveis porque cada mudança troca a referência do estado.”
+**Fala A:** “O método atmosfera recebe o componente e o guarda no Builder. return this devolve o mesmo Builder para eu continuar configurando o mundo. Já build reúne os componentes num EstadoPlanetario e cria uma Terra com UUID novo. Os componentes conferem seus limites, o estado verifica as referências e o tempo, e Terra valida o nome. Ao final, o serviço recebe o mundo construído para gravá-lo.”
 
-**Fala B:** “atmosfera recebe Atmosfera e retorna o próprio Builder. build cria EstadoPlanetario e Terra com UUID novo. A validação fica no domínio, não em todos os setters. A Terra é o produto; o Builder é o configurador.”
+**Fala B:** “atmosfera guarda o componente e retorna o próprio Builder. Isso permite encadear as escolhas. build cria EstadoPlanetario e uma Terra com identidade nova; a validação dos valores fica no domínio.”
 
-**Conceito e técnica:** No slide 5, atmosfera está em quatro linhas legíveis, com os mesmos tokens da fonte e apenas whitespace reorganizado. Abrir src/main/java/com/projekttellus/domain/TerraBuilder.java: atmosfera e build. Depois ui/BuilderDialog.java: setResultConverter; application/SimulacaoService.java: criar. Recebe TerraBuilder, chama build, captura origem e confirma. UUID identifica; não torna o cálculo aleatório.
+**Conceito e técnica:** Consulta: domain/TerraBuilder.java, atmosfera/build; domain/EstadoPlanetario.java; ui/BuilderDialog.java, setResultConverter; application/SimulacaoService.java, criar. Os setters não repetem toda a validação. Builder é mutável, pode ser reutilizado e não tem reset automático. UUID identifica o mundo; não participa da evolução numérica.
 
-**Demo / abrir código:** No modo B, mostrar o Java no slide e reservar a criação ao final. Uma interrupção pode substituir essa fala pela trilha Builder do DEFESA_CODIGO_JAVA.
+**Demo / abrir código:** Mostrar a criação no aplicativo ao final ou usar o caminho independente de Builder. build devolve Terra; o diálogo devolve TerraBuilder configurado.
 
-**Transição:** “Com a Terra construída, eu passo à criação dos tipos de evento.”
+**Transição:** “Com o mundo pronto, o próximo passo é escolher um evento.”
 
 ## Slide 6 — Factory Method: propósito, problema e UML
 
 **Modo A:** 2:45–3:20 (35 s). **Modo B:** 1:20–1:45 (25 s).
 
-**Fala A:** “Eu tenho cinco eventos diferentes, mas quero que o serviço use um contrato comum. EventoCreator declara criar; cada Creator concreto decide o produto. No UML, os cinco pares são Asteroide, Supervulcao, GuerraNuclear, InvasaoAlienigena e RestauracaoEcologica com seus Creators. Os produtos herdam EventoBase, que implementa EventoPlanetario. O serviço aplica pelo contrato; o catálogo da interface ainda conhece os criadores disponíveis.”
+**Fala A:** “Um asteroide, um supervulcão e uma guerra nuclear afetam o planeta de maneiras diferentes. O simulador também tem uma invasão alienígena fictícia e uma restauração ecológica. Cada evento tem um criador que sabe qual produto instanciar. Todos devolvem EventoPlanetario, então o serviço aplica o evento escolhido pelo mesmo contrato. Essa criação por subclasses é o papel do Factory Method.”
 
-**Fala B:** “Factory Method deixa cada subclasse de EventoCreator escolher o produto. Tenho cinco pares reais; todos podem ser usados como EventoPlanetario. No UML distingo herança entre classes, realização da interface e dependência de criação.”
+**Fala B:** “Os cinco eventos têm criadores próprios. Cada subclasse de EventoCreator decide qual produto criar e o devolve como EventoPlanetario. O serviço aplica o evento pelo contrato comum.”
 
-**Conceito e técnica:** Slides/UML devem dar acesso aos cinco pares, mesmo quando um par é ampliado para leitura. Propósito: variar criação. Problema: serviço aplicando cinco tipos. Solução: criar abstrato sobrescrito, sem switch de produtos no serviço. Produto base→interface é realização, não extends entre classes.
+**Conceito e técnica:** Pares: AsteroideCreator→Asteroide; SupervulcaoCreator→Supervulcao; GuerraNuclearCreator→GuerraNuclear; InvasaoAlienigenaCreator→InvasaoAlienigena; RestauracaoEcologicaCreator→RestauracaoEcologica. Produtos herdam EventoBase, que implementa EventoPlanetario. No UML, distinguir herança, realização de interface e dependência de criação. Catálogo da UI registra os criadores disponíveis.
 
-**Demo / abrir código:** Abrir events/EventoCreator.java e events/AsteroideCreator.java. Posso selecionar um evento num mundo já aberto sem reconstruí-lo.
+**Demo / abrir código:** Consulta: events/EventoCreator.java e events/AsteroideCreator.java. Num mundo aberto, selecionar um evento e sua intensidade.
 
-**Transição:** “Vou mostrar a sobrescrita e o tipo que o serviço recebe.”
+**Transição:** “A criação do asteroide mostra como o contrato é usado.”
 
 ## Slide 7 — Factory Method: criar e aplicar
 
 **Modo A:** 3:20–4:05 (45 s). **Modo B:** 1:45–2:20 (35 s).
 
-**Fala A:** “@Override confirma a sobrescrita de criar em AsteroideCreator. O retorno declarado é EventoPlanetario, e a instância criada é new Asteroide. No serviço, var evento tem tipo estático inferido EventoPlanetario; Java continua tipado. Eu chamo evento.aplicar pelo contrato. A base encaminha para a transformação concreta, e o resultado entra numa Terra candidata com o mesmo id. Na tela, 25% vira 0,25. A captura automática fica entre as duas linhas do serviço mostradas em recortes separados.”
+**Fala A:** “AsteroideCreator sobrescreve criar e retorna uma nova instância de Asteroide com a intensidade escolhida. O retorno declarado é EventoPlanetario; por isso, no serviço, esse é o tipo inferido de var evento. A chamada evento.aplicar recebe o estado atual e devolve o estado transformado. Esse resultado entra numa Terra candidata com o mesmo id do mundo. Para uma intensidade de 25% na interface, o evento recebe 0,25.”
 
-**Fala B:** “Este @Override sobrescreve criar e retorna new Asteroide. O retorno é EventoPlanetario; esse também é o tipo inferido de var evento no serviço. evento.aplicar usa o contrato e devolve o novo estado para a Terra candidata. As duas linhas são recortes separados: há captura entre elas.”
+**Fala B:** “AsteroideCreator.criar retorna new Asteroide pelo contrato EventoPlanetario. Esse é o tipo de var evento no serviço. Depois, evento.aplicar transforma o estado e o resultado forma a Terra candidata.”
 
-**Conceito e técnica:** Display final: AsteroideCreator real, @Override/EventoPlanetario destacados e método em quatro linhas; a candidata quebra após terra.nome(). São apenas quebras/espaços reorganizados, com os mesmos tokens do Java. Não substituir var por declaração fictícia no recorte. Usar as linhas literais `var evento = Objects.requireNonNull(creator).criar(intensidade);` e `var candidato = new Terra(terra.id(), terra.nome(), evento.aplicar(terra.estado()));`. Fonte completa/explicação em DEFESA_CODIGO_JAVA.md.
+**Conceito e técnica:** Consulta: events/EventoCreator.java, criar; AsteroideCreator.java, criar; EventoPlanetario.java, aplicar; EventoBase.java, aplicar/transformar; application/SimulacaoService.java, aplicar. @Override permite conferir a sobrescrita em compilação. Entre a criação do evento e a candidata, o serviço captura automaticamente o estado anterior; as duas chamadas não são adjacentes. Intensidade fora de [0,1]/não finita é rejeitada; zero mantém as condições, mas o serviço ainda pode registrar a ação.
 
-**Demo / abrir código:** Abrir events/EventoPlanetario.java e EventoBase.aplicar se perguntar pelo polimorfismo. Intensidade inválida é rejeitada; zero mantém condições, mas pode gerar registro/contagem no serviço.
+**Demo / abrir código:** Para aprofundar o polimorfismo, seguir EventoBase.aplicar até transformar no produto concreto. A candidata só substitui o estado público depois da confirmação.
 
-**Transição:** “Depois da confirmação, os interessados recebem a mudança.”
+**Transição:** “Depois que a mudança é salva, os outros componentes precisam recebê-la.”
 
 ## Slide 8 — Observer: propósito, problema e UML
 
 **Modo A:** 4:05–4:40 (35 s). **Modo B:** 2:20–2:45 (25 s).
 
-**Fala A:** “Eu não quero que Terra chame diretamente telas, alertas e estatísticas. ObserverBus guarda assinantes do contrato SimulacaoObserver. O serviço publica uma mudança confirmada; AlertaObserver gera recomendações e EstatisticasObserver atualiza contagem e extremos por mundo. MainController cria um terceiro assinante anônimo para a UI. Ele não implementa a interface diretamente. O UML mostra exatamente essas dependências e realizações.”
+**Fala A:** “Uma alteração no planeta interessa a mais de uma parte do aplicativo. O monitor avalia as condições de vida, as estatísticas contam mudanças e acompanham extremos, e a interface apresenta o resultado. Eu uso ObserverBus para entregar a mesma mudança a esses assinantes por SimulacaoObserver. Cada um executa sua responsabilidade sem colocar as regras de alertas ou de desenho dentro de Terra.”
 
-**Fala B:** “Observer distribui a mesma mudança a responsabilidades diferentes. O bus é o publicador; alertas e estatísticas implementam SimulacaoObserver. MainController inscreve um objeto anônimo da UI. A Terra não conhece essas implementações.”
+**Fala B:** “ObserverBus entrega a mudança aos assinantes: alertas, estatísticas e interface. Todos recebem pelo contrato SimulacaoObserver e cada um faz uma atualização diferente.”
 
-**Conceito e técnica:** Propósito: comunicar aos interessados inscritos. Problema: múltiplas reações a um mesmo fato. Solução: bus/contrato comum. Não desenhar MainController realizando diretamente SimulacaoObserver. Há dois assinantes padrão do serviço e um gráfico quando a UI está inscrita.
+**Conceito e técnica:** Consulta: patterns/observer/SimulacaoObserver.java; ObserverBus.java; AlertaObserver.java; EstatisticasObserver.java. O serviço inscreve os dois monitores. MainController inscreve um objeto anônimo cujo callback agenda a UI; não implementa diretamente SimulacaoObserver. Este é o papel do assinante gráfico no UML.
 
-**Demo / abrir código:** Para pedido isolado: alterar condições ou aplicar evento em mundo existente e mostrar assinantes. Não reiniciar a demo inteira.
+**Demo / abrir código:** Entrada independente: alterar condições ou aplicar um evento num mundo já aberto e consultar os assinantes notificados.
 
-**Transição:** “Eu explico interface, inscrição e callback nesta ordem.”
+**Transição:** “A inscrição define quem participa; a publicação chama cada assinante.”
 
 ## Slide 9 — Observer: interface, inscrição e callback
 
 **Modo A:** 4:40–5:25 (45 s). **Modo B:** 2:45–3:20 (35 s).
 
-**Fala A:** “Primeiro, a interface define aoMudar. Depois, inscrever guarda o assinante e devolve AutoCloseable para removê-lo. Na publicação, o laço contém observer.aoMudar(mudanca); essa é a chamada concreta pelo contrato. O nome entra em notificados só após retorno normal. RuntimeException é registrada por assinante e o laço continua. O bus é síncrono. O callback gráfico agenda Platform.runLater; receber a notificação não prova que os pixels já foram atualizados.”
+**Fala A:** “SimulacaoObserver define aoMudar, o método que recebe a mudança. inscrever adiciona o observador à lista e devolve uma forma de remover a inscrição depois. Quando o serviço publica, ObserverBus percorre a lista e chama observer.aoMudar(mudanca). Essa entrega é síncrona. O assinante da interface agenda a atualização com Platform.runLater, na thread JavaFX. Se um callback lança RuntimeException, o bus registra a falha e continua com os demais.”
 
-**Fala B:** “Eu mostro quatro blocos: interface, corpo de inscrever, publicação pelo serviço e callback. Na fonte, observer.aoMudar(mudanca) está dentro do laço. O callback é síncrono e o bus isola RuntimeException. A UI agenda runLater; o recibo confirma o callback, não o fim da renderização.”
+**Fala B:** “O serviço publica e o bus chama aoMudar em cada observador inscrito, de forma síncrona. O assinante gráfico usa Platform.runLater para agendar a atualização na thread JavaFX. RuntimeException é registrada por assinante.”
 
-**Conceito e técnica:** Abrir patterns/observer/SimulacaoObserver.java; ObserverBus.inscrever/publicar; application/SimulacaoService.confirmar; ui/MainController.initialize. Display final em quatro blocos: interface completa; corpo de inscrever em três linhas; serviço chama publicar/new MudancaPlanetaria em quatro linhas; callback observer.aoMudar(mudanca); em linha única azul. A publicação também reorganiza whitespace mantendo tokens. Quem publica é o serviço depois de salvar/atualizar; quem recebe são os assinantes. O método completo está em DEFESA_CODIGO_JAVA.md. Callback lento retarda a publicação; não prometer paralelismo ou captura de qualquer Error.
+**Conceito e técnica:** Consulta: ObserverBus.inscrever/publicar; SimulacaoService.confirmar; MainController.initialize/close. O serviço publica após salvar e atualizar Terra. Notificado significa retorno normal de aoMudar; no assinante gráfico, isso confirma o agendamento, não a conclusão da renderização. Callback lento retarda o laço; catch captura RuntimeException, não todo Error. AutoCloseable remove a inscrição. Alertas e estatísticas são projeções de sessão por UUID.
 
-**Demo / abrir código:** Ver nomes na trilha e estatística da sessão. Não prometer alerta crítico no Asteroide 25%: o ensaio registra condições estáveis no monitor, embora os assinantes tenham recebido a mudança.
+**Demo / abrir código:** Consultar nomes dos assinantes na trilha e contagem da sessão. Asteroide 25% pode manter a mensagem de condições estáveis do monitor mesmo tendo sido entregue; notificação e alerta crítico são fatos diferentes.
 
-**Transição:** “Para recuperar exatamente um estado anterior, eu uso Memento.”
+**Transição:** “Além de acompanhar uma mudança, eu posso recuperar o estado anterior.”
 
 ## Slide 10 — Memento: propósito, problema e UML
 
 **Modo A:** 5:25–6:00 (35 s). **Modo B:** 3:20–3:45 (25 s).
 
-**Fala A:** “Eu não consigo desfazer uma catástrofe apenas aplicando um evento bom. Memento preserva os valores anteriores para restaurá-los. Terra é o originador, TerraMemento é o retrato e SimulacaoService coordena como caretaker. O record é público e o estado pode ser lido. A proteção vem do grafo imutável, não de opacidade estrita. O banco acrescenta durabilidade; o retrato já existe em memória.”
+**Fala A:** “Antes de alterar o mundo, eu posso guardar um retrato. Ele preserva o nome e o estado completo daquele momento. Terra cria e restaura o retrato, TerraMemento carrega esses dados e SimulacaoService coordena quando usar cada um. Depois de uma catástrofe, recuperar esse valor guardado devolve as condições anteriores sem precisar calcular um evento que desfaça todos os efeitos.”
 
-**Fala B:** “Memento permite recuperar valores anteriores sem calcular o inverso de uma catástrofe. Terra captura/restaura, TerraMemento guarda e o serviço coordena. O record é público e legível: é imutabilidade, sem opacidade estrita GoF.”
+**Fala B:** “Memento guarda um retrato do mundo para recuperá-lo depois. Terra captura e restaura, TerraMemento conserva os dados e o serviço coordena a operação. A recuperação usa os valores guardados antes da mudança.”
 
-**Conceito e técnica:** Propósito: preservar/restaurar. Problema: perda de valores em múltiplos componentes. Solução: retrato completo vinculado ao mundo. UML: referências ao mesmo EstadoPlanetario imutável podem coexistir em Terra e Memento; armazenamento não substitui caretaker.
+**Conceito e técnica:** Consulta: domain/Terra.java, capturar/restaurar; patterns/memento/TerraMemento.java. Papéis: Terra originador, TerraMemento memento e SimulacaoService caretaker. O record é público e estado() é legível; a proteção é a imutabilidade do grafo, sem opacidade estrita GoF. Terra e snapshot podem referenciar o mesmo EstadoPlanetario imutável. SQLite acrescenta durabilidade. Detalhes em DEFESA_CODIGO_JAVA.md.
 
-**Demo / abrir código:** Abrir domain/Terra.java e patterns/memento/TerraMemento.java. Usar mundo existente para captura/restauração independente.
+**Demo / abrir código:** Entrada independente: num mundo existente, capturar, alterar e restaurar. A lista de retratos oferece o valor preservado para seleção.
 
-**Transição:** “A proteção de identidade aparece nestas linhas.”
+**Transição:** “Na restauração, o retrato precisa pertencer à mesma Terra.”
 
 ## Slide 11 — Memento: captura e restauração
 
 **Modo A:** 6:00–6:45 (45 s). **Modo B:** 3:45–4:20 (35 s).
 
-**Fala A:** “Capturar recebe rótulo e devolve um record com id do retrato, id do mundo, nome, instante e estado. Restaurar verifica null e compara mundoId com o id final da Terra. Só então reassocia nome e estado, incluindo tempo e componentes. No serviço, a candidata valida isso antes de gravar e um retrato de retorno preserva o que será substituído. Não preciso clonar os valores imutáveis. O histórico e as estatísticas de sessão não voltam ao passado.”
+**Fala A:** “capturar guarda o id do mundo, o nome, o instante e o estado num retrato com identificação própria. restaurar compara o mundoId desse retrato com o id da Terra. Se forem diferentes, rejeita a operação. Quando correspondem, recupera o nome e o estado sem trocar a identidade do mundo. O serviço valida isso numa candidata e também preserva o estado que está sendo substituído.”
 
-**Fala B:** “capturar guarda identidade, nome e estado. restaurar rejeita retrato de outro mundo e reassocia os valores; não troca o id da Terra. O serviço valida numa candidata antes de gravar e captura um retorno. O estado é legível e imutável, sem deep copy obrigatório.”
+**Fala B:** “A Terra confere o mundoId do retrato antes de restaurar. Se ele pertence ao mesmo mundo, recupera nome e estado mantendo seu id. O serviço também captura um retrato do estado que será substituído.”
 
-**Conceito e técnica:** Abrir Terra.capturar/restaurar e SimulacaoService.restaurar. Null-check antecede if se o slide recorta só a parte interna. Diferenciar id do retrato e mundoId. Snapshot de mundo original não serve na cópia de UUID novo; RestauracaoEcologica não é restauração exata por Memento.
+**Conceito e técnica:** Consulta: Terra.capturar/restaurar e SimulacaoService.restaurar. Objects.requireNonNull antecede a comparação dos UUIDs. Diferenciar id do snapshot de mundoId. Cópia tem UUID novo e rejeita retrato do original. Restaurar recupera componentes e anos; não apaga histórico nem devolve estatísticas de sessão/câmera ao passado. RestauracaoEcologica transforma o estado atual, sem ser restauração exata por Memento.
 
-**Demo / abrir código:** No final, comparar nome/ano/componentes, não só imagem. Para durabilidade, usar recibo de reabertura ou pedido específico do professor.
+**Demo / abrir código:** Comparar nome, ano e componentes. Recuperação de valores e persistência após reabertura têm evidências próprias. Legenda técnica: “A Terra recupera o nome e o estado sem trocar sua identidade.”
 
-**Transição:** “Agora eu separo os casos de uso para não confundir a ordem interna.”
+**Transição:** “Essas responsabilidades se encontram no fluxo de uso do simulador.”
 
 ## Slide 12 — Os quatro padrões no fluxo do simulador
 
 **Modo A:** 6:45–7:30 (45 s). **Modo B:** 4:20–4:50 (30 s).
 
-**Fala A:** “Eu separo quatro ações. Construir usa Builder e captura a origem. Capturar manualmente preserva um retrato sem anunciar nova mudança ambiental. Ao aplicar evento, a ordem interna é criar produto, capturar automaticamente, aplicar e calcular, gravar no SQLite, atualizar a Terra viva e publicar. Restaurar é uma ação posterior: valida o retrato numa candidata, preserva o retorno e confirma novamente. Não são quatro padrões rodando simultaneamente em qualquer clique.”
+**Fala A:** “Eu construo o mundo, preservo retratos, aplico eventos e recupero estados. São ações que posso repetir durante uma simulação. Dentro de aplicar, o serviço cria o evento, captura automaticamente o estado anterior, calcula os efeitos e os indicadores e grava no SQLite. Depois atualiza a Terra e publica a mudança. Restaurar usa outro fluxo: valida o retrato, preserva o estado atual e confirma a recuperação.”
 
-**Fala B:** “Construir, capturar manualmente, aplicar e restaurar são ações distintas. Dentro de aplicar: criar evento → captura automática → aplicar/calcular → SQLite → atualizar Terra → publicar. A captura manual da demo aconteceu antes do clique; ela não inverte essa ordem interna.”
+**Fala B:** “O usuário constrói, guarda retratos, aplica eventos e restaura. Dentro de aplicar, a ordem é criar evento, capturar automaticamente, aplicar e calcular, gravar, atualizar Terra e publicar a mudança.”
 
-**Conceito e técnica:** Abrir SimulacaoService.criar/capturar/aplicar/confirmar/restaurar. Grava candidata + RegistroEvento + snapshot opcional por MundoRepository. Erro de gravação antes de retorno normal impede avançar para atualizar/publicar; falha de observador é posterior. Não prometer transação distribuída banco/memória/GUI.
+**Conceito e técnica:** Consulta: SimulacaoService.criar/capturar/aplicar/confirmar/restaurar; persistence/SqliteMundoRepository.salvar e TransacaoSqlite.executar. MundoRepository recebe candidata, RegistroEvento e snapshot opcional. Captura manual é uma operação separada, com notificar=false; pode ocorrer antes do clique de aplicar, que faz sua própria captura após criar o produto. Em falha SQL anterior ao commit, tenta-se rollback. Se salvar não retorna normalmente, o serviço não avança para atualizar/publicar, mas isso não prova ausência de commit: o finally de TransacaoSqlite pode falhar ao restaurar autocommit depois de um commit bem-sucedido. Nesse caso, o banco pode estar gravado enquanto memória/notificação não avançaram. Não há transação distribuída entre SQLite, memória e GUI. RuntimeException do observador é posterior à gravação.
 
-**Demo / abrir código:** Apontar na trilha o retrato manual e o automático como capturas distintas. Modo B: após este slide ir direto ao 15; 13/14 ficam acessíveis para contexto.
+**Demo / abrir código:** Distinguir o retrato manual do automático na trilha. No modo B, seguir ao slide 15; no modo A, continuar por indicadores e resultados.
 
-**Transição:** “Vou mostrar o fluxo no aplicativo; o modelo e os experimentos ficam de apoio se quiser detalhar.”
+**Transição:** “A simulação calcula indicadores para acompanhar as condições desse mundo.”
 
-## Slide 13 — Algoritmo e indicadores
+## Slide 13 — Indicadores e evolução do planeta
 
 **Modo A:** 7:30–8:20 (50 s). **Modo B:** opcional; pular na exposição inicial.
 
-**Fala A:** “Eu separo adequação humana, potencial biológico e sustentabilidade da civilização. Os índices multiplicam adequações; não são probabilidades. Pressão parcial é pressão total vezes fração do gás. O suporte depende também de continente e recursos. O tempo avança em passos de até um ano, recalculando clima, gelo, vegetação e população. O determinismo se refere à mesma entrada e ao mesmo intervalo; fatiar chamadas pode mudar arredondamentos.”
+**Fala A:** “O simulador calcula três indicadores. A adequação humana considera as condições para humanos sem proteção. O potencial biológico usa condições mais amplas para vida associada à água. A sustentabilidade da civilização combina o ambiente com recursos, área continental e população. No avanço do tempo, clima, gelo, vegetação e população evoluem em passos de até um ano. Os indicadores são recalculados a partir dessas novas condições.”
 
-**Fala B:** Pular na exposição B; se solicitado, explicar H/B/C e abrir ModeloPlanetario.calcular/avancar. Não substituir os quatro padrões por discussão científica.
+**Fala B:** “Adequação humana, potencial biológico e sustentabilidade respondem a aspectos diferentes do mesmo mundo. Quando o tempo avança, o motor atualiza o ambiente e a população e recalcula esses indicadores.”
 
-**Conceito e técnica:** Fonte: simulation/ModeloPlanetario.java e docs/MODELO.md. O motor é global didático, sem calibração científica. Água+gelo conserva reserva de cobertura de superfície; eventos não avançam relógio por conta própria.
+**Conceito e técnica:** Contexto opcional no modo B. Consulta: simulation/ModeloPlanetario.java, calcular/avancar/evoluir; docs/MODELO.md. Os índices são produtos de adequações, não probabilidades. Pressão parcial = pressão total × fração do gás. O modelo é global e didático, sem calibração científica. Água+gelo conserva reserva de cobertura de superfície; o evento isolado não avança o relógio. Mesma entrada/intervalo produzem a mesma saída; particionar chamadas pode mudar arredondamentos.
 
-**Demo / abrir código:** Apontar indicadores/fatores se perguntado. Não executar varredura ou evolução longa durante a abertura curta.
+**Demo / abrir código:** Localizar fatores nos indicadores. Evolução longa ou varredura experimental fica fora da demonstração inicial.
 
-**Transição:** “Os registros ajudam a conferir comportamento e recuperação do estado.”
+**Transição:** “Os experimentos mostram como essas regras aparecem nos resultados.”
 
-## Slide 14 — Experimentos: evento e restauração do estado
+## Slide 14 — Resultados dos experimentos
 
 **Modo A:** 8:20–9:05 (45 s). **Modo B:** opcional; pular na exposição inicial.
 
-**Fala A:** “Eu mantenho os experimentos como evidência de apoio. A troca controlada de nitrogênio por hélio preserva indicadores quando mantenho as pressões relevantes; oceano total pode ter ambiente favorável e suporte civilizacional zero. No ensaio registrado da GUI, asteroide a 25% levou H de 100 para aproximadamente 64,73, temperatura de 15 para 8 e população de 8 para 6,5 bilhões. Restaurar recuperou os valores iniciais. Isso mostra transformação e recuperação pelo fluxo real, sem certificar ciência.”
+**Fala A:** “Nos cenários medidos, substituir parte do nitrogênio por hélio, mantendo as pressões relevantes, preservou os indicadores. Um planeta com oceano total manteve adequação humana de 100%, mas teve capacidade de suporte civilizacional zero. No asteroide a 25%, H passou de 100 para cerca de 64,73, a temperatura de 15 para 8 e a população de 8 para 6,5 bilhões. A restauração recuperou os valores iniciais.”
 
-**Fala B:** Pular na exposição B; usar como apoio se o professor pedir evidência. O terceiro exemplo é Asteroide 25% + restauração exata do estado, não população residual.
+**Fala B:** “Três resultados: a troca controlada de nitrogênio por hélio preservou os indicadores; oceano total teve suporte civilizacional zero; asteroide a 25% alterou o mundo e o retrato recuperou os valores anteriores.”
 
-**Conceito e técnica:** Fonte do ensaio anterior: docs/capturas/run-20261115-124710/measurements.csv, registros antes/evento_0/restaurado; visual-values.csv e sqlite-reopen.txt. H=100 → 64,72968169602449 →100; T=15→8→15; população=8.000.000.000→6.500.000.000→8.000.000.000. O display pode arredondar H para 64,7297 ou 64,73. As evidências são anteriores, não reexecutadas nesta revisão.
+**Conceito e técnica:** Contexto opcional no modo B. Primeiro/segundo resultados: docs/auditoria/experimental-20261115-final/snapshots.csv. Evento/restauração: docs/capturas/run-20261115-124710/measurements.csv, registros antes/evento_0/restaurado; visual-values.csv e sqlite-reopen.txt. H=100→64,72968169602449→100; T=15→8→15 °C; população=8.000.000.000→6.500.000.000→8.000.000.000. A UI pode arredondar H. Esses registros são anteriores e não foram reexecutados nesta revisão. Na evolução sem O₂, o arredondamento inteiro de Math.round pode reter duas pessoas; esse resíduo numérico não prevê sobrevivência. Os documentos de estudo detalham os limites do modelo.
 
-**Demo / abrir código:** Mostrar captura/recibo real; não repetir a auditoria. Três números ilustram recuperação; comparação completa do estado/checagens sustenta a restauração exata, não somente a aparência do planeta.
+**Demo / abrir código:** Apresentar os três resultados e a captura restaurada. Três números ilustram recuperação; a comparação de estado completo/checagens do ensaio sustenta a recuperação de todos os valores. Usar os registros como evidência anterior.
 
-**Transição:** “Posso demonstrar o ciclo completo ou só o padrão que quiser verificar.”
+**Transição:** “O mundo restaurado reúne esse ciclo de construção, evento e recuperação.”
 
-**Nota técnica, fora da chamada principal:** o resíduo de duas pessoas no cenário sem O₂ é limitação numérica de arredondamento inteiro; não representa sobrevivência real. Se perguntado, explicar sem usar esse achado como título/headline. A nova evidência de recuperação não elimina essa limitação do motor.
-
-## Slide 15 — Demonstração e conclusão
+## Slide 15 — Construção, eventos, comunicação e recuperação
 
 **Modo A:** 9:05–10:40 (95 s). **Modo B:** 4:50–6:20 (90 s).
 
-**Fala A:** “Vou construir a Terra, preservar um retrato e aplicar asteroide a 25%. O Creator produz o evento; o serviço salva e os assinantes recebem a mudança. Agora seleciono o retrato e restauro. Eu confiro os valores e a identidade do mundo, não só o globo. Builder constrói, Factory Method cria o evento, Observer comunica e Memento recupera. Posso abrir qualquer uma dessas classes para detalhar.”
+**Fala A:** “Nesta captura, a Terra voltou aos valores do retrato depois do impacto. O aplicativo reúne quatro responsabilidades: TerraBuilder monta o mundo, os criadores produzem os eventos, ObserverBus comunica as mudanças e Terra recupera o estado guardado em TerraMemento. Os mundos, o histórico e os retratos ficam no SQLite. A entrega anterior registrou 69 testes do aplicativo e 2.026 experimentos. O resultado é um simulador em que posso construir cenários, acompanhar transformações e recuperar estados.”
 
-**Fala B:** “Vou mostrar construir → capturar → asteroide 25% → observar → restaurar. Depois posso abrir a classe do padrão que quiser. O foco é explicar quem constrói a Terra, cria o evento, recebe a mudança e recupera o estado.”
+**Fala B:** “O mundo voltou ao estado preservado. Builder constrói, Factory Method cria os eventos, Observer comunica as mudanças e Memento permite recuperar o retrato. Essas partes formam o fluxo do simulador, com mundos e histórico guardados no SQLite.”
 
-**Conceito e técnica:** Usar banco temporário do procedimento de demo. Ordem UI e ordem interna são diferentes: o retrato manual antecede aplicar, que cria outro automático após criar o produto. Checar H/T/população e nome/ano. Só afirmar reabertura ao vivo se ocorrer; recibo anterior não é execução nova.
+**Conceito e técnica:** Captura restaurada e quatro papéis concretos acompanham a conclusão. Os 69 testes são do recibo histórico docs/evidencias/verify-final.txt; os 2.026 experimentos, de docs/auditoria/experimental-20261115-final/summary.json. Não são novas execuções desta revisão, nem 2.026 testes JUnit. Na demo, o retrato manual antecede aplicar, que captura outro automaticamente após criar o produto. Reabertura ao vivo só conta se efetivamente realizada; recibo anterior permanece registro.
 
-**Demo / abrir código:** 0–15s criar Terra com defaults; 15–25s capturar; 25–40s selecionar Asteroide 25% e aplicar; 40–50s apontar nomes dos assinantes/valores; 50–70s selecionar retrato/restaurar e conferir; 70–90s concluir e aceitar pedido de classe. No modo A, os 5s restantes servem para controle/pausa. Mundo de controle e reabertura são extensões sob pergunta, fora do orçamento básico. Se o professor pedir só um padrão, usar o caminho independente do guia/DEMO_APRESENTACAO.
+**Demo / abrir código:** 0–15s criar Terra com valores padrão; 15–25s capturar; 25–40s selecionar Asteroide 25% e aplicar; 40–50s acompanhar assinantes/valores; 50–70s selecionar retrato, restaurar e conferir; 70–90s concluir junto ao mundo restaurado. No modo A, 5s adicionais para pausa. Comparar H/T/população e nome/ano. Mundo de controle, reabertura e caminhos independentes permanecem no guia e em DEMO_APRESENTACAO.md, fora do orçamento básico. Se usar apenas a captura, apresentar como registro, sem narrar cliques que não ocorreram.
 
-**Transição:** “Posso seguir do contrato até a chamada concreta, ou mostrar outra operação.”
+**Transição:** Encerramento da apresentação.

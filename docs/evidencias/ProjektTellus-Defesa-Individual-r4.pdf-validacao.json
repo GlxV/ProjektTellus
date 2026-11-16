@@ -1,0 +1,11 @@
+{
+  "file": "docs\\apresentacao\\ProjektTellus-Defesa-Individual-r4.pdf",
+  "pages": 15,
+  "resolution": "1366x768 render per page",
+  "format": "Raster slides embedded in PDF; no searchable Java text. Editable source is PPTX.",
+  "rendered_all_pages": true,
+  "renderer": "PyMuPDF; bundled Poppler unavailable",
+  "sha256": "4bfa396d11b81aba7a88e3627ec32ac544a2de0a71fa83057516217dfab10569",
+  "bytes": 1083101,
+  "reason": "Reuse the established raster export after #standard-fonts/Helvetica was unavailable in the original delivery. Direct PDF export was not retried in this revision; bundled dependencies remain unchanged."
+}

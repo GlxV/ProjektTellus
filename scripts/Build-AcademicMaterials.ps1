@@ -1,10 +1,11 @@
 ﻿param(
     [Parameter(Mandatory=$true)][string]$RuntimeRoot,
     [Parameter(Mandatory=$true)][string]$PresentationsSkill,
+    [string]$PdfSkill = '',
     [string]$PythonExecutable = 'python',
-    [string]$DeckName = 'ProjektTellus-Defesa-Individual-r3.pptx',
-    [string]$PreviewDirectory = 'docs/apresentacao/defesa-r3',
-    [string]$BuildDirectory = 'target/defense-r3-build'
+    [string]$DeckName = 'ProjektTellus-Defesa-Individual-r4.pptx',
+    [string]$PreviewDirectory = 'docs/apresentacao/editorial-r4',
+    [string]$BuildDirectory = 'target/editorial-r4-build'
 )
 $ErrorActionPreference = 'Stop'
 $materialsRoot = Split-Path -Parent $PSScriptRoot
@@ -38,10 +39,20 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Falha ao gerar slides.' }
     & $PythonExecutable scripts/Personalize-DefenseMetadata.py
     if ($LASTEXITCODE -ne 0) { throw 'Falha ao definir metadados acadêmicos.' }
+    $materialsPdfSkill = $PdfSkill
+    if (-not $materialsPdfSkill) {
+        $materialsSkillVersion = Split-Path -Leaf (Split-Path -Parent (Split-Path -Parent $PresentationsSkill))
+        $materialsSkillsRoot = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $PresentationsSkill)))
+        $materialsPdfSkill = Join-Path $materialsSkillsRoot ("pdf/$materialsSkillVersion/skills/pdf")
+    }
+    & $materialsNode (Join-Path $materialsPdfSkill 'container_tools/mark_artifact_operation_started.mjs') --operation-kind edit --expected-output-count 1 --output-format pdf
+    if ($LASTEXITCODE -ne 0) { throw 'Falha ao iniciar a exportação PDF.' }
     & $PythonExecutable scripts/Export-AcademicPdf.py
     if ($LASTEXITCODE -ne 0) { throw 'Falha ao montar o PDF.' }
     & $materialsNode scripts/Finalize-AcademicDeck.mjs
     if ($LASTEXITCODE -ne 0) { throw 'A validação do PowerPoint falhou; consulte o recibo.' }
+    & $materialsNode scripts/Render-AcademicPptx.mjs $materialsOutput (Join-Path $BuildDirectory 'pptx-check')
+    if ($LASTEXITCODE -ne 0) { throw 'Falha ao renderizar o PowerPoint final.' }
     Write-Host "Apresentação gerada: $materialsOutput"
     Write-Host 'Inspecione os PNGs antes de usar a nova edição. O vídeo é gerado separadamente por Build-DemoVideo.py.'
 } finally { Pop-Location }

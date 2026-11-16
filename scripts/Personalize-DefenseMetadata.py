@@ -2,7 +2,7 @@
 from pathlib import Path
 import zipfile,xml.etree.ElementTree as ET,os
 root=Path(__file__).resolve().parents[1]
-build=root/os.environ.get('TELLUS_BUILD_DIR','target/defense-r3-build')
+build=root/os.environ.get('TELLUS_BUILD_DIR','target/editorial-r4-build')
 candidate=build/'candidate.pptx';temporary=build/'candidate-metadata.pptx'
 dc='http://purl.org/dc/elements/1.1/';cp='http://schemas.openxmlformats.org/package/2006/metadata/core-properties'
 ET.register_namespace('dc',dc);ET.register_namespace('cp',cp)

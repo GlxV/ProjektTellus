@@ -1,0 +1,116 @@
+{
+  "revision": "editorial-r4",
+  "findings": [
+    {
+      "title": "Trocar N₂ por 20% de He preservou os indicadores",
+      "text": "O₂ 21% e CO₂ 0,04%, a 1 atm: humana 100%, biológica 100% e sustentabilidade 85,88%."
+    },
+    {
+      "title": "Um oceano habitável pode ter suporte civilizacional zero",
+      "text": "Oceano 100%: humana 100%, biológica 98,81%; capacidade e sustentabilidade iguais a zero."
+    },
+    {
+      "title": "Asteroide 25% e recuperação por Memento",
+      "text": "Humana: 100% → 64,73% → 100%. Temperatura: 15 → 8 → 15 °C; o retrato recuperou o estado completo."
+    }
+  ],
+  "sources": [
+    "docs/auditoria/experimental-20261115-final/snapshots.csv",
+    "docs/capturas/run-20261115-124710/measurements.csv"
+  ],
+  "selected_gui_rows": {
+    "antes": {
+      "scenario": "antes",
+      "o2": "21.0",
+      "n2": "78.96",
+      "co2": "0.04",
+      "he": "0.0",
+      "pressure": "1.0",
+      "temperature": "15.0",
+      "aerosol": "0.0",
+      "radiation": "0.0",
+      "water": "71.0",
+      "ice": "3.0",
+      "vegetation": "65.0",
+      "population": "8000000000",
+      "years": "0.0",
+      "human": "100.0",
+      "biological": "100.0",
+      "civil": "85.87782018658834",
+      "capacity": "13740451230",
+      "history": "1",
+      "snapshots": "1",
+      "notifications": "1",
+      "alerts": "Condições estáveis neste modelo didático."
+    },
+    "evento_0": {
+      "scenario": "evento_0",
+      "o2": "21.0",
+      "n2": "78.92999999999999",
+      "co2": "0.07",
+      "he": "0.0",
+      "pressure": "1.0",
+      "temperature": "8.0",
+      "aerosol": "21.25",
+      "radiation": "0.0",
+      "water": "68.0",
+      "ice": "6.0",
+      "vegetation": "51.1875",
+      "population": "6500000000",
+      "years": "0.0",
+      "human": "64.72968169602449",
+      "biological": "75.4479635761296",
+      "civil": "44.765119622128324",
+      "capacity": "7162419140",
+      "history": "3",
+      "snapshots": "3",
+      "notifications": "2",
+      "alerts": "Condições estáveis neste modelo didático."
+    },
+    "restaurado": {
+      "scenario": "restaurado",
+      "o2": "21.0",
+      "n2": "78.96",
+      "co2": "0.04",
+      "he": "0.0",
+      "pressure": "1.0",
+      "temperature": "15.0",
+      "aerosol": "0.0",
+      "radiation": "0.0",
+      "water": "71.0",
+      "ice": "3.0",
+      "vegetation": "65.0",
+      "population": "8000000000",
+      "years": "0.0",
+      "human": "100.0",
+      "biological": "100.0",
+      "civil": "85.87782018658834",
+      "capacity": "13740451230",
+      "history": "4",
+      "snapshots": "4",
+      "notifications": "3",
+      "alerts": "Condições estáveis neste modelo didático."
+    }
+  },
+  "physical_fields_restored_exactly": [
+    "o2",
+    "n2",
+    "co2",
+    "he",
+    "pressure",
+    "temperature",
+    "aerosol",
+    "radiation",
+    "water",
+    "ice",
+    "vegetation",
+    "population",
+    "years",
+    "human",
+    "biological",
+    "civil",
+    "capacity"
+  ],
+  "numeric_limitation": "O resíduo de duas pessoas na evolução anóxica é uma limitação numérica de Math.round; não uma previsão realista de sobrevivência. Mantido nas notas e no estudo, substituído como exemplo central do slide.",
+  "new_experiments_executed": false
+}
