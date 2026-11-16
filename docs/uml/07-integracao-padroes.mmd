@@ -1,0 +1,42 @@
+classDiagram
+direction TB
+class SimulacaoService
+class TerraBuilder {
+  +build() Terra
+}
+class Terra {
+  +capturar(String rotulo) TerraMemento
+  +restaurar(TerraMemento memento) void
+}
+class TerraMemento {
+  <<record>>
+}
+class EventoCreator {
+  <<abstract>>
+  +criar(double intensidade) EventoPlanetario*
+}
+class EventoPlanetario {
+  <<interface>>
+  +aplicar(EstadoPlanetario estado) EstadoPlanetario
+}
+class ObserverBus {
+  +publicar(MudancaPlanetaria mudanca) Entrega
+}
+class SimulacaoObserver {
+  <<interface>>
+  +aoMudar(MudancaPlanetaria mudanca) void
+}
+class MundoRepository {
+  <<interface>>
+}
+SimulacaoService ..> TerraBuilder : Builder - criar
+TerraBuilder ..> Terra : constroi
+SimulacaoService ..> EventoCreator : Factory Method - aplicar
+EventoCreator ..> EventoPlanetario : retorna produto
+SimulacaoService ..> EventoPlanetario : aplica ao estado
+SimulacaoService ..> Terra : Memento - coordena originador
+Terra ..> TerraMemento : captura e restaura
+SimulacaoService --> MundoRepository : salva antes de notificar
+MundoRepository ..> TerraMemento : persiste retrato
+SimulacaoService --> ObserverBus : Observer - publica
+ObserverBus --> "0..*" SimulacaoObserver : assinantes

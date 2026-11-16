@@ -1,0 +1,43 @@
+classDiagram
+direction TB
+class TerraBuilder {
+  -String nome
+  -Atmosfera atmosfera
+  -Clima clima
+  -Biosfera biosfera
+  -Hidrosfera hidrosfera
+  -Civilizacao civilizacao
+  -double anos
+  +nome(String valor) TerraBuilder
+  +atmosfera(Atmosfera valor) TerraBuilder
+  +clima(Clima valor) TerraBuilder
+  +biosfera(Biosfera valor) TerraBuilder
+  +hidrosfera(Hidrosfera valor) TerraBuilder
+  +civilizacao(Civilizacao valor) TerraBuilder
+  +anos(double valor) TerraBuilder
+  +build() Terra
+}
+class Terra {
+  -UUID id
+  -String nome
+  -EstadoPlanetario estado
+  +Terra(UUID id, String nome, EstadoPlanetario estado)
+  +id() UUID
+  +nome() String
+  +estado() EstadoPlanetario
+}
+class EstadoPlanetario {
+  <<record>>
+  +atmosfera() Atmosfera
+  +clima() Clima
+  +biosfera() Biosfera
+  +hidrosfera() Hidrosfera
+  +civilizacao() Civilizacao
+  +anos() double
+  +superficieContinental() double
+  +superficieVegetada() double
+}
+TerraBuilder ..> Terra : cria com UUID novo
+TerraBuilder ..> EstadoPlanetario : cria com valores reunidos
+Terra --> "1" EstadoPlanetario : estado
+note for TerraBuilder "Builder concreto e fluente, sem Director. Os cinco componentes sao records imutaveis."

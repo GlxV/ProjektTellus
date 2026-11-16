@@ -1,0 +1,32 @@
+classDiagram
+direction TB
+class MainController
+class SimulacaoService
+class MundoRepository {
+  <<interface>>
+}
+class SqliteMundoRepository
+class ObserverBus
+class Terra
+class EstadoPlanetario {
+  <<record>>
+}
+class TerraBuilder
+class EventoCreator {
+  <<abstract>>
+}
+class ModeloPlanetario
+MainController --> SimulacaoService : service
+MainController --> Terra : current
+MainController ..> TerraBuilder : recebe do BuilderDialog
+MainController ..> SqliteMundoRepository : instancia
+SimulacaoService --> MundoRepository : repository
+MundoRepository <|.. SqliteMundoRepository
+SimulacaoService --> ObserverBus : observerBus
+SimulacaoService ..> Terra : coordena operacoes
+SimulacaoService ..> TerraBuilder : criar
+SimulacaoService ..> EventoCreator : aplicar
+SimulacaoService ..> ModeloPlanetario : chamadas estaticas
+TerraBuilder ..> Terra : constroi
+Terra --> "1" EstadoPlanetario : estado atual
+note for SqliteMundoRepository "Implementa o contrato via JDBC/SQLite. Estado, evento e retrato na mesma transacao."

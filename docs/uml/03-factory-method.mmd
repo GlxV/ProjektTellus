@@ -1,0 +1,49 @@
+classDiagram
+direction LR
+class EventoCreator {
+  <<abstract>>
+  +nome() String*
+  +criar(double intensidade) EventoPlanetario*
+  +toString() String
+}
+class AsteroideCreator
+class SupervulcaoCreator
+class GuerraNuclearCreator
+class InvasaoAlienigenaCreator
+class RestauracaoEcologicaCreator
+class EventoPlanetario {
+  <<interface>>
+  +nome() String
+  +intensidade() double
+  +aplicar(EstadoPlanetario estado) EstadoPlanetario
+}
+class EventoBase {
+  <<abstract>>
+  -double intensidade
+  #EventoBase(double intensidade)
+  +intensidade() double
+  +aplicar(EstadoPlanetario estado) EstadoPlanetario
+  #transformar(EstadoPlanetario estado, double intensidade) EstadoPlanetario*
+}
+class Asteroide
+class Supervulcao
+class GuerraNuclear
+class InvasaoAlienigena
+class RestauracaoEcologica
+EventoCreator <|-- AsteroideCreator
+EventoCreator <|-- SupervulcaoCreator
+EventoCreator <|-- GuerraNuclearCreator
+EventoCreator <|-- InvasaoAlienigenaCreator
+EventoCreator <|-- RestauracaoEcologicaCreator
+EventoCreator ..> EventoPlanetario : tipo de retorno
+EventoPlanetario <|.. EventoBase
+EventoBase <|-- Asteroide
+EventoBase <|-- Supervulcao
+EventoBase <|-- GuerraNuclear
+EventoBase <|-- InvasaoAlienigena
+EventoBase <|-- RestauracaoEcologica
+AsteroideCreator ..> Asteroide : cria
+SupervulcaoCreator ..> Supervulcao : cria
+GuerraNuclearCreator ..> GuerraNuclear : cria
+InvasaoAlienigenaCreator ..> InvasaoAlienigena : cria
+RestauracaoEcologicaCreator ..> RestauracaoEcologica : cria

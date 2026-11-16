@@ -79,7 +79,8 @@ src/test/java/            JUnit de comportamento e integração
 docs/                     Modelos, diagramas e transferência
 ```
 
-- [Arquitetura e UML](docs/ARQUITETURA.md)
+- [Documentação UML oficial — diagramas, fontes Mermaid, PNG e SVG](docs/uml/README.md)
+- [Arquitetura](docs/ARQUITETURA.md)
 - [Os quatro padrões](docs/PADROES.md)
 - [Modelo matemático e limites](docs/MODELO.md)
 - [Atmosfera dinâmica e aproximações ópticas](docs/ATMOSFERA.md)

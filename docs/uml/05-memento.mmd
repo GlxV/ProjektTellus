@@ -1,0 +1,41 @@
+classDiagram
+direction TB
+class SimulacaoService {
+  +capturar(Terra terra, String rotulo) ResultadoOperacao
+  +restaurar(Terra terra, TerraMemento snapshot) ResultadoOperacao
+}
+class Terra {
+  -UUID id
+  -String nome
+  -EstadoPlanetario estado
+  +capturar(String rotulo) TerraMemento
+  +restaurar(TerraMemento memento) void
+}
+class TerraMemento {
+  <<record>>
+  +id() UUID
+  +mundoId() UUID
+  +rotulo() String
+  +nomeMundo() String
+  +criadoEm() Instant
+  +estado() EstadoPlanetario
+}
+class EstadoPlanetario {
+  <<record>>
+}
+class MundoRepository {
+  <<interface>>
+  +salvar(Terra terra, RegistroEvento evento, TerraMemento snapshot) void
+  +snapshots(UUID id) List~TerraMemento~
+}
+class SqliteMundoRepository
+SimulacaoService ..> Terra : originador recebido por parametro
+SimulacaoService ..> TerraMemento : coordena captura e restauracao
+SimulacaoService --> MundoRepository : repository
+MundoRepository <|.. SqliteMundoRepository
+MundoRepository ..> TerraMemento : armazena e consulta
+Terra ..> TerraMemento : cria e restaura
+Terra --> "1" EstadoPlanetario : estado atual
+TerraMemento --> "1" EstadoPlanetario : estado preservado
+note for SimulacaoService "Caretaker. Restaura primeiro uma Terra candidata e salva antes de atualizar a Terra viva."
+note for TerraMemento "Grafo imutavel e publicamente legivel. Sem opacidade estrita do Memento GoF."

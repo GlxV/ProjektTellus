@@ -1,0 +1,34 @@
+sequenceDiagram
+autonumber
+participant UI as MainController<br/>(worker)
+participant S as SimulacaoService
+participant C as EventoCreator<br/>(concreto)
+participant E as EventoPlanetario<br/>(concreto)
+participant T as Terra<br/>(viva)
+participant R as MundoRepository<br/>(SQLite)
+participant B as ObserverBus
+UI->>S: aplicar(terra, creator, intensidade)
+S->>C: criar(intensidade)
+C-->>S: evento
+S->>T: capturar(rotulo)
+T-->>S: snapshot: TerraMemento
+S->>T: estado()
+T-->>S: antes: EstadoPlanetario
+S->>E: aplicar(antes)
+E-->>S: novo EstadoPlanetario
+Note over S,R: new Terra(id, nome, novoEstado)<br/>confirmar(...) privado calcula indicadores<br/>via ModeloPlanetario.calcular(candidato.estado())<br/>e cria RegistroEvento
+S->>R: salvar(candidato, registro, snapshot)
+alt transacao confirmada
+  R-->>S: retorno normal apos commit
+  S->>T: renomear(candidato.nome())
+  S->>T: atualizar(candidato.estado())
+  S->>B: publicar(new MudancaPlanetaria(...))
+  Note over S,B: Callbacks sincronos: AlertaObserver,<br/>EstatisticasObserver e assinante anonimo da UI.<br/>RuntimeException isolada por assinante.<br/>O callback da UI agenda Platform.runLater.
+  B-->>S: Entrega(notificados, falhas)
+  S-->>UI: ResultadoOperacao
+  Note over UI,E: MainController.run agenda sucesso na thread FX.<br/>Apresentacao e animacao usam o resultado confirmado.<br/>A entrega do bus nao espera os pixels da UI.
+else falha de persistencia
+  R-->>S: PersistenciaException (rollback)
+  S-->>UI: excecao propagada
+  Note over S,T: Terra viva preservada, sem publicar esta mudanca.
+end

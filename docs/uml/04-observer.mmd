@@ -1,0 +1,42 @@
+classDiagram
+direction TB
+class SimulacaoService
+class ObserverBus {
+  -CopyOnWriteArrayList~SimulacaoObserver~ observers
+  +inscrever(SimulacaoObserver observer) AutoCloseable
+  +remover(SimulacaoObserver observer) void
+  +publicar(MudancaPlanetaria mudanca) Entrega
+}
+class SimulacaoObserver {
+  <<interface>>
+  +nome() String
+  +aoMudar(MudancaPlanetaria mudanca) void
+}
+class AlertaObserver {
+  +nome() String
+  +aoMudar(MudancaPlanetaria m) void
+  +para(UUID id) List~String~
+}
+class EstatisticasObserver {
+  +nome() String
+  +aoMudar(MudancaPlanetaria m) void
+  +para(UUID id) Estatistica
+}
+class MudancaPlanetaria {
+  <<record>>
+  +mundoId() UUID
+  +estado() EstadoPlanetario
+  +indicadores() Indicadores
+  +descricao() String
+}
+class MainController
+SimulacaoService --> ObserverBus : observerBus
+SimulacaoService --> AlertaObserver : monitor
+SimulacaoService --> EstatisticasObserver : estatisticas
+ObserverBus --> "0..*" SimulacaoObserver : observers
+SimulacaoObserver <|.. AlertaObserver
+SimulacaoObserver <|.. EstatisticasObserver
+SimulacaoObserver ..> MudancaPlanetaria : recebe
+MainController ..> SimulacaoObserver : instancia implementacao anonima
+MainController ..> ObserverBus : inscreve via service.observerBus
+ObserverBus ..> MudancaPlanetaria : publica
