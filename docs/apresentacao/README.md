@@ -23,7 +23,9 @@ A edição mais recente apresenta quatro padrões de projeto implementados no c�
 | Observer | [ObserverBus.java](../../src/main/java/com/projekttellus/patterns/observer/ObserverBus.java) | [PNG](../uml/04-observer.png) |
 | Memento | [TerraMemento.java](../../src/main/java/com/projekttellus/patterns/memento/TerraMemento.java) | [PNG](../uml/05-memento.png) |
 
-Os sete diagramas, com fontes Mermaid e exportações PNG/SVG, estão em [docs/uml](../uml/README.md). A arquitetura e as decisões de implementação estão descritas em [ARQUITETURA.md](../ARQUITETURA.md) e [PADROES.md](../PADROES.md).
+Os sete diagramas, com fontes Mermaid e exportações PNG/SVG, estão em [docs/uml](../uml/README.md).
+
+A [documentação de engenharia de prompts](../ProjektTellus_Engenharia_de_Prompts/README.md) registra a metodologia de desenvolvimento assistido por IA, os prompts documentados, as fontes e as limitações de proveniência. Os prompts reconstruídos estão identificados como reconstruções, não transcrições literais. A arquitetura e as decisões de implementação estão descritas em [ARQUITETURA.md](../ARQUITETURA.md) e [PADROES.md](../PADROES.md).
 
 ## Executar a demonstração
 

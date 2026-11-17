@@ -86,6 +86,7 @@ docs/                     Modelos, diagramas e transferência
 - [Atmosfera dinâmica e aproximações ópticas](docs/ATMOSFERA.md)
 - [Comparativos de cenários](docs/COMPARATIVOS_REFORMULACAO.md)
 - [Apresentações em PowerPoint e PDF](docs/apresentacao/README.md)
+- [Engenharia de prompts e desenvolvimento assistido por IA](docs/ProjektTellus_Engenharia_de_Prompts/README.md)
 - [Recursos visuais](docs/ASSETS.md)
 - [Animações, acessibilidade e verificação gráfica](docs/ANIMACOES.md)
 - [Auditoria experimental](docs/AUDITORIA_EXPERIMENTAL.md)
