@@ -1,6 +1,6 @@
 # Capturas reais
 
-A execução canônica está indicada em [latest.json](latest.json): `run-20261115-124710`, 33 PNGs, 249 verificações de harness. Consulte [o roteiro](../DEMO_APRESENTACAO.md) e [o ambiente](../AMBIENTE_APRESENTACAO.md).
+A execução canônica está indicada em [latest.json](latest.json): `run-20261115-124710`, 33 PNGs, 249 verificações de harness. Consulte [as apresentações](../apresentacao/README.md) e [a auditoria experimental](../AUDITORIA_EXPERIMENTAL.md).
 
 `terra-referencia.png`, `demo-restaurado.png` e `planeta-*.png` são cópias byte a byte das imagens canônicas, para uso pelo deck. Os valores completos estão em `deck-visual-values.csv`; cada imagem original tem uma linha em `run-20261115-124710/visual-values.csv`, incluindo o escopo visual. Nenhuma imagem foi gerada por IA ou retocada.
 

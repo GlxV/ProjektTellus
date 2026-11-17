@@ -129,6 +129,6 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\docs\uml\Export-Uml.ps1
 
 [Export-Uml.ps1](Export-Uml.ps1) prepara o CLI 11.12.0, Mermaid 11.17.2 e Puppeteer 23.11.1 em `.tools/uml-renderer` se necessário, processa os sete `.mmd` e exporta SVG e PNG com fundo branco. [mermaid-config.json](mermaid-config.json) centraliza tipografia, cores e espaçamento. `-Scale 3` é o padrão; use entre 2 e 6. A largura de viewport é 1366 e o conteúdo determina a altura; diagramas largos são ajustados pelo renderizador. A configuração inicial de ferramentas pode precisar de internet.
 
-Após mudar o Java, confira operações, visibilidades e relações nos arquivos-fonte vinculados, regenere os dois formatos e inspecione cada imagem. O [registro de validação](VALIDACAO.md) descreve a conferência desta edição e os ajustes em relação aos materiais anteriores.
+Após mudar o Java, confira operações, visibilidades e relações nos arquivos-fonte vinculados, regenere os dois formatos e inspecione cada imagem. A fonte Mermaid deve ser conferida com as classes Java após mudanças na implementação.
 
-Os arquivos de [uml-apresentacao](../uml-apresentacao), os slides e seus exports foram preservados. Aqueles materiais são uma edição específica da apresentação; esta pasta é a referência UML oficial. Consulte também [Arquitetura](../ARQUITETURA.md) e [Padrões](../PADROES.md) para a discussão textual histórica.
+Esta pasta é a referência UML do projeto. Consulte também [Arquitetura](../ARQUITETURA.md), [Padrões](../PADROES.md) e [Apresentações](../apresentacao/README.md).

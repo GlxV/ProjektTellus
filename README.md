@@ -85,11 +85,11 @@ docs/                     Modelos, diagramas e transferência
 - [Modelo matemático e limites](docs/MODELO.md)
 - [Atmosfera dinâmica e aproximações ópticas](docs/ATMOSFERA.md)
 - [Comparativos de cenários](docs/COMPARATIVOS_REFORMULACAO.md)
-- [Validação da reformulação](docs/VALIDACAO_REFORMULACAO.md)
+- [Apresentações em PowerPoint e PDF](docs/apresentacao/README.md)
 - [Recursos visuais](docs/ASSETS.md)
 - [Animações, acessibilidade e verificação gráfica](docs/ANIMACOES.md)
-- [Transferência e validação](docs/HANDOFF_SOL.md)
-- [Handoff final da auditoria](docs/HANDOFF_FINAL.md)
+- [Auditoria experimental](docs/AUDITORIA_EXPERIMENTAL.md)
+- [Capturas da aplicação](docs/capturas/README.md)
 - [Requisitos originais](docs/REQUISITOS.md)
 
 Referências técnicas: [compatibilidade JavaFX 25/JDK 25](https://docs.oracle.com/en/java/java-components/javafx/25/javafx-users-guide/supported-jdk-versions.html), [JavaFX com Maven](https://openjfx.io/openjfx-docs/), [API oficial Temurin](https://github.com/adoptium/api.adoptium.net).

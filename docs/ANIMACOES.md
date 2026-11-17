@@ -61,4 +61,4 @@ Os modelos são geométricos estilizados e a atmosfera é ilustrativa. A verific
 
 Referências de implementação: [PhongMaterial JavaFX 25](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/paint/PhongMaterial.html) e [Node JavaFX 25](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/Node.html).
 
-Revisão atmosférica: `DesktopFlowTest` verifica também propriedades ópticas finais nos cinco eventos e Memento, matriz de doze atmosferas/superfícies e fatores na aba Indicadores. Ver [ATMOSFERA.md](ATMOSFERA.md) e [VALIDACAO_REFORMULACAO.md](VALIDACAO_REFORMULACAO.md).
+Revisão atmosférica: `DesktopFlowTest` verifica também propriedades ópticas finais nos cinco eventos e Memento, matriz de doze atmosferas/superfícies e fatores na aba Indicadores. Ver [ATMOSFERA.md](ATMOSFERA.md) e os testes JavaFX no diretório `src/test/java`.

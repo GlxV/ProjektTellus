@@ -172,7 +172,7 @@ Não foram validados nesta frente renderização/cores perceptuais, animação, 
 ## Integração com a apresentação e evidência visual
 
 - [Sete gráficos reais](graficos/manifest.json), gerados por `scripts/Plot-ExperimentalAudit.py`, leem o CSV canônico. PNG e SVG acompanham as fontes; não usam dados ilustrativos.
-- [Capturas canônicas](capturas/latest.json): 33 PNGs, 249 verificações do harness JavaFX, cinco quadros intermediários do animador real e capturas de cenários. [Demo](DEMO_APRESENTACAO.md) vincula condições/indicadores às imagens.
+- [Capturas canônicas](capturas/latest.json): 33 PNGs, 249 verificações do harness JavaFX, cinco quadros intermediários do animador real e capturas de cenários. As imagens e os dados de captura documentam os cenários executados.
 - Óptica numérica foi registrada nos 4.125 estados; **não houve inspeção visual humana de cada linha do CSV**. Imagens de cenários selecionados mostram renderizações reais. Os globos isolados são snapshots de PlanetView auxiliar alimentado com o estado confirmado pela interface; os quadros intermediários usam relógio controlado e não medem FPS.
 - Maven final: [verify-final.txt](evidencias/verify-final.txt), 69 testes, zero falhas/erros/skips. As 252.628 checagens experimentais e as 249 verificações gráficas não são contadas como testes JUnit.
 - Os fontes de produção permanecem iguais ao commit base. Este trabalho acrescenta experimentos, ferramentas e materiais; o patamar demográfico foi registrado para correção futura, sem modificar silenciosamente o motor.
